@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MobData" format=3 uid="uid://b30ub4ympgyxq"]
+
+[ext_resource type="Script" uid="uid://fv70y6lowrp0" path="res://scripts/MobData.cs" id="1_w2tfe"]
+[ext_resource type="Texture2D" uid="uid://dnopc6qwcscy3" path="res://sprites/mob.png" id="1_x43up"]
+[ext_resource type="Script" uid="uid://dekywd8lxaif5" path="res://scripts/strategies/FollowCursor.cs" id="2_ae6ug"]
+
+[sub_resource type="Resource" id="Resource_5vbcw"]
+script = ExtResource("2_ae6ug")
+metadata/_custom_type_script = "uid://dekywd8lxaif5"
+
+[resource]
+script = ExtResource("1_w2tfe")
+Sprite = ExtResource("1_x43up")
+Strategy = SubResource("Resource_5vbcw")
+metadata/_custom_type_script = "uid://fv70y6lowrp0"

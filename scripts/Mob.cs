@@ -1,24 +1,24 @@
 using Godot;
 
 [GlobalClass]
-public partial class CrowdController : RigidBody2D
+public partial class Mob : RigidBody2D
 {
-	[Export] public float MoveForce = 800;
-	[Export] public float MaxSpeed = 100;
-
+	[Export] private MobData _data;
+	private Sprite2D _sprite;
 	private NavigationAgent2D _agent;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-		_agent.PathDesiredDistance = 32;
-		_agent.TargetDesiredDistance = 32;
+
+		_sprite = GetNode<Sprite2D>("Sprite2D");
+		_sprite.Texture = _data.Sprite;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		_agent.TargetPosition = GetGlobalMousePosition();
+		_agent.TargetPosition = _data.Strategy.GetDestination(this);
 	}
 
 	public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -28,8 +28,9 @@ public partial class CrowdController : RigidBody2D
 
 		var nextPosition = _agent.GetNextPathPosition();
 		var direction = (nextPosition - GlobalPosition).Normalized();
-		ApplyCentralForce(direction * MoveForce);
-		if (state.LinearVelocity.LengthSquared() > MaxSpeed * MaxSpeed)
-			state.LinearVelocity = state.LinearVelocity.Normalized() * MaxSpeed;
+
+		ApplyCentralForce(direction * _data.MoveForce);
+		if (state.LinearVelocity.LengthSquared() > _data.MaxSpeed * _data.MaxSpeed)
+			state.LinearVelocity = state.LinearVelocity.Normalized() * _data.MaxSpeed;
 	}
 }

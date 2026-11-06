@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dimmbygv216r5"]
+
+[ext_resource type="PackedScene" uid="uid://dni8bho3ox2ci" path="res://mobs/mob.tscn" id="1_tbtww"]
+[ext_resource type="Resource" uid="uid://b30ub4ympgyxq" path="res://mobs/follow_cursor_mob.tres" id="2_4bw6j"]
+
+[node name="Mob" unique_id=382078136 instance=ExtResource("1_tbtww")]
+_data = ExtResource("2_4bw6j")
