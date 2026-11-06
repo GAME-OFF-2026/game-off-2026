@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dni8bho3ox2ci"]
+
+[ext_resource type="Script" uid="uid://bpwmxbbfjtodr" path="res://CrowdController.cs" id="1_dy6sc"]
+[ext_resource type="Texture2D" uid="uid://dnopc6qwcscy3" path="res://mob.png" id="2_nokgg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6f17"]
+radius = 32.0
+
+[node name="Mob" type="RigidBody2D" unique_id=382078136]
+gravity_scale = 0.0
+script = ExtResource("1_dy6sc")
+metadata/_custom_type_script = "uid://bpwmxbbfjtodr"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1231392025]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1736663495]
+shape = SubResource("CircleShape2D_d6f17")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=140634624]
+texture = ExtResource("2_nokgg")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1960103999]
+radius = 32.0

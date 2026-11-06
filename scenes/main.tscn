@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://b0ygmcgu4ict6"]
+
+[ext_resource type="PackedScene" uid="uid://dni8bho3ox2ci" path="res://scenes/mob.tscn" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://i168qxdbxpnv" path="res://sprites/grass.png" id="2_0xm2m"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_d6f17"]
+vertices = PackedVector2Array(471, -1, 471, -323, 2048.7266, -1129.0313, 2107.2266, 1400.2734, -1944.2422, -1132.9609, 150, -323, -1962.7578, 1310.7031, 150, -1)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1, 5), PackedInt32Array(0, 3, 6, 7), PackedInt32Array(7, 6, 4, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1976, -1165, -1995, 1342, 2140, 1433, 2080, -1161)])
+agent_radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6f17"]
+size = Vector2(63.535225, 63.782448)
+
+[node name="Main" type="Node2D" unique_id=1373700630]
+
+[node name="Mob" parent="." unique_id=382078136 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob2" parent="." unique_id=373275381 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob3" parent="." unique_id=1793013481 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob4" parent="." unique_id=595027661 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob5" parent="." unique_id=1865772515 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob6" parent="." unique_id=923753796 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob7" parent="." unique_id=141526253 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob8" parent="." unique_id=1436523502 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob9" parent="." unique_id=2107970921 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob10" parent="." unique_id=283453463 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob11" parent="." unique_id=52096146 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob12" parent="." unique_id=287975711 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob13" parent="." unique_id=518177507 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob14" parent="." unique_id=1106949572 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob15" parent="." unique_id=440291042 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob16" parent="." unique_id=1503870128 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob17" parent="." unique_id=714866167 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob18" parent="." unique_id=720883573 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob19" parent="." unique_id=1791297868 instance=ExtResource("1_ig7tw")]
+
+[node name="Mob20" parent="." unique_id=1277677544 instance=ExtResource("1_ig7tw")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1356506538]
+zoom = Vector2(0.5, 0.5)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=254759925]
+navigation_polygon = SubResource("NavigationPolygon_d6f17")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1753499421]
+position = Vector2(371, -173.00002)
+scale = Vector2(4.045, 4.045)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D" unique_id=10224617]
+position = Vector2(0.12361145, 0)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_d6f17")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D" unique_id=670118054]
+texture = ExtResource("2_0xm2m")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D/StaticBody2D" unique_id=1940263135]
+vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="NavigationRegion2D" unique_id=442211090]
+position = Vector2(285, 260)
+scale = Vector2(4.045, 4.045)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D2" unique_id=1048197183]
+position = Vector2(0.12361145, 0)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_d6f17")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D2" unique_id=1326826391]
+texture = ExtResource("2_0xm2m")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D/StaticBody2D2" unique_id=17733381]
+vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1555007554]
+position = Vector2(-189, 285)
+scale = Vector2(4.045, 4.045)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D3" unique_id=1752413007]
+position = Vector2(0.12361145, 0)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_d6f17")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D3" unique_id=1898034315]
+texture = ExtResource("2_0xm2m")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D/StaticBody2D3" unique_id=2070283564]
+vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D" unique_id=176439261]
+position = Vector2(-445, -134.00002)
+scale = Vector2(4.045, 4.045)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D4" unique_id=1476713490]
+position = Vector2(0.12361145, 0)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_d6f17")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D4" unique_id=1902147110]
+texture = ExtResource("2_0xm2m")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D/StaticBody2D4" unique_id=1670735735]
+vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="NavigationRegion2D" unique_id=1465707256]
+position = Vector2(-45, -247.00002)
+scale = Vector2(4.045, 4.045)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D5" unique_id=960309754]
+position = Vector2(0.12361145, 0)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_d6f17")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/StaticBody2D5" unique_id=1746281318]
+texture = ExtResource("2_0xm2m")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D/StaticBody2D5" unique_id=483584357]
+vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
