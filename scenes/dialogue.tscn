@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://c548ranj115ld"]
+
+[ext_resource type="Texture2D" uid="uid://dk1gsx44d6to2" path="res://sprites/waitress_sad.png" id="1_jwyou"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f17"]
+
+[node name="Dialogue" type="CanvasLayer" unique_id=1249066010]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=320581894]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_jwyou")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PanelContainer" type="Panel" parent="." unique_id=1973244357]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148.0
+offset_bottom = 1.9996948
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="Panel" parent="PanelContainer" unique_id=54069600]
+layout_mode = 1
+offset_left = 41.0
+offset_top = -21.0
+offset_right = 381.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d6f17")
+
+[node name="SpeakerName" type="RichTextLabel" parent="PanelContainer/PanelContainer" unique_id=1471008008]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=24]La serveuse aux tomates"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialogueText" type="RichTextLabel" parent="PanelContainer" unique_id=2108124390]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=24]Salut c'est moi la serveuse aux tomates !! Je vis dans une société trop nulle où les milliardaires fascistes ont établi leur domination par la force et du coup on est super pauvres et les minorités ont plus aucun droits #nul"
+scroll_active = false
