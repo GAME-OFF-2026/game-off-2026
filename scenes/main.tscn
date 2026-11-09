@@ -2,10 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dimmbygv216r5" path="res://mobs/follow_cursor_mob.tscn" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://i168qxdbxpnv" path="res://sprites/grass.png" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://caqfvs7nse1nj" path="res://mobs/follow_point_mob.tscn" id="2_sugp2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d6f17"]
-vertices = PackedVector2Array(-284, 27, 211, -12, 532, -12, 446, 99, 125, 99, -1962.7578, 1310.7031, -28, 446, 125, 421, 446, 421, 2107.2266, 1400.2734, -349, 446, 116, -86, -205, -86, -284, -295, -205, -408, 211, -334, 116, -408, 532, -334, 2048.7266, -1129.0313, -1944.2422, -1132.9609, -605, 27, -28, 124, -349, 124, -605, -295)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 6, 5), PackedInt32Array(11, 1, 0, 12), PackedInt32Array(12, 0, 13, 14), PackedInt32Array(15, 1, 11, 16), PackedInt32Array(2, 17, 18, 9), PackedInt32Array(19, 18, 17, 16), PackedInt32Array(2, 9, 8, 3), PackedInt32Array(10, 5, 19, 20), PackedInt32Array(7, 6, 21, 4), PackedInt32Array(0, 4, 21, 22, 20), PackedInt32Array(20, 22, 10), PackedInt32Array(23, 20, 19), PackedInt32Array(14, 13, 23, 19), PackedInt32Array(17, 15, 16), PackedInt32Array(19, 16, 14)])
+vertices = PackedVector2Array(446, 99, 125, 99, -297, 75, 211, -12, 532, -12, -1962.7578, 1310.7031, -28, 446, 125, 421, 446, 421, 2107.2266, 1400.2734, -349, 446, 211, -334, 116, -86, 116, -408, 532, -334, 2048.7266, -1129.0313, -1944.2422, -1132.9609, -205, -86, -297, -247, -205, -408, -618, 75, -28, 124, -349, 124, -618, -247)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8, 9), PackedInt32Array(10, 6, 5), PackedInt32Array(11, 3, 12, 13), PackedInt32Array(4, 14, 15, 9), PackedInt32Array(16, 15, 14, 13), PackedInt32Array(4, 9, 8, 0), PackedInt32Array(12, 3, 2, 17), PackedInt32Array(17, 2, 18, 19), PackedInt32Array(10, 5, 16, 20), PackedInt32Array(7, 6, 21, 1), PackedInt32Array(2, 1, 21, 22, 20), PackedInt32Array(20, 22, 10), PackedInt32Array(23, 20, 16), PackedInt32Array(19, 18, 23, 16), PackedInt32Array(14, 11, 13), PackedInt32Array(16, 13, 19)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1976, -1165, -1995, 1342, 2140, 1433, 2080, -1161)])
 agent_radius = 32.0
 
@@ -72,7 +73,7 @@ affect_navigation_mesh = true
 carve_navigation_mesh = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="NavigationRegion2D" unique_id=176439261]
-position = Vector2(-445, -134.00002)
+position = Vector2(-458, -86)
 scale = Vector2(4.045, 4.045)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D4" unique_id=1476713490]
@@ -105,7 +106,13 @@ vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 
-[node name="Mob" parent="." unique_id=382078136 instance=ExtResource("2_0wfyh")]
+[node name="Mob24" parent="NavigationRegion2D" unique_id=382078136 instance=ExtResource("2_sugp2")]
+position = Vector2(736, 692)
+
+[node name="Mob24" parent="NavigationRegion2D/Mob24" unique_id=945260623 instance=ExtResource("2_sugp2")]
+position = Vector2(742, 756)
+
+[node name="Mob" parent="." unique_id=1717724257 instance=ExtResource("2_0wfyh")]
 position = Vector2(-163, 17)
 
 [node name="Mob2" parent="." unique_id=1294632048 instance=ExtResource("2_0wfyh")]
@@ -173,3 +180,9 @@ position = Vector2(169, -379)
 
 [node name="Mob23" parent="." unique_id=902806346 instance=ExtResource("2_0wfyh")]
 position = Vector2(297, -367)
+
+[node name="Mob24" parent="." unique_id=1151316069 instance=ExtResource("2_sugp2")]
+position = Vector2(796, 755)
+
+[node name="Mob25" parent="." unique_id=46025063 instance=ExtResource("2_sugp2")]
+position = Vector2(930, 769)

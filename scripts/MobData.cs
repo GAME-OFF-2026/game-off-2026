@@ -1,5 +1,11 @@
 using Godot;
 
+public enum Faction
+{
+	Protester,
+	Fascist
+}
+
 [GlobalClass]
 public partial class MobData : Resource
 {
@@ -7,4 +13,5 @@ public partial class MobData : Resource
 	[Export] public MobStrategy Strategy;
 	[Export] public float MoveForce = 800;
 	[Export] public float MaxSpeed = 100;
+	[Export] public Faction Faction = Faction.Protester;
 }
