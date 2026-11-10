@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnopc6qwcscy3" path="res://sprites/mob.png" id="2_nokgg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6f17"]
-radius = 32.0
+radius = 16.0
 
 [node name="Mob" type="RigidBody2D" unique_id=382078136]
 gravity_scale = 0.0
@@ -20,7 +20,5 @@ avoidance_enabled = true
 shape = SubResource("CircleShape2D_d6f17")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=140634624]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_nokgg")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1960103999]
-radius = 32.0

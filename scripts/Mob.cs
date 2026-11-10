@@ -3,9 +3,11 @@ using Godot;
 [GlobalClass]
 public partial class Mob : RigidBody2D
 {
-	[Export] private MobData _data;
 	private Sprite2D _sprite;
 	private NavigationAgent2D _agent;
+
+	public MobManager MobManager;
+	[Export] public MobData Data { get; private set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -13,24 +15,49 @@ public partial class Mob : RigidBody2D
 		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 
 		_sprite = GetNode<Sprite2D>("Sprite2D");
-		_sprite.Texture = _data.Sprite;
+	}
+
+	public void SetData(MobData data)
+	{
+		if (data == null)
+		{
+			GD.PrintErr("SetData: data is null");
+			return;
+		}
+
+		Data = data.DuplicateDeep() as MobData;
+		if (Data == null)
+		{
+			GD.PrintErr("SetData: data duplication failed");
+			return;
+		}
+
+		Data.Strategy.Initialize(this);
+
+		_sprite.Texture = Data.Sprite;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		_agent.TargetPosition = _data.Strategy.GetDestination(this);
+		if (Data == null)
+			return;
+
+		Data.Strategy.Tick(delta);
+		_agent.TargetPosition = Data.Strategy.GetDestination();
 	}
 
 	public override void _IntegrateForces(PhysicsDirectBodyState2D state)
 	{
+		if (Data == null)
+			return;
 		if (_agent.IsNavigationFinished())
 			return;
 
 		var nextPosition = _agent.GetNextPathPosition();
 		var direction = (nextPosition - GlobalPosition).Normalized();
 
-		ApplyCentralForce(direction * _data.MoveForce);
-		if (state.LinearVelocity.LengthSquared() > _data.MaxSpeed * _data.MaxSpeed)
-			state.LinearVelocity = state.LinearVelocity.Normalized() * _data.MaxSpeed;
+		ApplyCentralForce(direction * Data.MoveForce);
+		if (state.LinearVelocity.LengthSquared() > Data.MaxSpeed * Data.MaxSpeed)
+			state.LinearVelocity = state.LinearVelocity.Normalized() * Data.MaxSpeed;
 	}
 }
