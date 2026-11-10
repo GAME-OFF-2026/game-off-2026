@@ -23,20 +23,28 @@ public partial class RoamStrategy : MobStrategy
         if (_immobileSeconds >= PatienceSeconds)
             _currentDirection = new Vector2(Rng.RandfRange(-1, 1), Rng.RandfRange(-1, 1));
 
-        var neighbours = Mob.MobManager
-            .CurrentMobs.Where(
-                mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= NeighbourRange * NeighbourRange &&
-                       mob.Data.Faction == Mob.Data.Faction
-            )
-            .ToArray();
+        if (Rng.Randi() % 10 == 0)
+        {
+            // Add neighour's direction to self
+            if (NeighbourRange > 0 && ConversionFactor > 0)
+            {
+                var neighbours = Mob.MobManager
+                    .CurrentMobs.Where(
+                        mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= NeighbourRange * NeighbourRange &&
+                               mob.Data.Faction == Mob.Data.Faction
+                    )
+                    .ToArray();
 
-        foreach (var mob in neighbours)
-            _currentDirection += ConversionFactor *
-                                 mob.LinearVelocity *
-                                 (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / NeighbourRange * NeighbourRange);
+                foreach (var mob in neighbours)
+                    _currentDirection += ConversionFactor *
+                                         mob.LinearVelocity *
+                                         (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / NeighbourRange * NeighbourRange);
+            }
 
-        // Add noise
-        _currentDirection += new Vector2(Rng.RandfRange(-1, 1), Rng.RandfRange(-1, 1));
+            // Add noise
+            _currentDirection += new Vector2(Rng.RandfRange(-0.5f, 0.5f), Rng.RandfRange(-0.5f, 0.5f));
+        }
+
 
         _currentDirection = _currentDirection.Normalized();
     }

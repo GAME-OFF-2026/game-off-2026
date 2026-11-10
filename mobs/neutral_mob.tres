@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MobData" format=3 uid="uid://mtuin5rrtdqw"]
+
+[ext_resource type="Script" uid="uid://fv70y6lowrp0" path="res://scripts/MobData.cs" id="1_5d3j3"]
+[ext_resource type="Texture2D" uid="uid://ci817q6tvpqkd" path="res://sprites/neutral.png" id="1_rurea"]
+[ext_resource type="Script" uid="uid://fjh1xjtcanop" path="res://scripts/strategies/RoamStrategy.cs" id="2_4jfpc"]
+
+[sub_resource type="Resource" id="Resource_5d3j3"]
+script = ExtResource("2_4jfpc")
+NeighbourRange = 0.0
+ConversionFactor = 0.0
+metadata/_custom_type_script = "uid://fjh1xjtcanop"
+
+[resource]
+script = ExtResource("1_5d3j3")
+Sprite = ExtResource("1_rurea")
+Strategy = SubResource("Resource_5d3j3")
+MoveForce = 500.0
+MaxSpeed = 50.0
+metadata/_custom_type_script = "uid://fv70y6lowrp0"
