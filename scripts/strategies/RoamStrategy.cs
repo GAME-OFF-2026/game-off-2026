@@ -4,7 +4,7 @@ using Godot;
 [GlobalClass]
 public partial class RoamStrategy : MobStrategy
 {
-    private static readonly RandomNumberGenerator Rng = new();
+    private const float TickSeconds = 0.1f;
 
     [Export] public float NeighbourRange = 150;
     [Export] public float ConversionFactor = 0.05f;
@@ -13,40 +13,68 @@ public partial class RoamStrategy : MobStrategy
     private Vector2 _currentDirection;
     private double _immobileSeconds;
 
+    private double _timeSinceLastUpdate;
+
+    public override void Init()
+    {
+        _timeSinceLastUpdate = Utils.Rng.RandfRange(0, TickSeconds);
+    }
+
     public override void Tick(double delta)
     {
-        if (_currentDirection.LengthSquared() < 1)
+        ImmobilityCheck(delta);
+
+        _timeSinceLastUpdate += delta;
+        if (_timeSinceLastUpdate > TickSeconds)
+        {
+            _timeSinceLastUpdate -= TickSeconds;
+
+            var protestingNeighbours = Mob.MobManager
+                .CurrentMobs.Where(
+                    mob => mob != Mob &&
+                           mob.IsProtesting &&
+                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= NeighbourRange * NeighbourRange
+                )
+                .ToArray();
+
+            UpdateDirection(protestingNeighbours);
+            UpdateMotivation(protestingNeighbours);
+        }
+    }
+
+    private void ImmobilityCheck(double delta)
+    {
+        if (Mob.LinearVelocity.LengthSquared() < 1)
             _immobileSeconds += delta;
         else
             _immobileSeconds = 0;
 
         if (_immobileSeconds >= PatienceSeconds)
-            _currentDirection = new Vector2(Rng.RandfRange(-1, 1), Rng.RandfRange(-1, 1));
+            _currentDirection = new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1));
+    }
 
-        if (Rng.Randi() % 10 == 0)
-        {
-            // Add neighour's direction to self
-            if (NeighbourRange > 0 && ConversionFactor > 0)
-            {
-                var neighbours = Mob.MobManager
-                    .CurrentMobs.Where(
-                        mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= NeighbourRange * NeighbourRange &&
-                               mob.Data.Faction == Mob.Data.Faction
-                    )
-                    .ToArray();
+    private void UpdateDirection(Mob[] neighbours)
+    {
+        // Add neighbour's direction to self
+        if (Mob.IsProtesting)
+            foreach (var mob in neighbours)
+                _currentDirection += ConversionFactor *
+                                     mob.LinearVelocity.Normalized() *
+                                     (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / NeighbourRange * NeighbourRange);
 
-                foreach (var mob in neighbours)
-                    _currentDirection += ConversionFactor *
-                                         mob.LinearVelocity.Normalized() *
-                                         (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / NeighbourRange * NeighbourRange);
-            }
-
-            // Add noise
-            _currentDirection += new Vector2(Rng.RandfRange(-0.5f, 0.5f), Rng.RandfRange(-0.5f, 0.5f));
-        }
-
+        // Add noise
+        _currentDirection += new Vector2(Utils.Rng.RandfRange(-0.5f, 0.5f), Utils.Rng.RandfRange(-0.5f, 0.5f));
 
         _currentDirection = _currentDirection.Normalized();
+    }
+
+    private void UpdateMotivation(Mob[] neighbours)
+    {
+        foreach (var mob in neighbours)
+            if (mob.IsProtesting)
+                Mob.Motivation += Mob.MotivationGainRate * (Mob.IsProtesting ? 0.005 : 0.003);
+
+        Mob.Motivation -= Mob.MotivationLossRate * (Mob.IsProtesting ? 0.005 : 0.01);
     }
 
     public override Vector2 GetDestination() => Mob.GlobalPosition + 150 * _currentDirection;

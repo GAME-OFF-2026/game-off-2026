@@ -4,8 +4,6 @@ using Godot.Collections;
 [GlobalClass]
 public partial class MobManager : Node
 {
-    private static readonly RandomNumberGenerator Rng = new();
-
     private readonly PackedScene _mobScene = GD.Load<PackedScene>("res://mobs/Mob.tscn");
     [Export] public Dictionary<MobData, int> MobTypes;
     [Export] public Rect2I SpawnRect;
@@ -16,8 +14,22 @@ public partial class MobManager : Node
     public override void _Ready()
     {
         foreach (var entry in MobTypes)
+        {
             for (var i = 0; i < entry.Value; i++)
-                SpawnMob(entry.Key);
+                SpawnMob(
+                    entry.Key,
+                    new Vector2(
+                        Utils.Rng.RandiRange(SpawnRect.Position.X, SpawnRect.End.X),
+                        Utils.Rng.RandiRange(SpawnRect.Position.Y, SpawnRect.End.Y)
+                    )
+                );
+
+            for (var i = 0; i < 10; i++)
+            {
+                var mob = SpawnMob(entry.Key, new Vector2());
+                mob.ForceProtesting(0.5);
+            }
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,16 +37,14 @@ public partial class MobManager : Node
     {
     }
 
-    private void SpawnMob(MobData mobData)
+    private Mob SpawnMob(MobData mobData, Vector2 spawnPosition)
     {
         var newMob = _mobScene.Instantiate<Mob>();
         newMob.MobManager = this;
-        newMob.GlobalPosition = new Vector2(
-            Rng.RandiRange(SpawnRect.Position.X, SpawnRect.End.X),
-            Rng.RandiRange(SpawnRect.Position.Y, SpawnRect.End.Y)
-        );
+        newMob.GlobalPosition = spawnPosition;
         AddChild(newMob);
         newMob.SetData(mobData);
         CurrentMobs.Add(newMob);
+        return newMob;
     }
 }

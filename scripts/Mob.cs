@@ -8,7 +8,15 @@ public partial class Mob : RigidBody2D
 
     public MobManager MobManager;
 
-    private float _motivation;
+    public double Motivation;
+    private double _motivationThreshold;
+    private double _motivationSwitchTimer;
+
+    public double MotivationGainRate { get; private set; }
+    public double MotivationLossRate { get; private set; }
+
+    public bool IsProtesting { get; private set; }
+
     [Export] public MobData Data { get; private set; }
 
     // Called when the node enters the scene tree for the first time.
@@ -36,12 +44,22 @@ public partial class Mob : RigidBody2D
 
         Data.Strategy.Initialize(this);
 
+        _motivationThreshold = Utils.Rng.RandfRange(Data.MotivationThresholdMinMax.X, Data.MotivationThresholdMinMax.Y);
+        MotivationGainRate = Utils.Rng.RandfRange(Data.MotivationGainRateMinMax.X, Data.MotivationGainRateMinMax.Y);
+        MotivationLossRate = Utils.Rng.RandfRange(Data.MotivationLossRateMinMax.X, Data.MotivationLossRateMinMax.Y);
+
+        IsProtesting = Motivation > _motivationThreshold;
+
         _sprite.Texture = Data.Sprite;
     }
 
     public override void _Process(double delta)
     {
-        _sprite.Modulate = Color.FromHsv(0, _motivation, 1);
+        _sprite.Modulate = Color.FromHsv(
+            0,
+            (float)(IsProtesting ? Motivation : Motivation / 2f),
+            1
+        );
     }
 
     public override void _PhysicsProcess(double delta)
@@ -50,6 +68,19 @@ public partial class Mob : RigidBody2D
             return;
 
         Data.Strategy.Tick(delta);
+        Motivation = Mathf.Clamp(Motivation, 0, 1);
+
+        if (IsProtesting ? Motivation < _motivationThreshold : Motivation > _motivationThreshold)
+        {
+            _motivationSwitchTimer += delta;
+            if (_motivationSwitchTimer >= Data.SecondsToSwitchMotivation)
+                IsProtesting = !IsProtesting;
+        }
+        else
+        {
+            _motivationSwitchTimer = 0;
+        }
+
         _agent.TargetPosition = Data.Strategy.GetDestination();
     }
 
@@ -66,5 +97,12 @@ public partial class Mob : RigidBody2D
         ApplyCentralForce(direction * Data.MoveForce);
         if (state.LinearVelocity.LengthSquared() > Data.MaxSpeed * Data.MaxSpeed)
             state.LinearVelocity = state.LinearVelocity.Normalized() * Data.MaxSpeed;
+    }
+
+    public void ForceProtesting(double motivation)
+    {
+        IsProtesting = true;
+        Motivation = motivation;
+        _motivationSwitchTimer = 0;
     }
 }
