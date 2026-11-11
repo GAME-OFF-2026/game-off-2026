@@ -6,7 +6,10 @@
 
 [sub_resource type="Resource" id="Resource_672bv"]
 script = ExtResource("2_dovx6")
-ConversionFactor = 0.01
+FascistDetectionRange = 200.0
+FascistAvoidanceFactor = 10.0
+NeighbourRange = 200.0
+ConversionFactor = 1.0
 metadata/_custom_type_script = "uid://fjh1xjtcanop"
 
 [resource]

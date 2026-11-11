@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MobData" format=3 uid="uid://bmlh1jifotb6y"]
+
+[ext_resource type="Script" uid="uid://fv70y6lowrp0" path="res://scripts/MobData.cs" id="1_emaoh"]
+[ext_resource type="Texture2D" uid="uid://bnsovryc5nqj8" path="res://sprites/crs.png" id="1_s4o0a"]
+[ext_resource type="Script" uid="uid://b78ea0ywk6asv" path="res://scripts/strategies/FascistStrategy.cs" id="2_s4o0a"]
+
+[sub_resource type="Resource" id="Resource_d6f17"]
+script = ExtResource("2_s4o0a")
+metadata/_custom_type_script = "uid://b78ea0ywk6asv"
+
+[resource]
+script = ExtResource("1_emaoh")
+Sprite = ExtResource("1_s4o0a")
+Strategy = SubResource("Resource_d6f17")
+MoveForce = 400.0
+MaxSpeed = 50.0
+MotivationThresholdMinMax = Vector2(1, 1)
+MotivationGainRateMinMax = Vector2(0, 0)
+MotivationLossRateMinMax = Vector2(1, 1)
+SecondsToSwitchMotivation = 1000.0
+Faction = 1
+metadata/_custom_type_script = "uid://fv70y6lowrp0"

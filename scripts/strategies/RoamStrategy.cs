@@ -6,6 +6,8 @@ public partial class RoamStrategy : MobStrategy
 {
     private const float TickSeconds = 0.1f;
 
+    [Export] public float FascistDetectionRange = 300;
+    [Export] public float FascistAvoidanceFactor = 1;
     [Export] public float NeighbourRange = 150;
     [Export] public float ConversionFactor = 0.05f;
     [Export] public double PatienceSeconds = 3f;
@@ -29,7 +31,7 @@ public partial class RoamStrategy : MobStrategy
         {
             _timeSinceLastUpdate -= TickSeconds;
 
-            var protestingNeighbours = Mob.MobManager
+            var friends = Mob.MobManager
                 .CurrentMobs.Where(
                     mob => mob != Mob &&
                            mob.IsProtesting &&
@@ -37,8 +39,14 @@ public partial class RoamStrategy : MobStrategy
                 )
                 .ToArray();
 
-            UpdateDirection(protestingNeighbours);
-            UpdateMotivation(protestingNeighbours);
+            var fascists = Mob.MobManager.CurrentMobs.Where(
+                    mob => mob.Data.Faction == Faction.Fascist &&
+                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= FascistDetectionRange * FascistDetectionRange
+                )
+                .ToArray();
+
+            UpdateDirection(friends, fascists);
+            UpdateMotivation(friends, fascists);
         }
     }
 
@@ -53,14 +61,25 @@ public partial class RoamStrategy : MobStrategy
             _currentDirection = new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1));
     }
 
-    private void UpdateDirection(Mob[] neighbours)
+    private void UpdateDirection(Mob[] friends, Mob[] fascists)
     {
         // Add neighbour's direction to self
         if (Mob.IsProtesting)
-            foreach (var mob in neighbours)
-                _currentDirection += ConversionFactor *
-                                     mob.LinearVelocity.Normalized() *
-                                     (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / NeighbourRange * NeighbourRange);
+        {
+            var friendInfluence = new Vector2();
+            foreach (var friend in friends)
+                friendInfluence += ConversionFactor *
+                                   friend.LinearVelocity.Normalized() *
+                                   friend.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
+                                   (NeighbourRange * NeighbourRange);
+
+            var fascistInfluence = new Vector2();
+            foreach (var fascist in fascists)
+                fascistInfluence += FascistAvoidanceFactor * (Mob.GlobalPosition - fascist.GlobalPosition).Normalized();
+
+            _currentDirection += friendInfluence;
+            _currentDirection += fascistInfluence;
+        }
 
         // Add noise
         _currentDirection += new Vector2(Utils.Rng.RandfRange(-0.5f, 0.5f), Utils.Rng.RandfRange(-0.5f, 0.5f));
@@ -68,13 +87,16 @@ public partial class RoamStrategy : MobStrategy
         _currentDirection = _currentDirection.Normalized();
     }
 
-    private void UpdateMotivation(Mob[] neighbours)
+    private void UpdateMotivation(Mob[] friends, Mob[] fascists)
     {
-        foreach (var mob in neighbours)
-            if (mob.IsProtesting)
-                Mob.Motivation += Mob.MotivationGainRate * (Mob.IsProtesting ? 0.005 : 0.003);
+        Mob.Motivation += friends.Length * Mob.MotivationGainRate * (Mob.IsProtesting ? 0.005 : 0.003);
 
         Mob.Motivation -= Mob.MotivationLossRate * (Mob.IsProtesting ? 0.005 : 0.01);
+
+        foreach (var fascist in fascists)
+            Mob.Motivation -= Mob.MotivationLossRate *
+                              0.03 *
+                              (1 - fascist.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / (FascistDetectionRange * FascistDetectionRange));
     }
 
     public override Vector2 GetDestination() => Mob.GlobalPosition + 150 * _currentDirection;
