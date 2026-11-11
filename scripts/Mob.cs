@@ -3,61 +3,68 @@ using Godot;
 [GlobalClass]
 public partial class Mob : RigidBody2D
 {
-	private Sprite2D _sprite;
-	private NavigationAgent2D _agent;
+    private Sprite2D _sprite;
+    private NavigationAgent2D _agent;
 
-	public MobManager MobManager;
-	[Export] public MobData Data { get; private set; }
+    public MobManager MobManager;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		_agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+    private float _motivation;
+    [Export] public MobData Data { get; private set; }
 
-		_sprite = GetNode<Sprite2D>("Sprite2D");
-	}
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 
-	public void SetData(MobData data)
-	{
-		if (data == null)
-		{
-			GD.PrintErr("SetData: data is null");
-			return;
-		}
+        _sprite = GetNode<Sprite2D>("Sprite2D");
+    }
 
-		Data = data.DuplicateDeep() as MobData;
-		if (Data == null)
-		{
-			GD.PrintErr("SetData: data duplication failed");
-			return;
-		}
+    public void SetData(MobData data)
+    {
+        if (data == null)
+        {
+            GD.PrintErr("SetData: data is null");
+            return;
+        }
 
-		Data.Strategy.Initialize(this);
+        Data = data.DuplicateDeep() as MobData;
+        if (Data == null)
+        {
+            GD.PrintErr("SetData: data duplication failed");
+            return;
+        }
 
-		_sprite.Texture = Data.Sprite;
-	}
+        Data.Strategy.Initialize(this);
 
-	public override void _PhysicsProcess(double delta)
-	{
-		if (Data == null)
-			return;
+        _sprite.Texture = Data.Sprite;
+    }
 
-		Data.Strategy.Tick(delta);
-		_agent.TargetPosition = Data.Strategy.GetDestination();
-	}
+    public override void _Process(double delta)
+    {
+        _sprite.Modulate = Color.FromHsv(0, _motivation, 1);
+    }
 
-	public override void _IntegrateForces(PhysicsDirectBodyState2D state)
-	{
-		if (Data == null)
-			return;
-		if (_agent.IsNavigationFinished())
-			return;
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Data == null)
+            return;
 
-		var nextPosition = _agent.GetNextPathPosition();
-		var direction = (nextPosition - GlobalPosition).Normalized();
+        Data.Strategy.Tick(delta);
+        _agent.TargetPosition = Data.Strategy.GetDestination();
+    }
 
-		ApplyCentralForce(direction * Data.MoveForce);
-		if (state.LinearVelocity.LengthSquared() > Data.MaxSpeed * Data.MaxSpeed)
-			state.LinearVelocity = state.LinearVelocity.Normalized() * Data.MaxSpeed;
-	}
+    public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+    {
+        if (Data == null)
+            return;
+        if (_agent.IsNavigationFinished())
+            return;
+
+        var nextPosition = _agent.GetNextPathPosition();
+        var direction = (nextPosition - GlobalPosition).Normalized();
+
+        ApplyCentralForce(direction * Data.MoveForce);
+        if (state.LinearVelocity.LengthSquared() > Data.MaxSpeed * Data.MaxSpeed)
+            state.LinearVelocity = state.LinearVelocity.Normalized() * Data.MaxSpeed;
+    }
 }

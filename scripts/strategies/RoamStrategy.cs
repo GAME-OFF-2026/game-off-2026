@@ -37,7 +37,7 @@ public partial class RoamStrategy : MobStrategy
 
                 foreach (var mob in neighbours)
                     _currentDirection += ConversionFactor *
-                                         mob.LinearVelocity *
+                                         mob.LinearVelocity.Normalized() *
                                          (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / NeighbourRange * NeighbourRange);
             }
 

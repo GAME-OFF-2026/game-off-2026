@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dni8bho3ox2ci"]
 
 [ext_resource type="Script" uid="uid://bpwmxbbfjtodr" path="res://scripts/Mob.cs" id="1_bsing"]
-[ext_resource type="Texture2D" uid="uid://dnopc6qwcscy3" path="res://sprites/mob.png" id="2_nokgg"]
+[ext_resource type="Texture2D" uid="uid://ci817q6tvpqkd" path="res://sprites/neutral.png" id="2_fgbma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6f17"]
 radius = 16.0
@@ -21,4 +21,4 @@ shape = SubResource("CircleShape2D_d6f17")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=140634624]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_nokgg")
+texture = ExtResource("2_fgbma")
