@@ -414,6 +414,59 @@ _fascistSpawnPeriod = 15
 SpawnRect = Rect2i(-1100, -600, 2200, 1200)
 metadata/_custom_type_script = "uid://dgt22l142c6gv"
 
+[node name="SpawnPoints" type="Node" parent="MobManager" unique_id=177831245]
+
+[node name="Node" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1588581752]
+position = Vector2(-994, -642)
+
+[node name="Node2" type="Node2D" parent="MobManager/SpawnPoints" unique_id=108534535]
+position = Vector2(-686, -643)
+
+[node name="Node3" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1003353886]
+position = Vector2(8, -638)
+
+[node name="Node4" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1247083872]
+position = Vector2(375, -638)
+
+[node name="Node5" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1261806073]
+position = Vector2(887, -643)
+
+[node name="Node6" type="Node2D" parent="MobManager/SpawnPoints" unique_id=947197508]
+position = Vector2(1155, -636)
+
+[node name="Node7" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1725784619]
+position = Vector2(1160, -324)
+
+[node name="Node8" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1387806446]
+position = Vector2(1160, -46)
+
+[node name="Node9" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1655883399]
+position = Vector2(1162, 197)
+
+[node name="Node10" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1710699640]
+position = Vector2(1164, 553)
+
+[node name="Node11" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1698687474]
+position = Vector2(229, 640)
+
+[node name="Node12" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1941579829]
+position = Vector2(16, 645)
+
+[node name="Node13" type="Node2D" parent="MobManager/SpawnPoints" unique_id=673883684]
+position = Vector2(-845, 645)
+
+[node name="Node14" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1303507009]
+position = Vector2(-1148, 562)
+
+[node name="Node15" type="Node2D" parent="MobManager/SpawnPoints" unique_id=781763753]
+position = Vector2(-1150, 195)
+
+[node name="Node16" type="Node2D" parent="MobManager/SpawnPoints" unique_id=1788683465]
+position = Vector2(-1152, -375)
+
+[node name="Node17" type="Node2D" parent="MobManager/SpawnPoints" unique_id=844858760]
+position = Vector2(-1152, -554)
+
 [node name="GameManager" type="Node" parent="." unique_id=787705394]
 unique_name_in_owner = true
 script = ExtResource("7_xi27f")
