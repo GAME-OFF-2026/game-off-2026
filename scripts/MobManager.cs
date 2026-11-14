@@ -28,7 +28,16 @@ public partial class MobManager : Node2D
     private uint _placedPacks;
 
     public Array<Mob> CurrentMobs { get; } = [];
-
+    
+    public float PlacedPackRate 
+    { 
+        get
+        {
+            if (_setupPackCount == 0)
+                return 1;
+            return (float)_placedPacks / (float)_setupPackCount;
+        }
+    }
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {

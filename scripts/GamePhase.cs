@@ -1,5 +1,6 @@
 public enum GamePhase
 {
     Setup,
-    Protest
+    Protest,
+    Ending
 }
