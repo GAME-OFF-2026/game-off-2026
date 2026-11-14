@@ -28,6 +28,7 @@ public partial class Mob : RigidBody2D
         _sprite = GetNode<Sprite2D>("Sprite2D");
 
         _gameManager = GetNode<GameManager>("/root/Main/GameManager");
+        Freeze = true;
     }
 
     public void SetData(MobData data)
@@ -69,6 +70,8 @@ public partial class Mob : RigidBody2D
     {
         if (Data == null || _gameManager.GamePhase == GamePhase.Setup)
             return;
+
+        Freeze = false;
 
         Data.Strategy.Tick(delta);
         Motivation = Mathf.Clamp(Motivation, 0, 1);
