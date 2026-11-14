@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://drdn2i1cp64c2"]
+
+[ext_resource type="Script" uid="uid://dq2gaik1gwvdl" path="res://scripts/PlayerActionItem.cs" id="1_f05rq"]
+[ext_resource type="Texture2D" uid="uid://cyh5vjt3bxytf" path="res://sprites/rally_flag.png" id="1_mn3t7"]
+
+[node name="PlayerActionItem" type="Node2D" unique_id=1856427758]
+script = ExtResource("1_f05rq")
+Duration = 15.0
+metadata/_custom_type_script = "uid://dq2gaik1gwvdl"
+
+[node name="RallyFlag" type="Sprite2D" parent="." unique_id=1281008896]
+position = Vector2(41, -109)
+texture = ExtResource("1_mn3t7")

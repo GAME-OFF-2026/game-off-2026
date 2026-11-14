@@ -27,6 +27,8 @@ public partial class MobManager : Node2D
     private Array<Mob> _currentPack = [];
     private uint _placedPacks;
 
+    public readonly Array<PlayerActionItem> PlacedItems = [];
+
     public Array<Mob> CurrentMobs { get; } = [];
     
     public float PlacedPackRate 
@@ -45,6 +47,20 @@ public partial class MobManager : Node2D
         SpawnNeutralMobs();
     }
 
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (_gameManager.GamePhase != GamePhase.Setup)
+            return;
+
+        if (@event.IsActionPressed("Click"))
+        {
+            _currentPack.Clear();
+            _placedPacks++;
+            if (_placedPacks >= _setupPackCount)
+                _gameManager.EndSetupPhase();
+        }
+    }
+
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
@@ -61,14 +77,6 @@ public partial class MobManager : Node2D
             {
                 var mob = _currentPack[i];
                 mob.GlobalPosition = GetGlobalMousePosition() + new Vector2(40, 0).Rotated(2 * Mathf.Pi * (i / (float)_currentPack.Count));
-            }
-
-            if (Input.IsActionJustPressed("Click"))
-            {
-                _currentPack.Clear();
-                _placedPacks++;
-                if (_placedPacks >= _setupPackCount)
-                    _gameManager.EndSetupPhase();
             }
 
             return;

@@ -58,7 +58,7 @@ public partial class RoamStrategy : MobStrategy
             _immobileSeconds = 0;
 
         if (_immobileSeconds >= PatienceSeconds)
-            _currentDirection = new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1));
+            _currentDirection = new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1)).Normalized();
     }
 
     private void UpdateDirection(Mob[] friends, Mob[] fascists)
@@ -69,7 +69,8 @@ public partial class RoamStrategy : MobStrategy
             var friendInfluence = new Vector2();
             foreach (var friend in friends)
                 friendInfluence += ConversionFactor *
-                                   friend.LinearVelocity.Normalized() *
+                                   (friend.LinearVelocity.Normalized() + (friend.Data.Strategy as RoamStrategy)?._currentDirection ?? new Vector2()) /
+                                   2 *
                                    friend.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
                                    (NeighbourRange * NeighbourRange);
 
@@ -81,8 +82,28 @@ public partial class RoamStrategy : MobStrategy
             _currentDirection += fascistInfluence;
         }
 
+        _currentDirection = _currentDirection.Normalized();
+
+        // Bias towards center
+        if (Mob.IsProtesting)
+        {
+            _currentDirection += -Mob.GlobalPosition.Normalized() / 10;
+            foreach (var item in Mob.MobManager.PlacedItems)
+            {
+                if (!IsInstanceValid(item))
+                    continue;
+
+                switch (item.type)
+                {
+                    case PlayerActionItemType.RallyFlag: _currentDirection += (item.GlobalPosition - Mob.GlobalPosition).Normalized() / 2; break;
+                    case PlayerActionItemType.AvoidArea: _currentDirection += (Mob.GlobalPosition - item.GlobalPosition).Normalized() / 2; break;
+                }
+            }
+        }
+
         // Add noise
-        _currentDirection += new Vector2(Utils.Rng.RandfRange(-0.5f, 0.5f), Utils.Rng.RandfRange(-0.5f, 0.5f));
+        _currentDirection += (Mob.IsProtesting ? 0f : 0.5f) * new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1));
+
 
         _currentDirection = _currentDirection.Normalized();
     }
