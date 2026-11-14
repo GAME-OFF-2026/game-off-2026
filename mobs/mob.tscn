@@ -8,6 +8,7 @@ radius = 16.0
 
 [node name="Mob" type="RigidBody2D" unique_id=382078136]
 gravity_scale = 0.0
+can_sleep = false
 script = ExtResource("1_bsing")
 metadata/_custom_type_script = "uid://bpwmxbbfjtodr"
 
