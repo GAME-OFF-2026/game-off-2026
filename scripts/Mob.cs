@@ -5,6 +5,7 @@ public partial class Mob : RigidBody2D
 {
     private Sprite2D _sprite;
     private NavigationAgent2D _agent;
+    private GameManager _gameManager;
 
     public MobManager MobManager;
 
@@ -25,6 +26,8 @@ public partial class Mob : RigidBody2D
         _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
 
         _sprite = GetNode<Sprite2D>("Sprite2D");
+
+        _gameManager = GetNode<GameManager>("/root/Main/GameManager");
     }
 
     public void SetData(MobData data)
@@ -64,7 +67,7 @@ public partial class Mob : RigidBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Data == null)
+        if (Data == null || _gameManager.GamePhase == GamePhase.Setup)
             return;
 
         Data.Strategy.Tick(delta);
