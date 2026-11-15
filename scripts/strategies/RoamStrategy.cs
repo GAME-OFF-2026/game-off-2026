@@ -96,7 +96,11 @@ public partial class RoamStrategy : MobStrategy
                 switch (item.type)
                 {
                     case PlayerActionItemType.RallyFlag: _currentDirection += (item.GlobalPosition - Mob.GlobalPosition).Normalized() / 2; break;
-                    case PlayerActionItemType.AvoidArea: _currentDirection += (Mob.GlobalPosition - item.GlobalPosition).Normalized() / 2; break;
+                    case PlayerActionItemType.AvoidArea:
+                        _currentDirection += Mathf.Clamp(1f - (Mob.GlobalPosition - item.GlobalPosition).LengthSquared() / (500 * 500), 0f, 1f) *
+                                             (Mob.GlobalPosition - item.GlobalPosition).Normalized() /
+                                             2f;
+                        break;
                 }
             }
         }
