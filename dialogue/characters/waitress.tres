@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogueCharacter" format=3 uid="uid://ddeqbkljtf84d"]
+
+[ext_resource type="Script" uid="uid://upibexg0sgdy" path="res://scripts/dialogue/DialogueCharacter.cs" id="1_s7i1x"]
+
+[resource]
+script = ExtResource("1_s7i1x")
+Name = "The Waitress"
+metadata/_custom_type_script = "uid://upibexg0sgdy"
