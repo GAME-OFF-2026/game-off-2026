@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bcyd4exsgq7t6"]
 
 [ext_resource type="Texture2D" uid="uid://i168qxdbxpnv" path="res://sprites/grass.png" id="1_1am6x"]
+[ext_resource type="Texture2D" uid="uid://cgxjf7r6pi1k0" path="res://sprites/map.png" id="1_8131g"]
 [ext_resource type="Script" uid="uid://dgt22l142c6gv" path="res://scripts/MobManager.cs" id="2_y13xm"]
 [ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/roaming_protester.tres" id="3_xi27f"]
 [ext_resource type="Script" uid="uid://coi0q1a5y75hf" path="res://scripts/PolygonCollider.cs" id="3_y13xm"]
 [ext_resource type="Resource" uid="uid://bmlh1jifotb6y" path="res://mobs/fascist.tres" id="4_hosn7"]
-[ext_resource type="Texture2D" uid="uid://bdtcjgj7dwat4" path="res://img_test_1.png" id="5_2e48u"]
 [ext_resource type="Script" uid="uid://4xvp5jn4urxk" path="res://scripts/GameManager.cs" id="7_xi27f"]
 [ext_resource type="Script" uid="uid://6lm3in6llypw" path="res://scripts/PlayerActionsManager.cs" id="8_hosn7"]
 [ext_resource type="Resource" uid="uid://b8mjs7tl02inr" path="res://player_actions/rally.tres" id="9_2e48u"]
@@ -29,7 +29,7 @@ zoom = Vector2(0.5, 0.5)
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=800525640]
 position = Vector2(2.666626, 1.5000153)
 scale = Vector2(0.6023148, 0.60231483)
-texture = ExtResource("5_2e48u")
+texture = ExtResource("1_8131g")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=254759925]
 position = Vector2(520, -437)
