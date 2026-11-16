@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bh1kmu5ntxh4e" path="res://sprites/bar.png" id="1_3n4vj"]
 [ext_resource type="Texture2D" uid="uid://dk1gsx44d6to2" path="res://sprites/waitress_sad.png" id="1_jwyou"]
 [ext_resource type="Script" uid="uid://j1g4ina456q6" path="res://scripts/dialogue/DialogueManager.cs" id="3_fyky8"]
-[ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/starting_dialogue.tres" id="4_fyky8"]
+[ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/dialogue1.tres" id="4_fyky8"]
+[ext_resource type="Resource" uid="uid://c2ee2ongfrqkr" path="res://dialogue/dialogue2.tres" id="5_led2e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f17"]
 
@@ -21,7 +22,8 @@ offset_bottom = 1.9996948
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="PanelContainer" type="Panel" parent="Dialogue/PanelContainer" unique_id=54069600]
+[node name="NamePanel" type="Panel" parent="Dialogue/PanelContainer" unique_id=54069600]
+unique_name_in_owner = true
 layout_mode = 1
 offset_left = 41.0
 offset_top = -21.0
@@ -29,7 +31,7 @@ offset_right = 381.0
 offset_bottom = 24.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_d6f17")
 
-[node name="SpeakerName" type="RichTextLabel" parent="Dialogue/PanelContainer/PanelContainer" unique_id=1471008008]
+[node name="SpeakerName" type="RichTextLabel" parent="Dialogue/PanelContainer/NamePanel" unique_id=1471008008]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -70,5 +72,5 @@ texture = ExtResource("1_jwyou")
 
 [node name="DialogueManager" type="Node" parent="." unique_id=618252887]
 script = ExtResource("3_fyky8")
-DialogueData = ExtResource("4_fyky8")
+DialoguePerDay = Array[Object]([ExtResource("4_fyky8"), ExtResource("5_led2e")])
 metadata/_custom_type_script = "uid://j1g4ina456q6"

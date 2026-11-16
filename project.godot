@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Game Off 2026"
-run/main_scene="uid://bcyd4exsgq7t6"
+run/main_scene="uid://c548ranj115ld"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalState="*uid://boywldqvic5o6"
 
 [display]
 

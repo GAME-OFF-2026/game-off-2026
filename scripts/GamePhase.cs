@@ -2,5 +2,6 @@ public enum GamePhase
 {
     Setup,
     Protest,
-    Ending
+    Evening,
+    End
 }

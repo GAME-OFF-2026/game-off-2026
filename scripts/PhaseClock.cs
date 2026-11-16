@@ -32,10 +32,10 @@ public partial class PhaseClock : Control
             CurrentPhase = 1;
             Elapsed = 1 + (float)_gameManager.ProtestPhaseCompletion();
         }
-        else if (_gameManager.GamePhase == GamePhase.Ending)
+        else if (_gameManager.GamePhase == GamePhase.Evening)
         {
             CurrentPhase = 2;
-            Elapsed = 2 + (float)_gameManager.EndingPhaseCompletion();
+            Elapsed = 2 + (float)_gameManager.EveningPhaseCompletion();
         }
 
         QueueRedraw();

@@ -97,6 +97,14 @@ public partial class MobManager : Node2D
             _fascistSpawnTimer = 0;
             SpawnMob(_fascist, GetRandomSpawnPoint());
         }
+
+        // Apply scaling motivation penalty in phase 3
+        if (_gameManager.GamePhase == GamePhase.Evening)
+        {
+            var penalty = delta * _gameManager.EveningPhaseCompletion();
+            foreach (var mob in CurrentMobs)
+                mob.Motivation -= mob.MotivationLossRate * penalty;
+        }
     }
 
     private void SpawnNeutralMobs()
