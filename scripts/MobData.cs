@@ -9,7 +9,7 @@ public enum Faction
 [GlobalClass]
 public partial class MobData : Resource
 {
-    [Export] public Texture2D Sprite { get; private set; }
+    [Export] public MobSpriteLayer[] Layers { get; private set; }
     [Export] public MobStrategy Strategy { get; private set; }
     [Export] public float MoveForce { get; private set; } = 800;
     [Export] public float MaxSpeed { get; private set; } = 100;

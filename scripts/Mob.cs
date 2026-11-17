@@ -1,9 +1,12 @@
 using Godot;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class Mob : RigidBody2D
 {
-    private Sprite2D _sprite;
+    private Node2D _spriteRoot;
+    private readonly Array<Sprite2D> _sprites = [];
+    private readonly Array<Sprite2D> _modulatedSprites = [];
     private NavigationAgent2D _agent;
     private GameManager _gameManager;
 
@@ -12,6 +15,7 @@ public partial class Mob : RigidBody2D
     public double Motivation;
     private double _motivationThreshold;
     private double _motivationSwitchTimer;
+    private double _movementBobCounter;
 
     public double MotivationGainRate { get; private set; }
     public double MotivationLossRate { get; private set; }
@@ -24,9 +28,6 @@ public partial class Mob : RigidBody2D
     public override void _Ready()
     {
         _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-
-        _sprite = GetNode<Sprite2D>("Sprite2D");
-
         _gameManager = GetNode<GameManager>("/root/Main/GameManager");
         Freeze = true;
     }
@@ -54,16 +55,28 @@ public partial class Mob : RigidBody2D
 
         IsProtesting = Motivation > _motivationThreshold;
 
-        _sprite.Texture = Data.Sprite;
+        _spriteRoot = new Node2D();
+        AddChild(_spriteRoot);
+        foreach (var layer in Data.Layers)
+        {
+            var newSprite = new Sprite2D();
+            newSprite.Texture = layer.Sprite;
+            newSprite.Scale = new Vector2(layer.Scale, layer.Scale);
+            newSprite.Position = layer.Offset;
+            (layer.ModulateColor ? _modulatedSprites : _sprites).Add(newSprite);
+            _spriteRoot.AddChild(newSprite);
+        }
     }
 
     public override void _Process(double delta)
     {
-        _sprite.Modulate = Color.FromHsv(
-            0,
-            (float)(IsProtesting ? Motivation : Motivation / 2f),
-            1
-        );
+        foreach (var sprite in _modulatedSprites)
+            sprite.Modulate = Color.FromHsv(
+                0,
+                (float)(IsProtesting ? Motivation : Motivation / 2f),
+                1
+            );
+        _spriteRoot.GlobalRotation = 0.1f * (float)Mathf.Cos(_movementBobCounter);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -88,6 +101,8 @@ public partial class Mob : RigidBody2D
         }
 
         _agent.TargetPosition = Data.Strategy.GetDestination();
+
+        _movementBobCounter += LinearVelocity.LengthSquared() * delta;
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -103,6 +118,11 @@ public partial class Mob : RigidBody2D
         ApplyCentralForce(direction * Data.MoveForce);
         if (state.LinearVelocity.LengthSquared() > Data.MaxSpeed * Data.MaxSpeed)
             state.LinearVelocity = state.LinearVelocity.Normalized() * Data.MaxSpeed;
+
+        if (state.LinearVelocity.X < -8)
+            _spriteRoot.Scale = new Vector2(-1, 1);
+        else if (state.LinearVelocity.X > 8)
+            _spriteRoot.Scale = new Vector2(1, 1);
     }
 
     public void ForceProtesting(double motivation)

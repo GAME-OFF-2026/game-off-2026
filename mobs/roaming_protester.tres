@@ -1,8 +1,28 @@
 [gd_resource type="Resource" script_class="MobData" format=3 uid="uid://bxetxqvjvocw"]
 
+[ext_resource type="Texture2D" uid="uid://ck3h7qst7vbiy" path="res://sprites/mob_clothes.png" id="1_f23ia"]
 [ext_resource type="Script" uid="uid://fv70y6lowrp0" path="res://scripts/MobData.cs" id="1_p31w6"]
-[ext_resource type="Texture2D" uid="uid://ci817q6tvpqkd" path="res://sprites/neutral.png" id="1_we64b"]
 [ext_resource type="Script" uid="uid://fjh1xjtcanop" path="res://scripts/strategies/RoamStrategy.cs" id="2_dovx6"]
+[ext_resource type="Script" uid="uid://bodhao17vc7pi" path="res://scripts/MobSpriteLayer.cs" id="2_mram8"]
+[ext_resource type="Texture2D" uid="uid://criborrbk7l0d" path="res://sprites/mob_skin.png" id="3_4tkln"]
+[ext_resource type="Texture2D" uid="uid://ca8s2xrrqs6xl" path="res://sprites/mob_outline.png" id="4_ugw0s"]
+
+[sub_resource type="Resource" id="Resource_cufih"]
+script = ExtResource("2_mram8")
+Sprite = ExtResource("1_f23ia")
+ModulateColor = true
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_5832w"]
+script = ExtResource("2_mram8")
+Sprite = ExtResource("3_4tkln")
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_65hfs"]
+script = ExtResource("2_mram8")
+Sprite = ExtResource("4_ugw0s")
+Offset = Vector2(1, 0)
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
 
 [sub_resource type="Resource" id="Resource_672bv"]
 script = ExtResource("2_dovx6")
@@ -14,7 +34,7 @@ metadata/_custom_type_script = "uid://fjh1xjtcanop"
 
 [resource]
 script = ExtResource("1_p31w6")
-Sprite = ExtResource("1_we64b")
+Layers = Array[Object]([SubResource("Resource_cufih"), SubResource("Resource_5832w"), SubResource("Resource_65hfs")])
 Strategy = SubResource("Resource_672bv")
 MaxSpeed = 80.0
 metadata/_custom_type_script = "uid://fv70y6lowrp0"
