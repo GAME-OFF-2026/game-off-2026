@@ -5,10 +5,7 @@ using Godot;
 public partial class GameManager : Node
 {
     [Signal]
-    public delegate void SetupPhaseEndEventHandler();
-
-    [Signal]
-    public delegate void ProtestPhaseEndEventHandler();
+    public delegate void PhaseChangedEventHandler(GamePhase phase);
 
     [Export] private uint _protestPhaseDuration = 120;
     [Export] private uint _eveningPhaseDuration = 120;
@@ -16,10 +13,16 @@ public partial class GameManager : Node
     private MobManager _mobManager;
     private RichTextLabel _scoreText;
     private double _phaseCurrentTime;
-    public GamePhase GamePhase { get; private set; } = GamePhase.Setup;
+    public GamePhase GamePhase { get; private set; }
 
     public double Score { get; private set; }
     private int ScoreFloored => Mathf.FloorToInt(Score);
+
+    public void SetGamePhase(GamePhase newGamePhase)
+    {
+        GamePhase = newGamePhase;
+        EmitSignalPhaseChanged(GamePhase);
+    }
 
     public override void _Ready()
     {
@@ -28,6 +31,19 @@ public partial class GameManager : Node
         _scoreText = GetNode<RichTextLabel>("%ScoreText");
 
         GetNode<Button>("%BackToTheFutureButton").Pressed += () => { GlobalState.Instance.SwitchToDialoguePhase(ScoreFloored); };
+
+        PhaseChanged += phase =>
+        {
+            if (phase == GamePhase.End)
+            {
+                GetTree().SetPause(true);
+
+                GetNode<RichTextLabel>("%FinalScoreLabel").Text = $"Final Score: {ScoreFloored}";
+                GetNode<Control>("%EndScreen").Visible = true;
+            }
+        };
+
+        SetGamePhase(GamePhase.Setup);
     }
 
     public override void _Process(double delta)
@@ -44,54 +60,14 @@ public partial class GameManager : Node
             if (_phaseCurrentTime > _protestPhaseDuration)
             {
                 _phaseCurrentTime = 0;
-                EndProtestPhase();
+                SetGamePhase(GamePhase.Evening);
             }
         }
         else if (GamePhase == GamePhase.Evening)
         {
             if (!_mobManager.CurrentMobs.Any(mob => mob.IsProtesting))
-                EndEveningPhase();
+                SetGamePhase(GamePhase.End);
         }
-    }
-
-    public void EndSetupPhase()
-    {
-        if (GamePhase != GamePhase.Setup)
-        {
-            GD.PrintErr("GameManager: EndSetupPhase called in phase: " + GamePhase);
-            return;
-        }
-
-        GamePhase = GamePhase.Protest;
-        EmitSignalSetupPhaseEnd();
-    }
-
-    public void EndProtestPhase()
-    {
-        if (GamePhase != GamePhase.Protest)
-        {
-            GD.PrintErr("GameManager: EndProtestPhase called in phase: " + GamePhase);
-            return;
-        }
-
-        GamePhase = GamePhase.Evening;
-        EmitSignalProtestPhaseEnd();
-    }
-
-
-    public void EndEveningPhase()
-    {
-        if (GamePhase != GamePhase.Evening)
-        {
-            GD.PrintErr("GameManager: EndEveningPhase called in phase: " + GamePhase);
-            return;
-        }
-
-        GamePhase = GamePhase.End;
-        GetTree().SetPause(true);
-
-        GetNode<RichTextLabel>("%FinalScoreLabel").Text = $"Final Score: {ScoreFloored}";
-        GetNode<Control>("%EndScreen").Visible = true;
     }
 
     public double SetupPhaseCompletion() => _mobManager.PlacedPackRate;

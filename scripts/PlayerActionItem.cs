@@ -2,6 +2,7 @@ using Godot;
 
 public enum PlayerActionItemType
 {
+    Other,
     RallyFlag,
     AvoidArea
 }

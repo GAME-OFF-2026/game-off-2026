@@ -5,6 +5,7 @@
 
 [node name="PlayerActionItem" type="Node2D" unique_id=1856427758]
 script = ExtResource("1_f05rq")
+type = 1
 Duration = 15.0
 metadata/_custom_type_script = "uid://dq2gaik1gwvdl"
 

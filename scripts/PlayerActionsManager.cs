@@ -18,10 +18,18 @@ public partial class PlayerActionsManager : Control
         _mobManager = GetNode<MobManager>("%MobManager");
         _buttonsContainer = GetNode<Container>("ButtonsContainer");
 
-        GetNode<GameManager>("%GameManager").SetupPhaseEnd += () =>
+        GetNode<GameManager>("%GameManager").PhaseChanged += phase =>
         {
+            // Clear actions
+            foreach (var button in _buttonsContainer.GetChildren())
+                button.QueueFree();
+
+            // Instantiate all actions for new phase
             foreach (var action in _actions)
             {
+                if (action.Phase != phase)
+                    continue;
+
                 var newButton = _playerActionButtonScene.Instantiate<Button>();
                 newButton.GetNode<TextureRect>("%Icon").Texture = action.Sprite;
                 newButton.GetNode<RichTextLabel>("%Label").Text = action.Name;

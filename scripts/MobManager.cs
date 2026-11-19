@@ -63,7 +63,7 @@ public partial class MobManager : Node2D
             _currentPack.Clear();
             _placedPacks++;
             if (_placedPacks >= _setupPackCount)
-                _gameManager.EndSetupPhase();
+                _gameManager.SetGamePhase(GamePhase.Protest);
         }
     }
 

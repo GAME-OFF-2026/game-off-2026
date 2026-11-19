@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerActionData" format=3 uid="uid://ct0xesmod0tjm"]
+
+[ext_resource type="Script" uid="uid://e8udkhl8kv1u" path="res://scripts/PlayerActionData.cs" id="1_0jvcd"]
+[ext_resource type="Texture2D" uid="uid://drule1df82exe" path="res://sprites/Poubelle.png" id="1_ka2vh"]
+[ext_resource type="PackedScene" uid="uid://dg4gyi8lee6t8" path="res://player_actions/barricade.tscn" id="1_s5yir"]
+
+[resource]
+script = ExtResource("1_0jvcd")
+Name = "Barricade"
+Sprite = ExtResource("1_ka2vh")
+Item = ExtResource("1_s5yir")
+metadata/_custom_type_script = "uid://e8udkhl8kv1u"

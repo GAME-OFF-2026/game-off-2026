@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dg4gyi8lee6t8"]
+
+[ext_resource type="Texture2D" uid="uid://drule1df82exe" path="res://sprites/Poubelle.png" id="1_bvi4y"]
+[ext_resource type="Script" uid="uid://dq2gaik1gwvdl" path="res://scripts/PlayerActionItem.cs" id="1_km6oh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6f17"]
+radius = 80.0
+
+[node name="Barricade" type="Node2D" unique_id=953823366]
+script = ExtResource("1_km6oh")
+Duration = 99999999.0
+metadata/_custom_type_script = "uid://dq2gaik1gwvdl"
+
+[node name="Poubelle" type="Sprite2D" parent="." unique_id=929554730]
+position = Vector2(-36, -29)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle2" type="Sprite2D" parent="." unique_id=592909934]
+position = Vector2(-7, -46)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle3" type="Sprite2D" parent="." unique_id=40685353]
+position = Vector2(44, -34)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle4" type="Sprite2D" parent="." unique_id=1437595969]
+position = Vector2(18, -18)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle5" type="Sprite2D" parent="." unique_id=315172863]
+position = Vector2(-14, -5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle6" type="Sprite2D" parent="." unique_id=1644779506]
+position = Vector2(-62, -3)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle7" type="Sprite2D" parent="." unique_id=449248848]
+position = Vector2(-46, 24)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle9" type="Sprite2D" parent="." unique_id=180359121]
+position = Vector2(10, 15)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle8" type="Sprite2D" parent="." unique_id=854961769]
+position = Vector2(-10, 44)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle10" type="Sprite2D" parent="." unique_id=1009872960]
+position = Vector2(56, 5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="Poubelle11" type="Sprite2D" parent="." unique_id=1039682424]
+position = Vector2(39, 35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bvi4y")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1846136921]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1322738639]
+shape = SubResource("CircleShape2D_d6f17")
