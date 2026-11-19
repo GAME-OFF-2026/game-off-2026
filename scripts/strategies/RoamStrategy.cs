@@ -34,7 +34,7 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         return true;
     }
 
-    protected override void TickWithNeighbours(Mob[] protesters, Mob[] fascists)
+    protected override void TickWithNeighbours(double delta, Mob[] protesters, Mob[] fascists)
     {
         UpdateDirection(protesters, fascists);
         UpdateMotivation(protesters, fascists);

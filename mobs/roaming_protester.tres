@@ -1,27 +1,36 @@
 [gd_resource type="Resource" script_class="MobData" format=3 uid="uid://bxetxqvjvocw"]
 
-[ext_resource type="Texture2D" uid="uid://ck3h7qst7vbiy" path="res://sprites/mob_clothes.png" id="1_f23ia"]
 [ext_resource type="Script" uid="uid://fv70y6lowrp0" path="res://scripts/MobData.cs" id="1_p31w6"]
+[ext_resource type="Texture2D" uid="uid://bhs54pw6nr61u" path="res://sprites/skin1.png" id="1_y5wpb"]
+[ext_resource type="Texture2D" uid="uid://l0qngdpobc0d" path="res://sprites/skin2.png" id="2_5sp11"]
 [ext_resource type="Script" uid="uid://fjh1xjtcanop" path="res://scripts/strategies/RoamStrategy.cs" id="2_dovx6"]
 [ext_resource type="Script" uid="uid://bodhao17vc7pi" path="res://scripts/MobSpriteLayer.cs" id="2_mram8"]
-[ext_resource type="Texture2D" uid="uid://criborrbk7l0d" path="res://sprites/mob_skin.png" id="3_4tkln"]
-[ext_resource type="Texture2D" uid="uid://ca8s2xrrqs6xl" path="res://sprites/mob_outline.png" id="4_ugw0s"]
-
-[sub_resource type="Resource" id="Resource_cufih"]
-script = ExtResource("2_mram8")
-Sprite = ExtResource("1_f23ia")
-ModulateColor = true
-metadata/_custom_type_script = "uid://bodhao17vc7pi"
+[ext_resource type="Texture2D" uid="uid://dcyy263l3y0bx" path="res://sprites/skin3.png" id="3_qfgqw"]
+[ext_resource type="Texture2D" uid="uid://repmrlxkqfu5" path="res://sprites/hairCap.png" id="5_5628s"]
+[ext_resource type="Texture2D" uid="uid://bm44ed0sblvgh" path="res://sprites/hairlong.png" id="6_wsstb"]
+[ext_resource type="Texture2D" uid="uid://cqlen12xjv8w6" path="res://sprites/hairShort.png" id="7_mkvlr"]
+[ext_resource type="Texture2D" uid="uid://b5sf78bqbi5nm" path="res://sprites/habits.png" id="8_5sp11"]
+[ext_resource type="Texture2D" uid="uid://ltsbfyh0thl5" path="res://sprites/petitbody.png" id="8_7fodu"]
 
 [sub_resource type="Resource" id="Resource_5832w"]
 script = ExtResource("2_mram8")
-Sprite = ExtResource("3_4tkln")
+SpriteVariants = Array[Texture2D]([ExtResource("1_y5wpb"), ExtResource("2_5sp11"), ExtResource("3_qfgqw")])
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_fsfmh"]
+script = ExtResource("2_mram8")
+SpriteVariants = Array[Texture2D]([ExtResource("8_5sp11")])
+ModulateColor = true
 metadata/_custom_type_script = "uid://bodhao17vc7pi"
 
 [sub_resource type="Resource" id="Resource_65hfs"]
 script = ExtResource("2_mram8")
-Sprite = ExtResource("4_ugw0s")
-Offset = Vector2(1, 0)
+SpriteVariants = Array[Texture2D]([ExtResource("8_7fodu")])
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_etmed"]
+script = ExtResource("2_mram8")
+SpriteVariants = Array[Texture2D]([ExtResource("5_5628s"), ExtResource("6_wsstb"), ExtResource("7_mkvlr")])
 metadata/_custom_type_script = "uid://bodhao17vc7pi"
 
 [sub_resource type="Resource" id="Resource_672bv"]
@@ -32,7 +41,8 @@ metadata/_custom_type_script = "uid://fjh1xjtcanop"
 
 [resource]
 script = ExtResource("1_p31w6")
-Layers = Array[Object]([SubResource("Resource_cufih"), SubResource("Resource_5832w"), SubResource("Resource_65hfs")])
+Layers = Array[Object]([SubResource("Resource_5832w"), SubResource("Resource_fsfmh"), SubResource("Resource_65hfs"), SubResource("Resource_etmed")])
 Strategy = SubResource("Resource_672bv")
+Dps = 0.0
 MaxSpeed = 80.0
 metadata/_custom_type_script = "uid://fv70y6lowrp0"

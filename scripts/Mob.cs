@@ -11,6 +11,7 @@ public partial class Mob : RigidBody2D
 
     public MobManager MobManager;
 
+    public double Health;
     public double Motivation;
     private double _motivationThreshold;
     private double _motivationSwitchTimer;
@@ -50,6 +51,8 @@ public partial class Mob : RigidBody2D
 
         Data.Strategy.Initialize(this);
 
+        Health = Data.MaxHealth;
+
         _motivationThreshold = Utils.Rng.RandfRange(Data.MotivationThresholdMinMax.X, Data.MotivationThresholdMinMax.Y);
         MotivationGainRate = Utils.Rng.RandfRange(Data.MotivationGainRateMinMax.X, Data.MotivationGainRateMinMax.Y);
         MotivationLossRate = Utils.Rng.RandfRange(Data.MotivationLossRateMinMax.X, Data.MotivationLossRateMinMax.Y);
@@ -61,7 +64,7 @@ public partial class Mob : RigidBody2D
         foreach (var layer in Data.Layers)
         {
             var newSprite = new Sprite2D();
-            newSprite.Texture = layer.Sprite;
+            newSprite.Texture = layer.SpriteVariants[Utils.Rng.RandiRange(0, layer.SpriteVariants.Length - 1)];
             newSprite.Scale = new Vector2(layer.Scale, layer.Scale);
             newSprite.Position = layer.Offset;
             (layer.ModulateColor ? _modulatedSprites : _sprites).Add(newSprite);
@@ -71,13 +74,30 @@ public partial class Mob : RigidBody2D
 
     public override void _Process(double delta)
     {
+        if (Data == null)
+            return;
+
         foreach (var sprite in _modulatedSprites)
             sprite.Modulate = Color.FromHsv(
                 0,
                 (float)(IsProtesting ? Motivation : Motivation / 2f),
                 1
             );
-        _spriteRoot.GlobalRotation = 0.1f * (float)Mathf.Cos(_movementBobCounter);
+        _spriteRoot.GlobalRotation = .15f * (float)Mathf.Cos(_movementBobCounter);
+
+        var healthFraction = (float)(Health / Data.MaxHealth);
+        var flashIntensity = 1 - healthFraction * healthFraction;
+
+        foreach (var sprite in _sprites)
+            sprite.Modulate = Color.FromHsv(
+                0,
+                flashIntensity * (1 + Mathf.Cos(5 * Time.GetTicksMsec() / 1000f * flashIntensity)) / 2,
+                1
+            );
+
+
+        if (Health <= 0)
+            QueueFree();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -102,8 +122,6 @@ public partial class Mob : RigidBody2D
         }
 
         _agent.TargetPosition = Data.Strategy.GetDestination();
-
-        _movementBobCounter += LinearVelocity.LengthSquared() * delta;
     }
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
@@ -119,6 +137,8 @@ public partial class Mob : RigidBody2D
         ApplyCentralForce(direction * Data.MoveForce);
         if (state.LinearVelocity.LengthSquared() > Data.MaxSpeed * Data.MaxSpeed)
             state.LinearVelocity = state.LinearVelocity.Normalized() * Data.MaxSpeed;
+
+        _movementBobCounter += LinearVelocity.LengthSquared() / 1000 * state.Step;
 
         if (state.LinearVelocity.X < -8)
             _spriteRoot.Scale = new Vector2(-1, 1);

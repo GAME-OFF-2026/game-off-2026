@@ -20,13 +20,14 @@ public abstract partial class NeighbourBasedStrategy : MobStrategy
 
     public sealed override void Tick(double delta)
     {
+        if (!PreTick(delta))
+            return;
+
         _timeSinceLastUpdate += delta;
+
         while (_timeSinceLastUpdate > TickSeconds)
         {
             _timeSinceLastUpdate -= TickSeconds;
-
-            if (!PreTick(delta))
-                continue;
 
             var protesters = Mob.MobManager
                 .CurrentMobs.Where(
@@ -43,11 +44,11 @@ public abstract partial class NeighbourBasedStrategy : MobStrategy
                 )
                 .ToArray();
 
-            TickWithNeighbours(protesters, fascists);
+            TickWithNeighbours(TickSeconds, protesters, fascists);
         }
     }
 
     protected virtual bool PreTick(double delta) => true;
 
-    protected abstract void TickWithNeighbours(Mob[] protesters, Mob[] fascists);
+    protected abstract void TickWithNeighbours(double delta, Mob[] protesters, Mob[] fascists);
 }

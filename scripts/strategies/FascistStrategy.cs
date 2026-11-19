@@ -13,7 +13,7 @@ public partial class FascistStrategy : NeighbourBasedStrategy
         _goal = Mob.GlobalPosition;
     }
 
-    protected override void TickWithNeighbours(Mob[] protesters, Mob[] fascists)
+    protected override void TickWithNeighbours(double delta, Mob[] protesters, Mob[] fascists)
     {
         if (fascists.Length == 0)
         {
@@ -23,8 +23,14 @@ public partial class FascistStrategy : NeighbourBasedStrategy
             return;
         }
 
-        _goal = Mob.MobManager.CurrentMobs.Where(mob => mob.IsProtesting)
-            .MinBy(mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition))
-            .GlobalPosition;
+        var nearestProtester = Mob.MobManager.CurrentMobs.Where(mob => mob.IsProtesting)
+            .MinBy(mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition));
+
+        if (nearestProtester != null)
+            _goal = nearestProtester.GlobalPosition;
+
+        foreach (var protester in protesters)
+            if (protester.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) < 40 * 40)
+                protester.Health -= delta * Mob.Data.Dps;
     }
 }
