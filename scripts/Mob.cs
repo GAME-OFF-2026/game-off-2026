@@ -8,7 +8,6 @@ public partial class Mob : RigidBody2D
     private readonly Array<Sprite2D> _sprites = [];
     private readonly Array<Sprite2D> _modulatedSprites = [];
     private NavigationAgent2D _agent;
-    private GameManager _gameManager;
 
     public MobManager MobManager;
 
@@ -16,6 +15,8 @@ public partial class Mob : RigidBody2D
     private double _motivationThreshold;
     private double _motivationSwitchTimer;
     private double _movementBobCounter;
+
+    public GameManager GameManager { get; private set; }
 
     public double MotivationGainRate { get; private set; }
     public double MotivationLossRate { get; private set; }
@@ -28,7 +29,7 @@ public partial class Mob : RigidBody2D
     public override void _Ready()
     {
         _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-        _gameManager = GetNode<GameManager>("/root/Main/GameManager");
+        GameManager = GetNode<GameManager>("/root/Main/GameManager");
         Freeze = true;
     }
 
@@ -81,7 +82,7 @@ public partial class Mob : RigidBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Data == null || _gameManager.GamePhase == GamePhase.Setup)
+        if (Data == null || GameManager.GamePhase == GamePhase.Setup)
             return;
 
         Freeze = false;

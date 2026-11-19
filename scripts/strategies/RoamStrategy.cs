@@ -12,6 +12,9 @@ public partial class RoamStrategy : MobStrategy
     [Export] public float ConversionFactor = 0.05f;
     [Export] public double PatienceSeconds = 3f;
 
+    private GameManager _gameManager;
+
+    private Vector2? _goal;
     private Vector2 _currentDirection;
     private double _immobileSeconds;
 
@@ -19,11 +22,28 @@ public partial class RoamStrategy : MobStrategy
 
     public override void Init()
     {
+        _gameManager = Mob.GetParent().GetNode<GameManager>("%GameManager");
         _timeSinceLastUpdate = Utils.Rng.RandfRange(0, TickSeconds);
     }
 
     public override void Tick(double delta)
     {
+        if (Mob.IsProtesting)
+            _goal = null;
+
+        if (_goal != null)
+        {
+            if (Mob.GlobalPosition.DistanceSquaredTo(_goal.Value) < 32 * 32)
+                Mob.QueueFree();
+            return;
+        }
+
+        if (_gameManager.GamePhase == GamePhase.Evening && !Mob.IsProtesting)
+        {
+            _goal = Mob.MobManager.GetRandomSpawnPoint();
+            return;
+        }
+
         ImmobilityCheck(delta);
 
         _timeSinceLastUpdate += delta;
@@ -124,5 +144,5 @@ public partial class RoamStrategy : MobStrategy
                               (1 - fascist.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / (FascistDetectionRange * FascistDetectionRange));
     }
 
-    public override Vector2 GetDestination() => Mob.GlobalPosition + 150 * _currentDirection;
+    public override Vector2 GetDestination() => _goal ?? Mob.GlobalPosition + 150 * _currentDirection;
 }

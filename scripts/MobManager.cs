@@ -31,7 +31,7 @@ public partial class MobManager : Node2D
     private Node2D[] _spawnPoints;
     public readonly Array<PlayerActionItem> PlacedItems = [];
 
-    public Array<Mob> CurrentMobs { get; } = [];
+    public Array<Mob> CurrentMobs { get; private set; } = [];
 
     public float PlacedPackRate
     {
@@ -42,6 +42,8 @@ public partial class MobManager : Node2D
             return _placedPacks / (float)_setupPackCount;
         }
     }
+
+    public Vector2 GetRandomSpawnPoint() => _spawnPoints[Utils.Rng.RandiRange(0, _spawnPoints.Length - 1)].GlobalPosition;
 
     public override void _Ready()
     {
@@ -66,6 +68,8 @@ public partial class MobManager : Node2D
 
     public override void _Process(double delta)
     {
+        CurrentMobs = [.. CurrentMobs.Where(IsInstanceValid)];
+
         if (_gameManager.GamePhase == GamePhase.Setup)
         {
             while (_currentPack.Count < _setupPackSize)
@@ -134,6 +138,4 @@ public partial class MobManager : Node2D
         CurrentMobs.Add(newMob);
         return newMob;
     }
-
-    private Vector2 GetRandomSpawnPoint() => _spawnPoints[Utils.Rng.RandiRange(0, _spawnPoints.Length - 1)].GlobalPosition;
 }
