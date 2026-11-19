@@ -1,32 +1,17 @@
-using System.Linq;
 using Godot;
 
 [GlobalClass]
-public partial class RoamStrategy : MobStrategy
+public partial class RoamStrategy : NeighbourBasedStrategy
 {
-    private const float TickSeconds = 0.1f;
-
-    [Export] public float FascistDetectionRange = 300;
     [Export] public float FascistAvoidanceFactor = 1;
-    [Export] public float NeighbourRange = 150;
     [Export] public float ConversionFactor = 0.05f;
     [Export] public double PatienceSeconds = 3f;
-
-    private GameManager _gameManager;
 
     private Vector2? _goal;
     private Vector2 _currentDirection;
     private double _immobileSeconds;
 
-    private double _timeSinceLastUpdate;
-
-    public override void Init()
-    {
-        _gameManager = Mob.GetParent().GetNode<GameManager>("%GameManager");
-        _timeSinceLastUpdate = Utils.Rng.RandfRange(0, TickSeconds);
-    }
-
-    public override void Tick(double delta)
+    protected override bool PreTick(double delta)
     {
         if (Mob.IsProtesting)
             _goal = null;
@@ -35,39 +20,24 @@ public partial class RoamStrategy : MobStrategy
         {
             if (Mob.GlobalPosition.DistanceSquaredTo(_goal.Value) < 32 * 32)
                 Mob.QueueFree();
-            return;
+            return false;
         }
 
-        if (_gameManager.GamePhase == GamePhase.Evening && !Mob.IsProtesting)
+        if (GameManager.GamePhase == GamePhase.Evening && !Mob.IsProtesting)
         {
             _goal = Mob.MobManager.GetRandomSpawnPoint();
-            return;
+            return false;
         }
 
         ImmobilityCheck(delta);
 
-        _timeSinceLastUpdate += delta;
-        if (_timeSinceLastUpdate > TickSeconds)
-        {
-            _timeSinceLastUpdate -= TickSeconds;
+        return true;
+    }
 
-            var friends = Mob.MobManager
-                .CurrentMobs.Where(
-                    mob => mob != Mob &&
-                           mob.IsProtesting &&
-                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= NeighbourRange * NeighbourRange
-                )
-                .ToArray();
-
-            var fascists = Mob.MobManager.CurrentMobs.Where(
-                    mob => mob.Data.Faction == Faction.Fascist &&
-                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= FascistDetectionRange * FascistDetectionRange
-                )
-                .ToArray();
-
-            UpdateDirection(friends, fascists);
-            UpdateMotivation(friends, fascists);
-        }
+    protected override void TickWithNeighbours(Mob[] protesters, Mob[] fascists)
+    {
+        UpdateDirection(protesters, fascists);
+        UpdateMotivation(protesters, fascists);
     }
 
     private void ImmobilityCheck(double delta)
@@ -92,7 +62,7 @@ public partial class RoamStrategy : MobStrategy
                                    (friend.LinearVelocity.Normalized() + (friend.Data.Strategy as RoamStrategy)?._currentDirection ?? new Vector2()) /
                                    2 *
                                    friend.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
-                                   (NeighbourRange * NeighbourRange);
+                                   (ProtesterDetectionRange * ProtesterDetectionRange);
 
             var fascistInfluence = new Vector2();
             foreach (var fascist in fascists)
@@ -127,7 +97,6 @@ public partial class RoamStrategy : MobStrategy
 
         // Add noise
         _currentDirection += (Mob.IsProtesting ? 0f : 0.5f) * new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1));
-
 
         _currentDirection = _currentDirection.Normalized();
     }

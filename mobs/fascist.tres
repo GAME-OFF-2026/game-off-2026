@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://bodhao17vc7pi"
 
 [sub_resource type="Resource" id="Resource_d6f17"]
 script = ExtResource("2_s4o0a")
+FascistDetectionRange = 50.0
 metadata/_custom_type_script = "uid://b78ea0ywk6asv"
 
 [resource]

@@ -410,7 +410,7 @@ _protester = ExtResource("3_xi27f")
 _neutralCount = 75
 _fascist = ExtResource("4_hosn7")
 _neutralSpawnPeriod = 8
-_fascistSpawnPeriod = 15
+_fascistSpawnPeriod = 40
 SpawnRect = Rect2i(-1100, -600, 2200, 1200)
 metadata/_custom_type_script = "uid://dgt22l142c6gv"
 

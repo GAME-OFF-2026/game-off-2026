@@ -19,6 +19,7 @@ public partial class MobManager : Node2D
 
     [Export] private uint _neutralSpawnPeriod = 30;
     [Export] private uint _fascistSpawnPeriod = 60;
+    [Export] private uint _fascistPackSize = 3;
 
     [Export] public Rect2I SpawnRect;
 
@@ -88,18 +89,23 @@ public partial class MobManager : Node2D
             return;
         }
 
-        _neutralSpawnTimer += delta;
-        if (_neutralSpawnTimer >= _neutralSpawnPeriod)
+        if (_gameManager.GamePhase == GamePhase.Protest)
         {
-            _neutralSpawnTimer = 0;
-            SpawnMob(_protester, GetRandomSpawnPoint());
+            _neutralSpawnTimer += delta;
+            if (_neutralSpawnTimer >= _neutralSpawnPeriod)
+            {
+                _neutralSpawnTimer = 0;
+                SpawnMob(_protester, GetRandomSpawnPoint());
+            }
         }
 
         _fascistSpawnTimer += delta;
         if (_fascistSpawnTimer >= _fascistSpawnPeriod)
         {
             _fascistSpawnTimer = 0;
-            SpawnMob(_fascist, GetRandomSpawnPoint());
+            var spawnPoint = GetRandomSpawnPoint();
+            for (var i = 0; i < _fascistPackSize; i++)
+                SpawnMob(_fascist, spawnPoint);
         }
 
         // Apply scaling motivation penalty in phase 3
