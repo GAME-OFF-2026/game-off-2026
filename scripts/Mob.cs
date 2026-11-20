@@ -16,6 +16,7 @@ public partial class Mob : RigidBody2D
     private double _motivationThreshold;
     private double _motivationSwitchTimer;
     private double _movementBobCounter;
+    private double _healthFlashCounter;
 
     public GameManager GameManager { get; private set; }
 
@@ -85,13 +86,14 @@ public partial class Mob : RigidBody2D
             );
         _spriteRoot.GlobalRotation = .15f * (float)Mathf.Cos(_movementBobCounter);
 
-        var healthFraction = (float)(Health / Data.MaxHealth);
+        var healthFraction = Health / Data.MaxHealth;
         var flashIntensity = 1 - healthFraction * healthFraction;
+        _healthFlashCounter += 10 * flashIntensity * delta;
 
         foreach (var sprite in _sprites)
             sprite.Modulate = Color.FromHsv(
                 0,
-                flashIntensity * (1 + Mathf.Cos(5 * Time.GetTicksMsec() / 1000f * flashIntensity)) / 2,
+                (float)(flashIntensity * (1 + Mathf.Cos(_healthFlashCounter)) / 2),
                 1
             );
 
@@ -109,6 +111,8 @@ public partial class Mob : RigidBody2D
 
         Data.Strategy.Tick(delta);
         Motivation = Mathf.Clamp(Motivation, 0, 1);
+        SetCollisionMaskValue(2, !IsProtesting);
+        _agent.NavigationLayers = IsProtesting ? 1u : 2u;
 
         if (IsProtesting ? Motivation < _motivationThreshold : Motivation > _motivationThreshold)
         {

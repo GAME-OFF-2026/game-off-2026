@@ -21,6 +21,7 @@ offset_top = -148.0
 offset_bottom = 1.9996948
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 1
 
 [node name="NamePanel" type="Panel" parent="Dialogue/PanelContainer" unique_id=54069600]
 unique_name_in_owner = true
@@ -29,6 +30,7 @@ offset_left = 41.0
 offset_top = -21.0
 offset_right = 381.0
 offset_bottom = 24.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_d6f17")
 
 [node name="SpeakerName" type="RichTextLabel" parent="Dialogue/PanelContainer/NamePanel" unique_id=1471008008]
@@ -39,6 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 bbcode_enabled = true
 text = "[font_size=24]La serveuse aux tomates"
 scroll_active = false
@@ -57,6 +60,7 @@ offset_right = -20.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 bbcode_enabled = true
 text = "[font_size=24]Salut c'est moi la serveuse aux tomates !! Je vis dans une société trop nulle où les milliardaires fascistes ont établi leur domination par la force et du coup on est super pauvres et les minorités ont plus aucun droits #nul"
 scroll_active = false

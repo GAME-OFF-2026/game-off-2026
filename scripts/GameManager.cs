@@ -34,6 +34,12 @@ public partial class GameManager : Node
 
         PhaseChanged += phase =>
         {
+            if (phase == GamePhase.Protest)
+            {
+                GetNode<NavigationRegion2D>("%ProtesterNavmesh").BakeNavigationPolygon();
+                GetNode<NavigationRegion2D>("%NonProtesterNavmesh").BakeNavigationPolygon();
+            }
+
             if (phase == GamePhase.End)
             {
                 GetTree().SetPause(true);

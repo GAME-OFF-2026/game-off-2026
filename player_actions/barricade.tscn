@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6f17"]
 radius = 80.0
 
-[node name="Barricade" type="Node2D" unique_id=953823366]
+[node name="Barricade" type="Node2D" unique_id=953823366 groups=["navigation_polygon_source_geometry_group"]]
 script = ExtResource("1_km6oh")
 Duration = 99999999.0
 metadata/_custom_type_script = "uid://dq2gaik1gwvdl"
@@ -67,6 +67,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_bvi4y")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1846136921]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1322738639]
 shape = SubResource("CircleShape2D_d6f17")

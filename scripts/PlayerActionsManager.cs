@@ -40,7 +40,7 @@ public partial class PlayerActionsManager : Control
                     _itemBeingPlaced?.QueueFree();
 
                     _itemBeingPlaced = action.Item.Instantiate<PlayerActionItem>();
-                    GetNode("/root/Main").AddChild(_itemBeingPlaced);
+                    GetNode("/root/Main/Terrain").AddChild(_itemBeingPlaced);
                 };
             }
         };
