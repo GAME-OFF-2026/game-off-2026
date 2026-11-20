@@ -68,6 +68,8 @@ public partial class PlayerActionsManager : Control
                 _mobManager.PlacedItems.Add(_itemBeingPlaced);
 
                 _itemBeingPlaced = null;
+
+                GetNode<GameManager>("%GameManager").SetupPhaseSpent++;
             }
     }
 }

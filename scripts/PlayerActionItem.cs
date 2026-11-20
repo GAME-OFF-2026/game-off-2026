@@ -12,7 +12,7 @@ public partial class PlayerActionItem : Node2D
 {
     public bool IsPlaced;
 
-    [Export] public PlayerActionItemType type { get; private set; }
+    [Export] public PlayerActionItemType Type { get; private set; }
     [Export] public double Duration { get; private set; }
 
     public override void _Process(double delta)

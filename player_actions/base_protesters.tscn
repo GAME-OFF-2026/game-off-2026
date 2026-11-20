@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://7rdql7pgcxrw"]
+
+[ext_resource type="Script" uid="uid://br36djnboadt0" path="res://scripts/PlayerActionMobSpawner.cs" id="1_xex2o"]
+[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/roaming_protester.tres" id="2_jtv6j"]
+
+[node name="BaseProtesters" type="Node2D" unique_id=616473747]
+script = ExtResource("1_xex2o")
+_mobsToSpawn = Array[Object]([ExtResource("2_jtv6j"), ExtResource("2_jtv6j"), ExtResource("2_jtv6j")])
+Duration = 99999999999.0
+metadata/_custom_type_script = "uid://br36djnboadt0"

@@ -13,13 +13,22 @@ public partial class GameManager : Node
     private MobManager _mobManager;
     private RichTextLabel _scoreText;
     private double _phaseCurrentTime;
+
+    public uint SetupPhaseSpent = 0;
+
     public GamePhase GamePhase { get; private set; }
 
     public double Score { get; private set; }
     private int ScoreFloored => Mathf.FloorToInt(Score);
 
+
+    public uint SetupPhaseBudget => 8;
+    public double SetupPhaseCompletion => SetupPhaseSpent / (float)SetupPhaseBudget;
+
     public void SetGamePhase(GamePhase newGamePhase)
     {
+        _phaseCurrentTime = 0;
+
         GamePhase = newGamePhase;
         EmitSignalPhaseChanged(GamePhase);
     }
@@ -55,7 +64,11 @@ public partial class GameManager : Node
     public override void _Process(double delta)
     {
         if (GamePhase == GamePhase.Setup)
+        {
+            if (SetupPhaseSpent >= SetupPhaseBudget)
+                SetGamePhase(GamePhase.Protest);
             return;
+        }
 
         Score += delta * _mobManager.CurrentMobs.Sum(mob => mob.IsProtesting ? mob.Motivation : 0);
         _scoreText.Text = $"Score: {ScoreFloored}";
@@ -64,10 +77,7 @@ public partial class GameManager : Node
         if (GamePhase == GamePhase.Protest)
         {
             if (_phaseCurrentTime > _protestPhaseDuration)
-            {
-                _phaseCurrentTime = 0;
                 SetGamePhase(GamePhase.Evening);
-            }
         }
         else if (GamePhase == GamePhase.Evening)
         {
@@ -76,7 +86,6 @@ public partial class GameManager : Node
         }
     }
 
-    public double SetupPhaseCompletion() => _mobManager.PlacedPackRate;
 
     public double ProtestPhaseCompletion()
     {

@@ -14,7 +14,7 @@ public abstract partial class NeighbourBasedStrategy : MobStrategy
 
     public override void Init()
     {
-        GameManager = Mob.GetParent().GetNode<GameManager>("%GameManager");
+        GameManager = Mob.GetNode<GameManager>("/root/Main/GameManager");
         _timeSinceLastUpdate = Utils.Rng.RandfRange(0, TickSeconds);
     }
 

@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://4xvp5jn4urxk" path="res://scripts/GameManager.cs" id="7_xi27f"]
 [ext_resource type="Script" uid="uid://6lm3in6llypw" path="res://scripts/PlayerActionsManager.cs" id="8_hosn7"]
 [ext_resource type="Resource" uid="uid://b8mjs7tl02inr" path="res://player_actions/rally.tres" id="9_2e48u"]
+[ext_resource type="Resource" uid="uid://d3back40dy8ia" path="res://player_actions/base_protesters.tres" id="9_ck0ku"]
 [ext_resource type="Resource" uid="uid://doggeqlkouuef" path="res://player_actions/avoid_area.tres" id="10_m5sgm"]
 [ext_resource type="Resource" uid="uid://ct0xesmod0tjm" path="res://player_actions/barricade.tres" id="11_5i8a5"]
 [ext_resource type="Script" uid="uid://n3qju8tsl66h" path="res://scripts/PhaseClock.cs" id="11_8131g"]
@@ -141,7 +142,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("8_hosn7")
-_actions = Array[Object]([ExtResource("9_2e48u"), ExtResource("10_m5sgm"), ExtResource("11_5i8a5")])
+_actions = Array[Object]([ExtResource("9_2e48u"), ExtResource("10_m5sgm"), ExtResource("11_5i8a5"), ExtResource("9_ck0ku")])
 metadata/_custom_type_script = "uid://6lm3in6llypw"
 metadata/_edit_use_anchors_ = true
 

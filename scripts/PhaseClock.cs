@@ -25,7 +25,7 @@ public partial class PhaseClock : Control
         if (_gameManager.GamePhase == GamePhase.Setup)
         {
             CurrentPhase = 0;
-            Elapsed = (float)_gameManager.SetupPhaseCompletion();
+            Elapsed = (float)_gameManager.SetupPhaseCompletion;
         }
         else if (_gameManager.GamePhase == GamePhase.Protest)
         {

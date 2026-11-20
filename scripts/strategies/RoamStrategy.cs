@@ -83,7 +83,7 @@ public partial class RoamStrategy : NeighbourBasedStrategy
                 if (!IsInstanceValid(item))
                     continue;
 
-                switch (item.type)
+                switch (item.Type)
                 {
                     case PlayerActionItemType.RallyFlag: _currentDirection += (item.GlobalPosition - Mob.GlobalPosition).Normalized() / 2; break;
                     case PlayerActionItemType.AvoidArea:

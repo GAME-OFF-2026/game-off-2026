@@ -8,9 +8,6 @@ public partial class MobManager : Node2D
     private readonly PackedScene _mobScene = GD.Load<PackedScene>("res://mobs/mob.tscn");
     private GameManager _gameManager;
 
-    [Export] private uint _setupPackSize = 3;
-    [Export] private uint _setupPackCount = 3;
-
     [Export] private MobData _protester;
     [Export] private uint _neutralCount = 50;
 
@@ -26,23 +23,10 @@ public partial class MobManager : Node2D
     private double _neutralSpawnTimer;
     private double _fascistSpawnTimer;
 
-    private Array<Mob> _currentPack = [];
-    private uint _placedPacks;
-
     private Node2D[] _spawnPoints;
     public readonly Array<PlayerActionItem> PlacedItems = [];
 
     public Array<Mob> CurrentMobs { get; private set; } = [];
-
-    public float PlacedPackRate
-    {
-        get
-        {
-            if (_setupPackCount == 0)
-                return 1;
-            return _placedPacks / (float)_setupPackCount;
-        }
-    }
 
     public Vector2 GetRandomSpawnPoint() => _spawnPoints[Utils.Rng.RandiRange(0, _spawnPoints.Length - 1)].GlobalPosition;
 
@@ -53,41 +37,12 @@ public partial class MobManager : Node2D
         SpawnNeutralMobs();
     }
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if (_gameManager.GamePhase != GamePhase.Setup)
-            return;
-
-        if (@event.IsActionPressed("Click"))
-        {
-            _currentPack.Clear();
-            _placedPacks++;
-            if (_placedPacks >= _setupPackCount)
-                _gameManager.SetGamePhase(GamePhase.Protest);
-        }
-    }
-
     public override void _Process(double delta)
     {
         CurrentMobs = [.. CurrentMobs.Where(IsInstanceValid)];
 
         if (_gameManager.GamePhase == GamePhase.Setup)
-        {
-            while (_currentPack.Count < _setupPackSize)
-            {
-                var mob = SpawnMob(_protester, new Vector2());
-                mob.ForceProtesting(1);
-                _currentPack.Add(mob);
-            }
-
-            for (var i = 0; i < _currentPack.Count; i++)
-            {
-                var mob = _currentPack[i];
-                mob.GlobalPosition = GetGlobalMousePosition() + new Vector2(40, 0).Rotated(2 * Mathf.Pi * (i / (float)_currentPack.Count));
-            }
-
             return;
-        }
 
         if (_gameManager.GamePhase == GamePhase.Protest)
         {
@@ -134,7 +89,7 @@ public partial class MobManager : Node2D
             SpawnMob(_fascist, fascistsSpawnPoint);
     }
 
-    private Mob SpawnMob(MobData mobData, Vector2 spawnPosition)
+    public Mob SpawnMob(MobData mobData, Vector2 spawnPosition)
     {
         var newMob = _mobScene.Instantiate<Mob>();
         newMob.MobManager = this;
