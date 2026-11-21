@@ -30,10 +30,9 @@ public partial class PlayerActionsManager : Control
                 if (action.Phase != phase)
                     continue;
 
-                var newButton = _playerActionButtonScene.Instantiate<Button>();
-                newButton.GetNode<TextureRect>("%Icon").Texture = action.Sprite;
-                newButton.GetNode<RichTextLabel>("%Label").Text = action.Name;
+                var newButton = _playerActionButtonScene.Instantiate<PlayerActionButton>();
                 _buttonsContainer.AddChild(newButton);
+                newButton.SetAction(action);
 
                 newButton.Pressed += () =>
                 {
@@ -41,6 +40,7 @@ public partial class PlayerActionsManager : Control
                         _itemBeingPlaced.QueueFree();
 
                     _itemBeingPlaced = action.Item.Instantiate<PlayerActionItem>();
+                    _itemBeingPlaced.Action = action;
                     GetNode("/root/Main/Terrain").AddChild(_itemBeingPlaced);
                 };
             }
@@ -65,6 +65,7 @@ public partial class PlayerActionsManager : Control
         if (@event.IsActionPressed("Click"))
             if (IsInstanceValid(_itemBeingPlaced))
             {
+                _itemBeingPlaced.Action.Uses--;
                 _itemBeingPlaced.IsPlaced = true;
                 _mobManager.PlacedItems.Add(_itemBeingPlaced);
 

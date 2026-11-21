@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://dbihces6pgxy0"]
 
 [ext_resource type="Texture2D" uid="uid://cyh5vjt3bxytf" path="res://sprites/rally_flag.png" id="1_fbq4w"]
+[ext_resource type="Script" uid="uid://dkfjuegwy0j1r" path="res://scripts/PlayerActionButton.cs" id="1_ittip"]
 
-[node name="Button" type="Button" unique_id=1183213231]
+[node name="Button" type="Button" unique_id=1202734903]
 custom_minimum_size = Vector2(100, 100)
 offset_right = 106.0
 offset_bottom = 136.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+script = ExtResource("1_ittip")
+metadata/_custom_type_script = "uid://dkfjuegwy0j1r"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=711744790]
 layout_mode = 1
@@ -16,18 +19,37 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer" unique_id=338608245]
-unique_name_in_owner = true
+[node name="MarginContainer" type="Control" parent="VBoxContainer" unique_id=2064567628]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer" unique_id=338608245]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 106.0
+offset_bottom = 109.0
+size_flags_vertical = 3
+mouse_filter = 2
 texture = ExtResource("1_fbq4w")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer" unique_id=565429973]
+[node name="UsesLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer" unique_id=1349294848]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_right = 44.0
+offset_bottom = 40.0
+mouse_filter = 2
+text = "1"
+
+[node name="NameLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=565429973]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 text = "Action Name"
 fit_content = true
 horizontal_alignment = 1

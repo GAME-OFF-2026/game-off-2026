@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_5q02x")
+Uses = 2
 Name = "Medic"
 Sprite = ExtResource("2_rrg2a")
 Item = ExtResource("1_t0ail")

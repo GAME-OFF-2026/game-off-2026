@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_bsasf")
+Uses = 2
 Name = "Black Block"
 Sprite = ExtResource("2_ey4t8")
 Item = ExtResource("1_ey4t8")

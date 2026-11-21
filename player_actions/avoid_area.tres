@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_g561u")
+Uses = 3
 Name = "Avoid Area"
 Sprite = ExtResource("2_g6u3e")
 Item = ExtResource("1_4i1q2")

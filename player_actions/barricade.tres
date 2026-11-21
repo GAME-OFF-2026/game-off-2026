@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_0jvcd")
+Uses = 3
 Name = "Barricade"
 Sprite = ExtResource("1_ka2vh")
 Item = ExtResource("1_s5yir")

@@ -10,6 +10,7 @@ public enum PlayerActionItemType
 [GlobalClass]
 public partial class PlayerActionItem : Node2D
 {
+    public PlayerActionData Action;
     public bool IsPlaced;
 
     [Export] public PlayerActionItemType Type { get; private set; }

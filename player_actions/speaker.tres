@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_i0ki3")
+Uses = 2
 Name = "Speaker"
 Sprite = ExtResource("2_m0lly")
 Item = ExtResource("1_m0lly")

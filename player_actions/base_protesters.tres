@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_holox")
+Uses = 3
 Name = "Protesters"
 Sprite = ExtResource("2_wyiby")
 Item = ExtResource("1_oq0et")
