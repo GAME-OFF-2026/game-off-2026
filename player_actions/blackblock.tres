@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerActionData" format=3 uid="uid://dktc3wslmkh5i"]
+
+[ext_resource type="PackedScene" uid="uid://d31y6sxmkr1i5" path="res://player_actions/blackblock.tscn" id="1_ey4t8"]
+[ext_resource type="Texture2D" uid="uid://bsmn2notm512i" path="res://sprites/blackblock.png" id="2_ey4t8"]
+[ext_resource type="Script" uid="uid://e8udkhl8kv1u" path="res://scripts/PlayerActionData.cs" id="3_bsasf"]
+
+[resource]
+script = ExtResource("3_bsasf")
+Name = "Black Block"
+Sprite = ExtResource("2_ey4t8")
+Item = ExtResource("1_ey4t8")
+metadata/_custom_type_script = "uid://e8udkhl8kv1u"

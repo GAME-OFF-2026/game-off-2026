@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 [GlobalClass]
@@ -38,6 +39,10 @@ public partial class RoamStrategy : NeighbourBasedStrategy
     {
         UpdateDirection(protesters, fascists);
         UpdateMotivation(protesters, fascists);
+
+        if (Mob.Data.ProtesterType == ProtesterType.Medic)
+            foreach (var protester in protesters)
+                protester.Heal(delta * 20);
     }
 
     private void ImmobilityCheck(double delta)
@@ -65,8 +70,9 @@ public partial class RoamStrategy : NeighbourBasedStrategy
                                    (ProtesterDetectionRange * ProtesterDetectionRange);
 
             var fascistInfluence = new Vector2();
-            foreach (var fascist in fascists)
-                fascistInfluence += FascistAvoidanceFactor * (Mob.GlobalPosition - fascist.GlobalPosition).Normalized();
+            if (Mob.Data.ProtesterType != ProtesterType.BlackBlock)
+                foreach (var fascist in fascists)
+                    fascistInfluence += FascistAvoidanceFactor * (Mob.GlobalPosition - fascist.GlobalPosition).Normalized();
 
             _currentDirection += friendInfluence;
             _currentDirection += fascistInfluence;
@@ -74,9 +80,9 @@ public partial class RoamStrategy : NeighbourBasedStrategy
 
         _currentDirection = _currentDirection.Normalized();
 
-        // Bias towards center
         if (Mob.IsProtesting)
         {
+            // Bias towards center
             _currentDirection += -Mob.GlobalPosition.Normalized() / 10;
             foreach (var item in Mob.MobManager.PlacedItems)
             {
@@ -103,14 +109,18 @@ public partial class RoamStrategy : NeighbourBasedStrategy
 
     private void UpdateMotivation(Mob[] friends, Mob[] fascists)
     {
-        Mob.Motivation += friends.Length * Mob.MotivationGainRate * (Mob.IsProtesting ? 0.005 : 0.003);
+        Mob.Motivation += (friends.Length + 10 * friends.Count(mob => mob.Data.ProtesterType == ProtesterType.Speaker)) *
+                          Mob.MotivationGainRate *
+                          (Mob.IsProtesting ? 0.005 : 0.003);
 
         Mob.Motivation -= Mob.MotivationLossRate * (Mob.IsProtesting ? 0.005 : 0.01);
 
-        foreach (var fascist in fascists)
-            Mob.Motivation -= Mob.MotivationLossRate *
-                              0.03 *
-                              (1 - fascist.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / (FascistDetectionRange * FascistDetectionRange));
+        if (Mob.Data.ProtesterType != ProtesterType.BlackBlock)
+            foreach (var fascist in fascists)
+                Mob.Motivation -= Mob.MotivationLossRate *
+                                  0.03 *
+                                  (1 -
+                                   fascist.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) / (FascistDetectionRange * FascistDetectionRange));
     }
 
     public override Vector2 GetDestination() => _goal ?? Mob.GlobalPosition + 150 * _currentDirection;

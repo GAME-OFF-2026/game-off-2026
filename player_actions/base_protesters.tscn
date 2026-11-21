@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7rdql7pgcxrw"]
 
 [ext_resource type="Script" uid="uid://br36djnboadt0" path="res://scripts/PlayerActionMobSpawner.cs" id="1_xex2o"]
-[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/roaming_protester.tres" id="2_jtv6j"]
+[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/base_protester.tres" id="2_jtv6j"]
 
 [node name="BaseProtesters" type="Node2D" unique_id=616473747]
 script = ExtResource("1_xex2o")

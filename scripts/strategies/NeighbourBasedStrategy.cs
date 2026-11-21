@@ -3,7 +3,7 @@ using Godot;
 
 public abstract partial class NeighbourBasedStrategy : MobStrategy
 {
-    private const float TickSeconds = 0.1f;
+    private const float TickSeconds = 0.15f;
 
     [Export] public float ProtesterDetectionRange = 200;
     [Export] public float FascistDetectionRange = 300;

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d31y6sxmkr1i5"]
+
+[ext_resource type="Script" uid="uid://br36djnboadt0" path="res://scripts/PlayerActionMobSpawner.cs" id="1_s5csm"]
+[ext_resource type="Resource" uid="uid://c12ihclpg566g" path="res://mobs/blackblock.tres" id="2_s5csm"]
+
+[node name="BlackBlock" type="Node2D" unique_id=616473747]
+script = ExtResource("1_s5csm")
+_mobsToSpawn = Array[Object]([ExtResource("2_s5csm")])
+Duration = 99999999999.0
+metadata/_custom_type_script = "uid://br36djnboadt0"

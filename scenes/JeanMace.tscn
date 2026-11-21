@@ -3,16 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://i168qxdbxpnv" path="res://sprites/grass.png" id="1_1am6x"]
 [ext_resource type="Texture2D" uid="uid://cgxjf7r6pi1k0" path="res://sprites/map.png" id="1_8131g"]
 [ext_resource type="Script" uid="uid://dgt22l142c6gv" path="res://scripts/MobManager.cs" id="2_y13xm"]
-[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/roaming_protester.tres" id="3_xi27f"]
+[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/base_protester.tres" id="3_xi27f"]
 [ext_resource type="Script" uid="uid://coi0q1a5y75hf" path="res://scripts/PolygonCollider.cs" id="3_y13xm"]
 [ext_resource type="Resource" uid="uid://bmlh1jifotb6y" path="res://mobs/fascist.tres" id="4_hosn7"]
 [ext_resource type="Script" uid="uid://4xvp5jn4urxk" path="res://scripts/GameManager.cs" id="7_xi27f"]
 [ext_resource type="Script" uid="uid://6lm3in6llypw" path="res://scripts/PlayerActionsManager.cs" id="8_hosn7"]
 [ext_resource type="Resource" uid="uid://b8mjs7tl02inr" path="res://player_actions/rally.tres" id="9_2e48u"]
 [ext_resource type="Resource" uid="uid://d3back40dy8ia" path="res://player_actions/base_protesters.tres" id="9_ck0ku"]
+[ext_resource type="Resource" uid="uid://dq3y2eus1qlry" path="res://player_actions/medic.tres" id="10_gqvlt"]
 [ext_resource type="Resource" uid="uid://doggeqlkouuef" path="res://player_actions/avoid_area.tres" id="10_m5sgm"]
+[ext_resource type="Resource" uid="uid://l7ho53uebogg" path="res://player_actions/speaker.tres" id="11_3aud3"]
 [ext_resource type="Resource" uid="uid://ct0xesmod0tjm" path="res://player_actions/barricade.tres" id="11_5i8a5"]
 [ext_resource type="Script" uid="uid://n3qju8tsl66h" path="res://scripts/PhaseClock.cs" id="11_8131g"]
+[ext_resource type="Resource" uid="uid://dktc3wslmkh5i" path="res://player_actions/blackblock.tres" id="12_sy7e0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
 vertices = PackedVector2Array(-1165.0469, 705.90625, -1168.5703, 705.9219, -1168.7578, 695.8828, -1165.0469, 695.8828, 1134, 615, -1120, 615, -1120, -610, 1134, -610, -1169.0469, -717.14844, -1169.0469, -706.65625, -1194.2109, -706.65625, -1194.3984, -717.52344)
@@ -142,7 +145,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("8_hosn7")
-_actions = Array[Object]([ExtResource("9_2e48u"), ExtResource("10_m5sgm"), ExtResource("11_5i8a5"), ExtResource("9_ck0ku")])
+_actions = Array[Object]([ExtResource("9_2e48u"), ExtResource("10_m5sgm"), ExtResource("11_5i8a5"), ExtResource("9_ck0ku"), ExtResource("10_gqvlt"), ExtResource("11_3aud3"), ExtResource("12_sy7e0")])
 metadata/_custom_type_script = "uid://6lm3in6llypw"
 metadata/_edit_use_anchors_ = true
 

@@ -19,6 +19,7 @@ metadata/_custom_type_script = "uid://b78ea0ywk6asv"
 script = ExtResource("1_emaoh")
 Layers = Array[Object]([SubResource("Resource_bteyy")])
 Strategy = SubResource("Resource_d6f17")
+Dps = 20.0
 MoveForce = 400.0
 MaxSpeed = 50.0
 MotivationThresholdMinMax = Vector2(1, 1)

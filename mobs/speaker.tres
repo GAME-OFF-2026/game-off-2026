@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="MobData" format=3 uid="uid://do0xkkjols3lf"]
+
+[ext_resource type="Texture2D" uid="uid://bhs54pw6nr61u" path="res://sprites/skin1.png" id="1_nby5u"]
+[ext_resource type="Texture2D" uid="uid://l0qngdpobc0d" path="res://sprites/skin2.png" id="2_vyrct"]
+[ext_resource type="Texture2D" uid="uid://dcyy263l3y0bx" path="res://sprites/skin3.png" id="3_aa7ye"]
+[ext_resource type="Script" uid="uid://bodhao17vc7pi" path="res://scripts/MobSpriteLayer.cs" id="4_7tro6"]
+[ext_resource type="Texture2D" uid="uid://b5sf78bqbi5nm" path="res://sprites/habits.png" id="5_b40yp"]
+[ext_resource type="Texture2D" uid="uid://ltsbfyh0thl5" path="res://sprites/petitbody.png" id="6_b542v"]
+[ext_resource type="Texture2D" uid="uid://qlwsrmnh8cvu" path="res://sprites/animateur.png" id="7_ctpao"]
+[ext_resource type="Script" uid="uid://fjh1xjtcanop" path="res://scripts/strategies/RoamStrategy.cs" id="10_q1ten"]
+[ext_resource type="Script" uid="uid://fv70y6lowrp0" path="res://scripts/MobData.cs" id="11_pp86v"]
+
+[sub_resource type="Resource" id="Resource_5832w"]
+script = ExtResource("4_7tro6")
+SpriteVariants = Array[Texture2D]([ExtResource("1_nby5u"), ExtResource("2_vyrct"), ExtResource("3_aa7ye")])
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_fsfmh"]
+script = ExtResource("4_7tro6")
+SpriteVariants = Array[Texture2D]([ExtResource("5_b40yp")])
+ModulateColor = true
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_65hfs"]
+script = ExtResource("4_7tro6")
+SpriteVariants = Array[Texture2D]([ExtResource("6_b542v")])
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_etmed"]
+script = ExtResource("4_7tro6")
+SpriteVariants = Array[Texture2D]([ExtResource("7_ctpao")])
+metadata/_custom_type_script = "uid://bodhao17vc7pi"
+
+[sub_resource type="Resource" id="Resource_672bv"]
+script = ExtResource("10_q1ten")
+FascistAvoidanceFactor = 10.0
+ConversionFactor = 1.0
+metadata/_custom_type_script = "uid://fjh1xjtcanop"
+
+[resource]
+script = ExtResource("11_pp86v")
+Layers = Array[Object]([SubResource("Resource_5832w"), SubResource("Resource_fsfmh"), SubResource("Resource_65hfs"), SubResource("Resource_etmed")])
+Strategy = SubResource("Resource_672bv")
+ProtesterType = 1
+metadata/_custom_type_script = "uid://fv70y6lowrp0"

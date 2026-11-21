@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dgt22l142c6gv" path="res://scripts/MobManager.cs" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://i168qxdbxpnv" path="res://sprites/grass.png" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://coi0q1a5y75hf" path="res://scripts/PolygonCollider.cs" id="2_jyhfs"]
-[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/roaming_protester.tres" id="3_sugp2"]
+[ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/base_protester.tres" id="3_sugp2"]
 [ext_resource type="Resource" uid="uid://bmlh1jifotb6y" path="res://mobs/fascist.tres" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://4xvp5jn4urxk" path="res://scripts/GameManager.cs" id="6_tefeu"]
 

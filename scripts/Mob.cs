@@ -10,15 +10,15 @@ public partial class Mob : RigidBody2D
     private NavigationAgent2D _agent;
 
     public MobManager MobManager;
+    private GameManager _gameManager;
 
-    public double Health;
     public double Motivation;
+
     private double _motivationThreshold;
     private double _motivationSwitchTimer;
     private double _movementBobCounter;
+    private double _health;
     private double _healthFlashCounter;
-
-    public GameManager GameManager { get; private set; }
 
     public double MotivationGainRate { get; private set; }
     public double MotivationLossRate { get; private set; }
@@ -27,11 +27,14 @@ public partial class Mob : RigidBody2D
 
     [Export] public MobData Data { get; private set; }
 
+    public void Heal(double amount) => _health = Mathf.Clamp(_health + amount, 0, Data.MaxHealth);
+    public void Damage(double amount) => _health = Mathf.Clamp(_health - amount, 0, Data.MaxHealth);
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
-        GameManager = GetNode<GameManager>("/root/Main/GameManager");
+        _gameManager = GetNode<GameManager>("/root/Main/GameManager");
         Freeze = true;
     }
 
@@ -52,7 +55,7 @@ public partial class Mob : RigidBody2D
 
         Data.Strategy.Initialize(this);
 
-        Health = Data.MaxHealth;
+        _health = Data.MaxHealth;
 
         _motivationThreshold = Utils.Rng.RandfRange(Data.MotivationThresholdMinMax.X, Data.MotivationThresholdMinMax.Y);
         MotivationGainRate = Utils.Rng.RandfRange(Data.MotivationGainRateMinMax.X, Data.MotivationGainRateMinMax.Y);
@@ -86,7 +89,7 @@ public partial class Mob : RigidBody2D
             );
         _spriteRoot.GlobalRotation = .15f * (float)Mathf.Cos(_movementBobCounter);
 
-        var healthFraction = Health / Data.MaxHealth;
+        var healthFraction = _health / Data.MaxHealth;
         var flashIntensity = 1 - healthFraction * healthFraction;
         _healthFlashCounter += 10 * flashIntensity * delta;
 
@@ -98,13 +101,13 @@ public partial class Mob : RigidBody2D
             );
 
 
-        if (Health <= 0)
+        if (_health <= 0)
             QueueFree();
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Data == null || GameManager.GamePhase == GamePhase.Setup)
+        if (Data == null || _gameManager.GamePhase == GamePhase.Setup)
             return;
 
         Freeze = false;
