@@ -14,6 +14,7 @@ public partial class PlayerActionMobSpawner : PlayerActionItem
         foreach (var mobData in _mobsToSpawn)
         {
             var newMob = mobManager.SpawnMob(mobData, GlobalPosition);
+            newMob.Reparent(this);
             _mobs.Add(newMob);
             newMob.ForceProtesting(1);
         }

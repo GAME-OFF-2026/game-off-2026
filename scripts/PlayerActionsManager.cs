@@ -37,10 +37,12 @@ public partial class PlayerActionsManager : Control
 
                 newButton.Pressed += () =>
                 {
-                    _itemBeingPlaced?.QueueFree();
+                    if (IsInstanceValid(_itemBeingPlaced))
+                        _itemBeingPlaced.QueueFree();
 
                     _itemBeingPlaced = action.Item.Instantiate<PlayerActionItem>();
                     GetNode("/root/Main/Terrain").AddChild(_itemBeingPlaced);
+                    GD.Print("Created ", _itemBeingPlaced.Name);
                 };
             }
         };
@@ -50,9 +52,11 @@ public partial class PlayerActionsManager : Control
     {
         if (IsInstanceValid(_itemBeingPlaced))
         {
+            GD.Print("Placing ", _itemBeingPlaced.Name);
             _itemBeingPlaced.GlobalPosition = _itemBeingPlaced.GetGlobalMousePosition();
             if (Input.IsActionJustPressed("RightClick"))
             {
+                GD.Print("Deleting ", _itemBeingPlaced.Name);
                 _itemBeingPlaced.QueueFree();
                 _itemBeingPlaced = null;
             }
@@ -64,6 +68,7 @@ public partial class PlayerActionsManager : Control
         if (@event.IsActionPressed("Click"))
             if (IsInstanceValid(_itemBeingPlaced))
             {
+                GD.Print("Placing ", _itemBeingPlaced.Name);
                 _itemBeingPlaced.IsPlaced = true;
                 _mobManager.PlacedItems.Add(_itemBeingPlaced);
 

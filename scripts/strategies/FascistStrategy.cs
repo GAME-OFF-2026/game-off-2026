@@ -32,5 +32,10 @@ public partial class FascistStrategy : NeighbourBasedStrategy
         foreach (var protester in protesters)
             if (protester.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) < 40 * 40)
                 protester.Health -= delta * Mob.Data.Dps;
+
+        foreach (var placedItem in Mob.MobManager.PlacedItems)
+            if (placedItem is Barricade barricade &&
+                barricade.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) < barricade.DamageRadius * barricade.DamageRadius)
+                barricade.Health -= delta * Mob.Data.Dps;
     }
 }

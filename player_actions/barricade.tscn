@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://dg4gyi8lee6t8"]
 
 [ext_resource type="Texture2D" uid="uid://drule1df82exe" path="res://sprites/Poubelle.png" id="1_bvi4y"]
-[ext_resource type="Script" uid="uid://dq2gaik1gwvdl" path="res://scripts/PlayerActionItem.cs" id="1_km6oh"]
+[ext_resource type="Script" uid="uid://y4d0t7fngl2j" path="res://scripts/Barricade.cs" id="1_km6oh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6f17"]
 radius = 80.0
 
-[node name="Barricade" type="Node2D" unique_id=953823366 groups=["navigation_polygon_source_geometry_group"]]
+[node name="Barricade" type="Node2D" unique_id=1107324863 groups=["navigation_polygon_source_geometry_group"]]
 script = ExtResource("1_km6oh")
 Duration = 99999999.0
-metadata/_custom_type_script = "uid://dq2gaik1gwvdl"
+metadata/_custom_type_script = "uid://y4d0t7fngl2j"
 
 [node name="Poubelle" type="Sprite2D" parent="." unique_id=929554730]
 position = Vector2(-36, -29)

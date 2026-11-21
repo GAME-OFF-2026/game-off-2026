@@ -112,7 +112,7 @@ public partial class Mob : RigidBody2D
         Data.Strategy.Tick(delta);
         Motivation = Mathf.Clamp(Motivation, 0, 1);
         SetCollisionMaskValue(2, !IsProtesting);
-        _agent.NavigationLayers = IsProtesting ? 1u : 2u;
+        _agent.NavigationLayers = IsProtesting || Data.Faction == Faction.Fascist ? 1u : 2u;
 
         if (IsProtesting ? Motivation < _motivationThreshold : Motivation > _motivationThreshold)
         {
