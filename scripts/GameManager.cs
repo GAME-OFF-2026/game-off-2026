@@ -19,7 +19,7 @@ public partial class GameManager : Node
     public GamePhase GamePhase { get; private set; }
 
     public double Score { get; private set; }
-    private int ScoreFloored => Mathf.FloorToInt(Score);
+    private int ScoreFloored => Mathf.Max(0, Mathf.FloorToInt(Score));
 
 
     public uint SetupPhaseBudget => 8;
