@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://ct0xesmod0tjm" path="res://player_actions/barricade.tres" id="11_5i8a5"]
 [ext_resource type="Script" uid="uid://n3qju8tsl66h" path="res://scripts/PhaseClock.cs" id="11_8131g"]
 [ext_resource type="Resource" uid="uid://dktc3wslmkh5i" path="res://player_actions/blackblock.tres" id="12_sy7e0"]
+[ext_resource type="AudioStream" uid="uid://d055mo3i3vf2x" path="res://audio/zikmu/p1.ogg" id="17_sy7e0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
 vertices = PackedVector2Array(-1165.0469, 705.90625, -1168.5703, 705.9219, -1168.7578, 695.8828, -1165.0469, 695.8828, 1134, 615, -1120, 615, -1120, -610, 1134, -610, -1169.0469, -717.14844, -1169.0469, -706.65625, -1194.2109, -706.65625, -1194.3984, -717.52344)
@@ -589,3 +590,7 @@ polygon = PackedVector2Array(-76.50818, -88.9805, -76.50818, -72.08545, -35.7038
 uv = PackedVector2Array(-202.41235, -110.34234, -196.21188, -13.792221, -33.22821, -35.050964, -85.48929, -91.74094)
 script = ExtResource("3_y13xm")
 metadata/_custom_type_script = "uid://coi0q1a5y75hf"
+
+[node name="Musique" type="AudioStreamPlayer" parent="." unique_id=1319060700]
+stream = ExtResource("17_sy7e0")
+autoplay = true
