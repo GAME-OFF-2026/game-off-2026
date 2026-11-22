@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using Godot.Collections;
 
@@ -5,20 +6,33 @@ using Godot.Collections;
 public partial class PlayerActionsManager : Control
 {
     [Export] private Array<PlayerActionData> _actions;
+    [Export] private double _bonusPeriod = 29;
 
     private PackedScene _playerActionButtonScene = GD.Load<PackedScene>("res://ui/player_action_button.tscn");
+    private PackedScene _bonusChoiceScene = GD.Load<PackedScene>("res://ui/bonus_choice.tscn");
+
     private Container _buttonsContainer;
+    private Container _bonusChoicesContainer;
 
     private PlayerActionItem _itemBeingPlaced;
 
     private MobManager _mobManager;
 
+    private double _timeSinceLastBonus;
+
+    private GameManager _gameManager;
+
     public override void _Ready()
     {
-        _mobManager = GetNode<MobManager>("%MobManager");
-        _buttonsContainer = GetNode<Container>("ButtonsContainer");
+        _actions = [.. _actions.Select(a => a.DuplicateDeep() as PlayerActionData)];
 
-        GetNode<GameManager>("%GameManager").PhaseChanged += phase =>
+        _buttonsContainer = GetNode<Container>("ButtonsContainer");
+        _bonusChoicesContainer = GetNode<Container>("ChoicesContainer");
+
+        _mobManager = GetNode<MobManager>("%MobManager");
+        _gameManager = GetNode<GameManager>("%GameManager");
+
+        _gameManager.PhaseChanged += phase =>
         {
             // Clear actions
             foreach (var button in _buttonsContainer.GetChildren())
@@ -27,12 +41,16 @@ public partial class PlayerActionsManager : Control
             // Instantiate all actions for new phase
             foreach (var action in _actions)
             {
-                if (action.Phase != phase)
+                if (phase == GamePhase.Setup && !action.IsAvailableAtSetup)
                     continue;
+
+                // Clear leftover setup actions at protest start
+                if (phase == GamePhase.Protest && action.IsAvailableAtSetup)
+                    action.Uses = 0;
 
                 var newButton = _playerActionButtonScene.Instantiate<PlayerActionButton>();
                 _buttonsContainer.AddChild(newButton);
-                newButton.SetAction(action);
+                newButton.SetAction(action, false);
 
                 newButton.Pressed += () =>
                 {
@@ -56,6 +74,37 @@ public partial class PlayerActionsManager : Control
             {
                 _itemBeingPlaced.QueueFree();
                 _itemBeingPlaced = null;
+            }
+        }
+
+        if (_gameManager.GamePhase == GamePhase.Protest)
+        {
+            _timeSinceLastBonus += delta;
+            if (_timeSinceLastBonus >= _bonusPeriod)
+            {
+                _timeSinceLastBonus = 0;
+                var index1 = Utils.Rng.RandiRange(0, _actions.Count - 1);
+                var index2 = Utils.Rng.RandiRange(0, _actions.Count - 1);
+                while (index1 == index2)
+                    index2 = Utils.Rng.RandiRange(0, _actions.Count - 1);
+
+                var newChoice = _bonusChoiceScene.Instantiate<Control>();
+                _bonusChoicesContainer.AddChild(newChoice);
+
+                var buttonsContainer = newChoice.GetNode<Container>("ButtonsContainer");
+
+                foreach (var action in (PlayerActionData[])[_actions[index1], _actions[index2]])
+                {
+                    var newButton = _playerActionButtonScene.Instantiate<PlayerActionButton>();
+                    buttonsContainer.AddChild(newButton);
+                    newButton.SetAction(action, true);
+                    newButton.GetNode<RichTextLabel>("%UsesLabel").Visible = false;
+                    newButton.Pressed += () =>
+                    {
+                        action.Uses++;
+                        newChoice.QueueFree();
+                    };
+                }
             }
         }
     }

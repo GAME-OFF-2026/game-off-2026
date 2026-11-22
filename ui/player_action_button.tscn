@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dkfjuegwy0j1r" path="res://scripts/PlayerActionButton.cs" id="1_ittip"]
 
 [node name="Button" type="Button" unique_id=1202734903]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(80, 80)
 offset_right = 106.0
 offset_bottom = 136.0
 size_flags_horizontal = 0
@@ -21,23 +21,32 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="Control" parent="VBoxContainer" unique_id=2064567628]
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=2064567628]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/MarginContainer" unique_id=338608245]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/Control" unique_id=338608245]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 106.0
-offset_bottom = 109.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
 texture = ExtResource("1_fbq4w")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="UsesLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer" unique_id=1349294848]
+[node name="UsesLabel" type="RichTextLabel" parent="VBoxContainer/Control" unique_id=1349294848]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 4.0
@@ -50,6 +59,7 @@ text = "1"
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 13
 text = "Action Name"
 fit_content = true
 horizontal_alignment = 1

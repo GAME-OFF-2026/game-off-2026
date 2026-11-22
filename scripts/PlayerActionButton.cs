@@ -4,6 +4,7 @@ using Godot;
 public partial class PlayerActionButton : Button
 {
     private PlayerActionData _action;
+    private bool _isBonus;
 
     private TextureRect _textureRect;
     private RichTextLabel _nameLabel;
@@ -16,9 +17,10 @@ public partial class PlayerActionButton : Button
         _usesLabel = GetNode<RichTextLabel>("%UsesLabel");
     }
 
-    public void SetAction(PlayerActionData newAction)
+    public void SetAction(PlayerActionData newAction, bool isBonus)
     {
         _action = newAction;
+        _isBonus = isBonus;
         _textureRect.Texture = _action.Sprite;
         _nameLabel.Text = _action.Name;
         _usesLabel.Text = _action.Uses.ToString();
@@ -26,7 +28,7 @@ public partial class PlayerActionButton : Button
 
     public override void _Process(double delta)
     {
-        _usesLabel.Text = _action.Uses.ToString();
-        Disabled = _action.Uses <= 0;
+        _usesLabel.Text = _isBonus ? "" : _action.Uses.ToString();
+        Disabled = !_isBonus && _action.Uses <= 0;
     }
 }

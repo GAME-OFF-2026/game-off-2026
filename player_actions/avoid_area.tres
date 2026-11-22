@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource("3_g561u")
 Uses = 3
+IsAvailableAtSetup = false
 Name = "Avoid Area"
 Sprite = ExtResource("2_g6u3e")
 Item = ExtResource("1_4i1q2")
-Phase = 1
 metadata/_custom_type_script = "uid://e8udkhl8kv1u"
