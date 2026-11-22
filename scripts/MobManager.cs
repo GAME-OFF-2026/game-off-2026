@@ -89,14 +89,22 @@ public partial class MobManager : Node2D
             SpawnMob(_fascist, fascistsSpawnPoint);
     }
 
-    public Mob SpawnMob(MobData mobData, Vector2 spawnPosition)
+    public Mob SpawnMob(MobData mobData, Vector2 spawnPosition, bool addToMobs = true)
     {
         var newMob = _mobScene.Instantiate<Mob>();
         newMob.MobManager = this;
         newMob.GlobalPosition = spawnPosition;
         AddChild(newMob);
         newMob.SetData(mobData);
-        CurrentMobs.Add(newMob);
+        if (addToMobs)
+            CurrentMobs.Add(newMob);
         return newMob;
+    }
+
+    public void AddMob(Mob mob)
+    {
+        if (CurrentMobs.Contains(mob))
+            return;
+        CurrentMobs.Add(mob);
     }
 }

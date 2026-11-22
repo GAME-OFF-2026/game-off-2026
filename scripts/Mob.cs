@@ -107,7 +107,7 @@ public partial class Mob : RigidBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Data == null || _gameManager.GamePhase == GamePhase.Setup)
+        if (Data == null || _gameManager.GamePhase == GamePhase.Setup || GetParent() is PlayerActionMobSpawner)
             return;
 
         Freeze = false;

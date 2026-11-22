@@ -71,4 +71,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1322738639]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_d6f17")

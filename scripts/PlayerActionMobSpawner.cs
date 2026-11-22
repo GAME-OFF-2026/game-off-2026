@@ -13,7 +13,7 @@ public partial class PlayerActionMobSpawner : PlayerActionItem
         var mobManager = GetNode<MobManager>("/root/Main/MobManager");
         foreach (var mobData in _mobsToSpawn)
         {
-            var newMob = mobManager.SpawnMob(mobData, GlobalPosition);
+            var newMob = mobManager.SpawnMob(mobData, GlobalPosition, false);
             newMob.Reparent(this);
             _mobs.Add(newMob);
             newMob.ForceProtesting(1);
@@ -22,13 +22,23 @@ public partial class PlayerActionMobSpawner : PlayerActionItem
 
     public override void _Process(double delta)
     {
-        if (IsPlaced)
-            return;
-
         for (var i = 0; i < _mobs.Count; i++)
         {
             var mob = _mobs[i];
             mob.GlobalPosition = GetGlobalMousePosition() + new Vector2(40, 0).Rotated(2 * Mathf.Pi * (i / (float)_mobs.Count));
+            mob.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
+        }
+
+        if (IsPlaced)
+        {
+            foreach (var mob in _mobs)
+            {
+                mob.MobManager.AddMob(mob);
+                mob.Reparent(mob.MobManager);
+                mob.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+            }
+
+            QueueFree();
         }
     }
 }
