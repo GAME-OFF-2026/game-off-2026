@@ -22,6 +22,8 @@ public partial class Barricade : PlayerActionItem
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+        GetNode<CollisionShape2D>("%CollisionShape2D").SetDisabled(!IsPlaced);
+
         var healthFraction = Health / _maxHealth;
         var flashIntensity = 1 - healthFraction * healthFraction;
         _healthFlashCounter += 10 * flashIntensity * delta;
