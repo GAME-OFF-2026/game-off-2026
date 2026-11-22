@@ -17,7 +17,7 @@ public partial class FascistStrategy : NeighbourBasedStrategy
     {
         if (fascists.Length == 0)
         {
-            _goal = Mob.MobManager.CurrentMobs.Where(mob => mob != Mob && mob.Data.Faction == Faction.Fascist)
+            _goal = Mob.MobManager.CurrentMobs.Where(mob => IsInstanceValid(mob) && mob != Mob && mob.Data.Faction == Faction.Fascist)
                 .MinBy(mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition))
                 .GlobalPosition;
             return;

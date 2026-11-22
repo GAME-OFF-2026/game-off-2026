@@ -29,16 +29,18 @@ public abstract partial class NeighbourBasedStrategy : MobStrategy
         {
             _timeSinceLastUpdate -= TickSeconds;
 
-            var protesters = Mob.MobManager
-                .CurrentMobs.Where(
-                    mob => mob != Mob &&
+            var protesters = Mob.MobManager.CurrentMobs.Where(
+                    mob => IsInstanceValid(mob) &&
+                           mob != Mob &&
                            mob.IsProtesting &&
-                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= ProtesterDetectionRange * ProtesterDetectionRange
+                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <=
+                           ProtesterDetectionRange * ProtesterDetectionRange
                 )
                 .ToArray();
 
             var fascists = Mob.MobManager.CurrentMobs.Where(
-                    mob => mob != Mob &&
+                    mob => IsInstanceValid(mob) &&
+                           mob != Mob &&
                            mob.Data.Faction == Faction.Fascist &&
                            mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= FascistDetectionRange * FascistDetectionRange
                 )

@@ -4,9 +4,9 @@ using Godot;
 [GlobalClass]
 public partial class RoamStrategy : NeighbourBasedStrategy
 {
-    [Export] public float FascistAvoidanceFactor = 1;
-    [Export] public float ConversionFactor = 0.05f;
-    [Export] public double PatienceSeconds = 3f;
+    [Export] public float FascistAvoidanceFactor = 10;
+    [Export] public float ConversionFactor = 1;
+    [Export] public double PatienceSeconds = 1;
 
     private Vector2? _goal;
     private Vector2 _currentDirection;
@@ -41,8 +41,11 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         UpdateMotivation(protesters, fascists);
 
         if (Mob.Data.ProtesterType == ProtesterType.Medic)
+        {
+            Mob.Heal(delta * 20);
             foreach (var protester in protesters)
                 protester.Heal(delta * 20);
+        }
     }
 
     private void ImmobilityCheck(double delta)
@@ -53,7 +56,7 @@ public partial class RoamStrategy : NeighbourBasedStrategy
             _immobileSeconds = 0;
 
         if (_immobileSeconds >= PatienceSeconds)
-            _currentDirection = new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1)).Normalized();
+            _currentDirection = -Mob.GlobalPosition.Normalized();
     }
 
     private void UpdateDirection(Mob[] friends, Mob[] fascists)
@@ -61,11 +64,11 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         // Add neighbour's direction to self
         if (Mob.IsProtesting)
         {
-            if (Mob.Data.ProtesterType == ProtesterType.BlackBlock && friends.Length > 0 && fascists.Length > 0)
+            if (Mob.Data.ProtesterType == ProtesterType.BlackBlock && friends.Length > 3 && fascists.Length > 0)
             {
-                var allPositions = friends.Select(f => f.GlobalPosition).Concat(fascists.Select(f => f.GlobalPosition)).ToArray();
-                var averagePosition = allPositions.Aggregate((sum, pos) => sum + pos / allPositions.Length);
-                _currentDirection = averagePosition - Mob.GlobalPosition;
+                var averageFriendPosition = friends.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / friends.Length);
+                var averageFascistPosition = fascists.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / fascists.Length);
+                _currentDirection = (averageFascistPosition + averageFriendPosition) / 2 - Mob.GlobalPosition;
             }
             else
             {
@@ -103,22 +106,22 @@ public partial class RoamStrategy : NeighbourBasedStrategy
                     case PlayerActionItemType.RallyFlag: _currentDirection += (item.GlobalPosition - Mob.GlobalPosition).Normalized() / 2; break;
                     case PlayerActionItemType.AvoidArea:
                         _currentDirection += Mathf.Clamp(1f - (Mob.GlobalPosition - item.GlobalPosition).LengthSquared() / (500 * 500), 0f, 1f) *
-                                             (Mob.GlobalPosition - item.GlobalPosition).Normalized() /
-                                             2f;
+                                             (Mob.GlobalPosition - item.GlobalPosition).Normalized();
                         break;
                 }
             }
         }
 
         // Add noise
-        _currentDirection += (Mob.IsProtesting ? 0f : 0.5f) * new Vector2(Utils.Rng.RandfRange(-1, 1), Utils.Rng.RandfRange(-1, 1));
+        var rand = Utils.Rng.RandfRange(0, 2 * Mathf.Pi);
+        _currentDirection += (Mob.IsProtesting ? 0f : 0.5f) * new Vector2(Mathf.Cos(rand), Mathf.Sin(rand));
 
         _currentDirection = _currentDirection.Normalized();
     }
 
     private void UpdateMotivation(Mob[] friends, Mob[] fascists)
     {
-        Mob.Motivation += (friends.Length + 10 * friends.Count(mob => mob.Data.ProtesterType == ProtesterType.Speaker)) *
+        Mob.Motivation += (friends.Length + 5 * friends.Count(mob => mob.Data.ProtesterType == ProtesterType.Speaker)) *
                           Mob.MotivationGainRate *
                           (Mob.IsProtesting ? 0.005 : 0.003);
 

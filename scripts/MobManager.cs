@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -26,7 +27,14 @@ public partial class MobManager : Node2D
     private Node2D[] _spawnPoints;
     public readonly Array<PlayerActionItem> PlacedItems = [];
 
-    public Array<Mob> CurrentMobs { get; private set; } = [];
+    private Array<Mob> _currentMobs = [];
+    private Array<Array<Mob>> _protesterClusters = [];
+
+    private double _timeSinceLastClustering;
+    private double _clusteringDistance = 100;
+
+    public IEnumerable<Mob> CurrentMobs => _currentMobs;
+    public IEnumerable<Array<Mob>> ProtesterClusters => _protesterClusters;
 
     public Vector2 GetRandomSpawnPoint() => _spawnPoints[Utils.Rng.RandiRange(0, _spawnPoints.Length - 1)].GlobalPosition;
 
@@ -39,7 +47,7 @@ public partial class MobManager : Node2D
 
     public override void _Process(double delta)
     {
-        CurrentMobs = [.. CurrentMobs.Where(IsInstanceValid)];
+        _currentMobs = [.. _currentMobs.Where(IsInstanceValid)];
 
         if (_gameManager.GamePhase == GamePhase.Setup)
             return;
@@ -67,8 +75,53 @@ public partial class MobManager : Node2D
         if (_gameManager.GamePhase == GamePhase.Evening)
         {
             var penalty = delta * _gameManager.EveningPhaseCompletion();
-            foreach (var mob in CurrentMobs)
+            foreach (var mob in _currentMobs)
                 mob.Motivation -= mob.MotivationLossRate * penalty;
+        }
+
+        _timeSinceLastClustering += delta;
+        if (_timeSinceLastClustering >= 1)
+        {
+            _timeSinceLastClustering = 0;
+            UpdateClusters();
+        }
+    }
+
+    private void UpdateClusters()
+    {
+        var protesters = _currentMobs.Where(m => m.IsProtesting).ToArray();
+        var assignedProtesters = new HashSet<Mob>();
+
+        _protesterClusters.Clear();
+
+        foreach (var iterMob in protesters)
+        {
+            if (assignedProtesters.Contains(iterMob))
+                continue;
+
+            _protesterClusters.Add([iterMob]);
+            var clusterIndex = _protesterClusters.Count - 1;
+            assignedProtesters.Add(iterMob);
+
+            var queue = new Queue<Mob>();
+            queue.Enqueue(iterMob);
+
+            while (queue.Count > 0)
+            {
+                var currentMob = queue.Dequeue();
+                foreach (var testedMob in protesters)
+                {
+                    if (testedMob == currentMob || assignedProtesters.Contains(testedMob))
+                        continue;
+
+                    if (currentMob.GlobalPosition.DistanceSquaredTo(testedMob.GlobalPosition) < _clusteringDistance * _clusteringDistance)
+                    {
+                        _protesterClusters[clusterIndex].Add(testedMob);
+                        assignedProtesters.Add(testedMob);
+                        queue.Enqueue(testedMob);
+                    }
+                }
+            }
         }
     }
 
@@ -97,14 +150,14 @@ public partial class MobManager : Node2D
         AddChild(newMob);
         newMob.SetData(mobData);
         if (addToMobs)
-            CurrentMobs.Add(newMob);
+            _currentMobs.Add(newMob);
         return newMob;
     }
 
     public void AddMob(Mob mob)
     {
-        if (CurrentMobs.Contains(mob))
+        if (_currentMobs.Contains(mob))
             return;
-        CurrentMobs.Add(mob);
+        _currentMobs.Add(mob);
     }
 }

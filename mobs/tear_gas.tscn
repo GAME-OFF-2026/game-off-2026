@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://jd8u3p0g83fl"]
+
+[ext_resource type="Script" uid="uid://dqmnl7mn7n0k" path="res://scripts/TearGas.cs" id="1_squ2p"]
+[ext_resource type="Texture2D" uid="uid://i0fqx6apfrur" path="res://sprites/teargas.png" id="1_vwk08"]
+
+[node name="TearGas" type="Node2D" unique_id=46312301]
+scale = Vector2(2, 2)
+script = ExtResource("1_squ2p")
+Type = 2
+Duration = 15.0
+metadata/_custom_type_script = "uid://dqmnl7mn7n0k"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=938424237]
+texture = ExtResource("1_vwk08")

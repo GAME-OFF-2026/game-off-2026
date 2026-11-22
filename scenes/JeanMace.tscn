@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://8b6c62wxhtfc" path="res://scenes/MusicVolManager.cs" id="13_emgr0"]
 [ext_resource type="Texture2D" uid="uid://uicw6k3ykla1" path="res://sprites/icone_son.png" id="14_uqk7w"]
 [ext_resource type="AudioStream" uid="uid://d055mo3i3vf2x" path="res://audio/zikmu/p1.ogg" id="17_sy7e0"]
+[ext_resource type="Script" uid="uid://dvyaqnx2bemt4" path="res://scripts/TearGasManager.cs" id="18_emgr0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
 vertices = PackedVector2Array(-1165.0469, 705.90625, -1168.5703, 705.9219, -1168.7578, 695.8828, -1165.0469, 695.8828, 1134, 615, -1120, 615, -1120, -610, 1134, -610, -1169.0469, -717.14844, -1169.0469, -706.65625, -1194.2109, -706.65625, -1194.3984, -717.52344)
@@ -243,6 +244,10 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 script = ExtResource("7_xi27f")
 metadata/_custom_type_script = "uid://4xvp5jn4urxk"
+
+[node name="TearGasManager" type="Node" parent="." unique_id=1596244924]
+script = ExtResource("18_emgr0")
+metadata/_custom_type_script = "uid://dvyaqnx2bemt4"
 
 [node name="Terrain" type="Node2D" parent="." unique_id=2081596069 groups=["navigation_polygon_source_geometry_group"]]
 
