@@ -1,5 +1,6 @@
-using System.Linq;
+using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 public abstract partial class NeighbourBasedStrategy : MobStrategy
 {
@@ -29,28 +30,28 @@ public abstract partial class NeighbourBasedStrategy : MobStrategy
         {
             _timeSinceLastUpdate -= TickSeconds;
 
-            var protesters = Mob.MobManager.CurrentMobs.Where(
-                    mob => IsInstanceValid(mob) &&
-                           mob != Mob &&
-                           mob.IsProtesting &&
-                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <=
-                           ProtesterDetectionRange * ProtesterDetectionRange
-                )
-                .ToArray();
+            var protesters = new Array<Mob>();
+            var fascists = new Array<Mob>();
+            var neutrals = new Array<Mob>();
 
-            var fascists = Mob.MobManager.CurrentMobs.Where(
-                    mob => IsInstanceValid(mob) &&
-                           mob != Mob &&
-                           mob.Data.Faction == Faction.Fascist &&
-                           mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= FascistDetectionRange * FascistDetectionRange
-                )
-                .ToArray();
+            foreach (var mob in Mob.MobManager.CurrentMobs)
+            {
+                if (mob == Mob || !IsInstanceValid(mob))
+                    continue;
 
-            TickWithNeighbours(TickSeconds, protesters, fascists);
+                if (mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= ProtesterDetectionRange * ProtesterDetectionRange)
+                    (mob.IsProtesting ? protesters : neutrals).Add(mob);
+
+                if (mob.Data.Faction == Faction.Fascist &&
+                    mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) <= FascistDetectionRange * FascistDetectionRange)
+                    fascists.Add(mob);
+            }
+
+            TickWithNeighbours(TickSeconds, protesters, fascists, neutrals);
         }
     }
 
     protected virtual bool PreTick(double delta) => true;
 
-    protected abstract void TickWithNeighbours(double delta, Mob[] protesters, Mob[] fascists);
+    protected abstract void TickWithNeighbours(double delta, ICollection<Mob> protesters, ICollection<Mob> fascists, ICollection<Mob> neutrals);
 }

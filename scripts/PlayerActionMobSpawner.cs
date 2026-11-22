@@ -25,7 +25,9 @@ public partial class PlayerActionMobSpawner : PlayerActionItem
         for (var i = 0; i < _mobs.Count; i++)
         {
             var mob = _mobs[i];
-            mob.GlobalPosition = GetGlobalMousePosition() + new Vector2(40, 0).Rotated(2 * Mathf.Pi * (i / (float)_mobs.Count));
+            mob.GlobalPosition = _mobs.Count > 1
+                ? GetGlobalMousePosition() + new Vector2(40, 0).Rotated(2 * Mathf.Pi * (i / (float)_mobs.Count))
+                : GetGlobalMousePosition();
             mob.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
         }
 

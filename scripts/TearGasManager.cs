@@ -10,15 +10,19 @@ public partial class TearGasManager : Node
     private double _timeSinceLastTearGas;
 
     private MobManager _mobManager;
+    private GameManager _gameManager;
 
     public override void _Ready()
     {
         _mobManager = GetNode<MobManager>("%MobManager");
+        _gameManager = GetNode<GameManager>("%GameManager");
     }
 
     public override void _Process(double delta)
-
     {
+        if (_gameManager.GamePhase == GamePhase.Setup)
+            return;
+
         _timeSinceLastTearGas += delta;
         if (_timeSinceLastTearGas >= _tearGasPeriod)
         {

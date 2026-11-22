@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://j1g4ina456q6" path="res://scripts/dialogue/DialogueManager.cs" id="3_fyky8"]
 [ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/dialogue1.tres" id="4_fyky8"]
+[ext_resource type="Texture2D" uid="uid://bscfplcf608u8" path="res://sprites/FachoBar.png" id="5_03vpb"]
 [ext_resource type="Resource" uid="uid://c2ee2ongfrqkr" path="res://dialogue/dialogue2.tres" id="5_led2e"]
 [ext_resource type="PackedScene" uid="uid://m6vvt00mrk2" path="res://dialogue/bar/Bar.tscn" id="5_vogiq"]
+[ext_resource type="Texture2D" uid="uid://dw28oulh0e0go" path="res://sprites/BarTradi.png" id="6_ccu7b"]
 [ext_resource type="PackedScene" uid="uid://b404rvh8t0gt7" path="res://dialogue/characters/Waitress.tscn" id="6_vogiq"]
+[ext_resource type="Texture2D" uid="uid://ho016l4qeeoi" path="res://sprites/BarGreen.png" id="7_6xhvj"]
+[ext_resource type="Texture2D" uid="uid://cmjxgsf2sll46" path="res://sprites/WokeBar.png" id="8_sv5jy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f17"]
 
@@ -61,6 +65,7 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[font_size=24]Salut c'est moi la serveuse aux tomates !! Je vis dans une société trop nulle où les milliardaires fascistes ont établi leur domination par la force et du coup on est super pauvres et les minorités ont plus aucun droits #nul"
 scroll_active = false
@@ -72,6 +77,7 @@ metadata/_custom_type_script = "uid://j1g4ina456q6"
 
 [node name="Bar" parent="." unique_id=1113718536 instance=ExtResource("5_vogiq")]
 unique_name_in_owner = true
+BarTextures = [ExtResource("5_03vpb"), ExtResource("6_ccu7b"), ExtResource("7_6xhvj"), ExtResource("8_sv5jy")]
 
 [node name="Waitress" parent="." unique_id=209684534 instance=ExtResource("6_vogiq")]
 unique_name_in_owner = true

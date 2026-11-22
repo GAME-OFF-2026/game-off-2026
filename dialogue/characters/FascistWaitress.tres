@@ -1,15 +1,11 @@
 [gd_resource type="Resource" script_class="WaitressPhaseData" format=3 uid="uid://ctifto1m305u8"]
 
-[ext_resource type="Texture2D" uid="uid://cx4va6wx6565k" path="res://sprites/TradiCorps1.png" id="1_326h6"]
-[ext_resource type="Texture2D" uid="uid://m6rx6cce4uk4" path="res://sprites/TradiCorps2.png" id="2_spwee"]
-[ext_resource type="Texture2D" uid="uid://bse4va143meh8" path="res://sprites/TradiCorps3.png" id="3_c2de5"]
-[ext_resource type="Texture2D" uid="uid://dl7ugyenqr8gj" path="res://sprites/TradiTete1.png" id="4_7ufdp"]
-[ext_resource type="Texture2D" uid="uid://d4fp34u7ksjxp" path="res://sprites/TradiTete2.png" id="5_eoch1"]
-[ext_resource type="Texture2D" uid="uid://dmb75ng1pjmio" path="res://sprites/TradiTete3.png" id="6_vs54u"]
+[ext_resource type="Texture2D" uid="uid://dxcb38dw8luhs" path="res://sprites/FachoCorps1.png" id="1_s32t1"]
+[ext_resource type="Texture2D" uid="uid://ccxdbv88f3g0x" path="res://sprites/FachoTete1.png" id="2_adc3i"]
 [ext_resource type="Script" uid="uid://crfw5l65vj1yr" path="res://scripts/dialogue/WaitressPhaseData.cs" id="7_tialw"]
 
 [resource]
 script = ExtResource("7_tialw")
-Corps = [ExtResource("1_326h6"), ExtResource("2_spwee"), ExtResource("3_c2de5")]
-Tetes = [ExtResource("4_7ufdp"), ExtResource("5_eoch1"), ExtResource("6_vs54u")]
+Corps = [ExtResource("1_s32t1"), ExtResource("1_s32t1"), ExtResource("1_s32t1")]
+Tetes = [ExtResource("2_adc3i"), ExtResource("2_adc3i"), ExtResource("2_adc3i")]
 metadata/_custom_type_script = "uid://crfw5l65vj1yr"

@@ -12,47 +12,21 @@ public enum FutureTimeline
 
 public partial class GlobalState : Node
 {
-    public readonly int PhaseNumber = 3;
     private readonly Array<Array<int>> _scoreThresholds = [[5000], [10000, 15000], [16000, 25000, 30000]];
-    private Array<int> _scores = [-1, -1, -1];
-    public static GlobalState Instance { get; private set; }
-    public FutureTimeline Timeline 
-    { 
-        get
-        {
-            return GetTimeline(_scoreThresholds, Day, TotalScore);
-        } 
-    }
-    public int Day 
-    { 
-        get
-        {
-            return _scores.Count(elem => elem != -1);
-        }
-    }
-    public int LatestScore 
-    { 
-        get
-        {
-            if (_scores.Any(elem => elem != -1))
-            {
-                return _scores.LastOrDefault(elem => elem != -1);
-            }
-            return -1;
-        }
-    }
-    public int TotalScore 
-    { 
-        get
-        {
-            if (_scores.Any(elem => elem != -1))
-            {
-                return _scores.Where(elem => elem != -1).Sum();
-            }
-            return -1;
-        }
-    }
+    private readonly Array<int> _scores = [];
 
+    public static GlobalState Instance { get; private set; }
+
+    public FutureTimeline Timeline => GetTimeline(_scoreThresholds, Day, TotalScore);
+
+    public int Day => _scores.Count;
+
+    private int LatestScore =>
+        _scores.Count > 0
+            ? _scores[^1]
+            : 0;
+
+    public int TotalScore => _scores.Sum();
 
     public override void _Ready()
     {
@@ -61,10 +35,18 @@ public partial class GlobalState : Node
         Instance = this;
     }
 
+    public void StartNewGame()
+    {
+        GetTree().SetPause(false);
+        _scores.Clear();
+
+        GetTree().ChangeSceneToFile("res://scenes/dialogue.tscn");
+    }
+
     public void SwitchToDialoguePhase(int finalScore)
     {
         GetTree().SetPause(false);
-        _scores[Day] = finalScore;
+        _scores.Add(finalScore);
         GetTree().ChangeSceneToFile("res://scenes/dialogue.tscn");
     }
 
@@ -76,15 +58,15 @@ public partial class GlobalState : Node
 
     private static FutureTimeline GetTimeline(Array<Array<int>> dayThresholds, int day, int score)
     {
-        if (day >= dayThresholds.Count)
+        if (day < 1 || day > dayThresholds.Count)
             return FutureTimeline.Fascist;
 
-        var thresholds = dayThresholds[day];
+        var thresholds = dayThresholds[day - 1];
 
         for (var i = 0; i < thresholds.Count; i++)
-            if (score >= thresholds[i])
+            if (score < thresholds[i])
                 return (FutureTimeline)i;
 
-        return FutureTimeline.Fascist;
+        return (FutureTimeline)thresholds.Count;
     }
 }

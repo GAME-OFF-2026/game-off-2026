@@ -53,7 +53,8 @@ public partial class GameManager : Node
             {
                 GetTree().SetPause(true);
 
-                GetNode<RichTextLabel>("%FinalScoreLabel").Text = $"Final Score: {ScoreFloored}";
+                GetNode<RichTextLabel>("%FinalScoreLabel").Text =
+                    $"Today's score: {ScoreFloored}\nTotal score: {GlobalState.Instance.TotalScore + ScoreFloored}";
                 GetNode<Control>("%EndScreen").Visible = true;
             }
         };

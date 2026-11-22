@@ -13,6 +13,7 @@ public partial class PlayerActionsManager : Control
 
     private Container _buttonsContainer;
     private Container _bonusChoicesContainer;
+    private Label _mouseLabel;
 
     private PlayerActionItem _itemBeingPlaced;
 
@@ -28,6 +29,7 @@ public partial class PlayerActionsManager : Control
 
         _buttonsContainer = GetNode<Container>("ButtonsContainer");
         _bonusChoicesContainer = GetNode<Container>("ChoicesContainer");
+        _mouseLabel = GetNode<Label>("%MouseLabel");
 
         _mobManager = GetNode<MobManager>("%MobManager");
         _gameManager = GetNode<GameManager>("%GameManager");
@@ -69,12 +71,20 @@ public partial class PlayerActionsManager : Control
     {
         if (IsInstanceValid(_itemBeingPlaced))
         {
+            Visible = false;
+            _mouseLabel.Visible = true;
+            _mouseLabel.GlobalPosition = _itemBeingPlaced.GetGlobalMousePosition() + new Vector2(0, 50);
             _itemBeingPlaced.GlobalPosition = _itemBeingPlaced.GetGlobalMousePosition();
             if (Input.IsActionJustPressed("RightClick"))
             {
                 _itemBeingPlaced.QueueFree();
                 _itemBeingPlaced = null;
             }
+        }
+        else
+        {
+            Visible = true;
+            _mouseLabel.Visible = false;
         }
 
         if (_gameManager.GamePhase == GamePhase.Protest)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
@@ -13,9 +14,9 @@ public partial class FascistStrategy : NeighbourBasedStrategy
         _goal = Mob.GlobalPosition;
     }
 
-    protected override void TickWithNeighbours(double delta, Mob[] protesters, Mob[] fascists)
+    protected override void TickWithNeighbours(double delta, ICollection<Mob> protesters, ICollection<Mob> fascists, ICollection<Mob> neutrals)
     {
-        if (fascists.Length == 0)
+        if (fascists.Count == 0)
         {
             _goal = Mob.MobManager.CurrentMobs.Where(mob => IsInstanceValid(mob) && mob != Mob && mob.Data.Faction == Faction.Fascist)
                 .MinBy(mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition))
@@ -23,11 +24,9 @@ public partial class FascistStrategy : NeighbourBasedStrategy
             return;
         }
 
-        var nearestProtester = Mob.MobManager.CurrentMobs.Where(mob => mob.IsProtesting)
-            .MinBy(mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition));
+        var nearestProtester = protesters.MinBy(mob => mob.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition));
 
-        if (nearestProtester != null)
-            _goal = nearestProtester.GlobalPosition;
+        _goal = nearestProtester?.GlobalPosition ?? new Vector2();
 
         foreach (var protester in protesters)
             if (protester.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) < 40 * 40)

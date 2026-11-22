@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
@@ -35,7 +36,7 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         return true;
     }
 
-    protected override void TickWithNeighbours(double delta, Mob[] protesters, Mob[] fascists)
+    protected override void TickWithNeighbours(double delta, ICollection<Mob> protesters, ICollection<Mob> fascists, ICollection<Mob> neutrals)
     {
         UpdateDirection(protesters, fascists);
         UpdateMotivation(protesters, fascists);
@@ -45,6 +46,8 @@ public partial class RoamStrategy : NeighbourBasedStrategy
             Mob.Heal(delta * 20);
             foreach (var protester in protesters)
                 protester.Heal(delta * 20);
+            foreach (var neutral in neutrals)
+                neutral.Heal(delta * 20);
         }
     }
 
@@ -59,26 +62,26 @@ public partial class RoamStrategy : NeighbourBasedStrategy
             _currentDirection = -Mob.GlobalPosition.Normalized();
     }
 
-    private void UpdateDirection(Mob[] friends, Mob[] fascists)
+    private void UpdateDirection(ICollection<Mob> protesters, ICollection<Mob> fascists)
     {
         // Add neighbour's direction to self
         if (Mob.IsProtesting)
         {
-            if (Mob.Data.ProtesterType == ProtesterType.BlackBlock && friends.Length > 3 && fascists.Length > 0)
+            if (Mob.Data.ProtesterType == ProtesterType.BlackBlock && protesters.Count > 3 && fascists.Count > 0)
             {
-                var averageFriendPosition = friends.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / friends.Length);
-                var averageFascistPosition = fascists.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / fascists.Length);
+                var averageFriendPosition = protesters.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / protesters.Count);
+                var averageFascistPosition = fascists.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / fascists.Count);
                 _currentDirection = (averageFascistPosition + averageFriendPosition) / 2 - Mob.GlobalPosition;
             }
             else
             {
                 var friendInfluence = new Vector2();
-                foreach (var friend in friends)
+                foreach (var protester in protesters)
                     friendInfluence += ConversionFactor *
-                                       (friend.LinearVelocity.Normalized() + (friend.Data.Strategy as RoamStrategy)?._currentDirection ??
+                                       (protester.LinearVelocity.Normalized() + (protester.Data.Strategy as RoamStrategy)?._currentDirection ??
                                         new Vector2()) /
                                        2 *
-                                       friend.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
+                                       protester.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
                                        (ProtesterDetectionRange * ProtesterDetectionRange);
 
                 var fascistInfluence = new Vector2();
@@ -88,12 +91,9 @@ public partial class RoamStrategy : NeighbourBasedStrategy
                 _currentDirection += friendInfluence;
                 _currentDirection += fascistInfluence;
             }
-        }
 
-        _currentDirection = _currentDirection.Normalized();
+            _currentDirection = _currentDirection.Normalized();
 
-        if (Mob.IsProtesting)
-        {
             // Bias towards center
             _currentDirection += -Mob.GlobalPosition.Normalized() / 10;
             foreach (var item in Mob.MobManager.PlacedItems)
@@ -119,9 +119,9 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         _currentDirection = _currentDirection.Normalized();
     }
 
-    private void UpdateMotivation(Mob[] friends, Mob[] fascists)
+    private void UpdateMotivation(ICollection<Mob> protesters, ICollection<Mob> fascists)
     {
-        Mob.Motivation += (friends.Length + 5 * friends.Count(mob => mob.Data.ProtesterType == ProtesterType.Speaker)) *
+        Mob.Motivation += (protesters.Count + 5 * protesters.Count(mob => mob.Data.ProtesterType == ProtesterType.Speaker)) *
                           Mob.MotivationGainRate *
                           (Mob.IsProtesting ? 0.005 : 0.003);
 
