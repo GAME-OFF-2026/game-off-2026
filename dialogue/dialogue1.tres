@@ -10,16 +10,19 @@ metadata/_custom_type_script = "uid://ciwr62e57lgy7"
 
 [sub_resource type="Resource" id="Resource_v55a8"]
 script = ExtResource("1_n4m5h")
+Pose = 1
 Text = "The 0,1% have won, leaving the working class struggling for the scraps."
 metadata/_custom_type_script = "uid://ciwr62e57lgy7"
 
 [sub_resource type="Resource" id="Resource_vogiq"]
 script = ExtResource("1_n4m5h")
+Pose = 2
 Text = "People have never worked so much and been so poor."
 metadata/_custom_type_script = "uid://ciwr62e57lgy7"
 
 [sub_resource type="Resource" id="Resource_x1cjp"]
 script = ExtResource("1_n4m5h")
+Pose = 0
 Text = "Violent repression has made popular uprising almost impossible."
 metadata/_custom_type_script = "uid://ciwr62e57lgy7"
 

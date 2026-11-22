@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c548ranj115ld"]
 
-[ext_resource type="Texture2D" uid="uid://bh1kmu5ntxh4e" path="res://sprites/bar.png" id="1_3n4vj"]
-[ext_resource type="Texture2D" uid="uid://dk1gsx44d6to2" path="res://sprites/waitress_sad.png" id="1_jwyou"]
 [ext_resource type="Script" uid="uid://j1g4ina456q6" path="res://scripts/dialogue/DialogueManager.cs" id="3_fyky8"]
 [ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/dialogue1.tres" id="4_fyky8"]
 [ext_resource type="Resource" uid="uid://c2ee2ongfrqkr" path="res://dialogue/dialogue2.tres" id="5_led2e"]
+[ext_resource type="PackedScene" uid="uid://m6vvt00mrk2" path="res://dialogue/bar/Bar.tscn" id="5_vogiq"]
+[ext_resource type="PackedScene" uid="uid://b404rvh8t0gt7" path="res://dialogue/characters/Waitress.tscn" id="6_vogiq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f17"]
 
@@ -65,16 +65,13 @@ bbcode_enabled = true
 text = "[font_size=24]Salut c'est moi la serveuse aux tomates !! Je vis dans une société trop nulle où les milliardaires fascistes ont établi leur domination par la force et du coup on est super pauvres et les minorités ont plus aucun droits #nul"
 scroll_active = false
 
-[node name="Bar" type="Sprite2D" parent="." unique_id=89619139]
-position = Vector2(601, 595)
-texture = ExtResource("1_3n4vj")
-
-[node name="Waitress" type="Sprite2D" parent="." unique_id=1795859968]
-position = Vector2(196, 385)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_jwyou")
-
 [node name="DialogueManager" type="Node" parent="." unique_id=618252887]
 script = ExtResource("3_fyky8")
 DialoguePerDay = Array[Object]([ExtResource("4_fyky8"), ExtResource("5_led2e")])
 metadata/_custom_type_script = "uid://j1g4ina456q6"
+
+[node name="Bar" parent="." unique_id=1113718536 instance=ExtResource("5_vogiq")]
+unique_name_in_owner = true
+
+[node name="Waitress" parent="." unique_id=209684534 instance=ExtResource("6_vogiq")]
+unique_name_in_owner = true

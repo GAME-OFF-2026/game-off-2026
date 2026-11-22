@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b404rvh8t0gt7"]
+
+[ext_resource type="Script" uid="uid://pfuawu7wjqaj" path="res://scripts/dialogue/Waitress.cs" id="1_av58k"]
+[ext_resource type="Texture2D" uid="uid://cx4va6wx6565k" path="res://sprites/TradiCorps1.png" id="1_b58y1"]
+[ext_resource type="Texture2D" uid="uid://dl7ugyenqr8gj" path="res://sprites/TradiTete1.png" id="2_jeipd"]
+[ext_resource type="Resource" uid="uid://ctifto1m305u8" path="res://dialogue/characters/FascistWaitress.tres" id="2_lmlcb"]
+[ext_resource type="Resource" uid="uid://dr4r7sbghf5li" path="res://dialogue/characters/CapitalistWaitress.tres" id="3_na2ky"]
+[ext_resource type="Resource" uid="uid://bg5wim6pm5gua" path="res://dialogue/characters/LiberalWaitress.tres" id="4_s6pd8"]
+[ext_resource type="Resource" uid="uid://cl7wj4drueirs" path="res://dialogue/characters/ProgressiveWaitress.tres" id="5_yfjqj"]
+
+[node name="Waitress" type="Node" unique_id=1644269293]
+script = ExtResource("1_av58k")
+Phases = [ExtResource("2_lmlcb"), ExtResource("3_na2ky"), ExtResource("4_s6pd8"), ExtResource("5_yfjqj")]
+metadata/_custom_type_script = "uid://pfuawu7wjqaj"
+
+[node name="Body" type="Sprite2D" parent="." unique_id=428224022]
+unique_name_in_owner = true
+position = Vector2(325.11105, 359.99997)
+scale = Vector2(0.26666665, 0.26666665)
+texture = ExtResource("1_b58y1")
+
+[node name="Marker2D" type="Marker2D" parent="Body" unique_id=1824233007]
+
+[node name="Head" type="Sprite2D" parent="Body/Marker2D" unique_id=777515243]
+unique_name_in_owner = true
+texture = ExtResource("2_jeipd")

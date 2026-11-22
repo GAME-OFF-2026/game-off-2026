@@ -9,6 +9,8 @@ public partial class DialogueManager : Node
     private Control _namePanel;
     private RichTextLabel _speakerNameLabel;
     private RichTextLabel _dialogueTextLabel;
+    private Waitress _waitress;
+    private Bar _bar;
 
     private int _dialogueLineIndex;
 
@@ -19,19 +21,27 @@ public partial class DialogueManager : Node
         _namePanel = GetNode<Control>("%NamePanel");
         _speakerNameLabel = GetNode<RichTextLabel>("%SpeakerName");
         _dialogueTextLabel = GetNode<RichTextLabel>("%DialogueText");
+        _waitress = GetNode<Waitress>("%Waitress");
+        _bar = GetNode<Bar>("%Bar");
 
         DisplayDialogue();
     }
 
     private void DisplayDialogue()
     {
-        var line = CurrentDialogue.Lines[_dialogueLineIndex];
+        if (_dialogueLineIndex < CurrentDialogue.Lines.Count)
+        {
+            var line = CurrentDialogue.Lines[_dialogueLineIndex];
+            var pose = line.Pose;
+            _waitress.SetWaitressPhase(GlobalState.Instance.Timeline, pose);
+            _bar.SetBarPhase(GlobalState.Instance.Timeline);
 
-        _namePanel.Visible = IsInstanceValid(line.Character);
-        if (_namePanel.Visible)
-            _speakerNameLabel.Text = line.Character.Name;
+            _namePanel.Visible = IsInstanceValid(line.Character);
+            if (_namePanel.Visible)
+                _speakerNameLabel.Text = line.Character.Name;
 
-        _dialogueTextLabel.Text = line.Text;
+            _dialogueTextLabel.Text = line.Text;
+        }
     }
 
     public override void _UnhandledInput(InputEvent @event)
