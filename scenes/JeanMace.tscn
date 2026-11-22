@@ -16,6 +16,8 @@
 [ext_resource type="Resource" uid="uid://ct0xesmod0tjm" path="res://player_actions/barricade.tres" id="11_5i8a5"]
 [ext_resource type="Script" uid="uid://n3qju8tsl66h" path="res://scripts/PhaseClock.cs" id="11_8131g"]
 [ext_resource type="Resource" uid="uid://dktc3wslmkh5i" path="res://player_actions/blackblock.tres" id="12_sy7e0"]
+[ext_resource type="Script" uid="uid://8b6c62wxhtfc" path="res://scenes/MusicVolManager.cs" id="13_emgr0"]
+[ext_resource type="Texture2D" uid="uid://uicw6k3ykla1" path="res://sprites/icone_son.png" id="14_uqk7w"]
 [ext_resource type="AudioStream" uid="uid://d055mo3i3vf2x" path="res://audio/zikmu/p1.ogg" id="17_sy7e0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
@@ -204,6 +206,27 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "Back to the future!"
+
+[node name="VolumeControl" type="HBoxContainer" parent="CanvasLayer" unique_id=543636469]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VolumeSlider" type="HSlider" parent="CanvasLayer/VolumeControl" unique_id=713990938]
+modulate = Color(0.90386766, 0.28924286, 0.99999994, 1)
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("13_emgr0")
+
+[node name="VolumeIcon" type="TextureRect" parent="CanvasLayer/VolumeControl" unique_id=375345313]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+texture = ExtResource("14_uqk7w")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PhaseClock" type="Control" parent="." unique_id=532634101]
 layout_mode = 3
@@ -594,3 +617,4 @@ metadata/_custom_type_script = "uid://coi0q1a5y75hf"
 [node name="Musique" type="AudioStreamPlayer" parent="." unique_id=1319060700]
 stream = ExtResource("17_sy7e0")
 autoplay = true
+bus = &"Musique"
