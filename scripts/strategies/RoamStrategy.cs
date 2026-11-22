@@ -61,21 +61,30 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         // Add neighbour's direction to self
         if (Mob.IsProtesting)
         {
-            var friendInfluence = new Vector2();
-            foreach (var friend in friends)
-                friendInfluence += ConversionFactor *
-                                   (friend.LinearVelocity.Normalized() + (friend.Data.Strategy as RoamStrategy)?._currentDirection ?? new Vector2()) /
-                                   2 *
-                                   friend.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
-                                   (ProtesterDetectionRange * ProtesterDetectionRange);
+            if (Mob.Data.ProtesterType == ProtesterType.BlackBlock && friends.Length > 0 && fascists.Length > 0)
+            {
+                var allPositions = friends.Select(f => f.GlobalPosition).Concat(fascists.Select(f => f.GlobalPosition)).ToArray();
+                var averagePosition = allPositions.Aggregate((sum, pos) => sum + pos / allPositions.Length);
+                _currentDirection = averagePosition - Mob.GlobalPosition;
+            }
+            else
+            {
+                var friendInfluence = new Vector2();
+                foreach (var friend in friends)
+                    friendInfluence += ConversionFactor *
+                                       (friend.LinearVelocity.Normalized() + (friend.Data.Strategy as RoamStrategy)?._currentDirection ??
+                                        new Vector2()) /
+                                       2 *
+                                       friend.GlobalPosition.DistanceSquaredTo(Mob.GlobalPosition) /
+                                       (ProtesterDetectionRange * ProtesterDetectionRange);
 
-            var fascistInfluence = new Vector2();
-            if (Mob.Data.ProtesterType != ProtesterType.BlackBlock)
+                var fascistInfluence = new Vector2();
                 foreach (var fascist in fascists)
                     fascistInfluence += FascistAvoidanceFactor * (Mob.GlobalPosition - fascist.GlobalPosition).Normalized();
 
-            _currentDirection += friendInfluence;
-            _currentDirection += fascistInfluence;
+                _currentDirection += friendInfluence;
+                _currentDirection += fascistInfluence;
+            }
         }
 
         _currentDirection = _currentDirection.Normalized();
