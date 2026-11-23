@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DialogueData" format=3 uid="uid://dww7bij4edlpa"]
+
+[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_httey"]
+[ext_resource type="Resource" uid="uid://dqv4bmm7ujdr4" path="res://dialogue/characters/tv_presenter.tres" id="2_73vvt"]
+[ext_resource type="Resource" uid="uid://buvxp8fy0bvry" path="res://dialogue/characters/tv_presenter_default_pose.tres" id="2_ivndb"]
+[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="3_ivndb"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="4_ivndb"]
+[ext_resource type="Script" uid="uid://bdaq6jgafmh5k" path="res://scripts/dialogue/CharacterPose.cs" id="5_q1ebx"]
+
+[sub_resource type="Resource" id="Resource_q1ebx"]
+script = ExtResource("1_httey")
+Background = 1
+Speaker = ExtResource("2_73vvt")
+Characters = Array[Resource]([ExtResource("2_ivndb")])
+Text = "People of the Great Nation of France,"
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[sub_resource type="Resource" id="Resource_dbh0h"]
+script = ExtResource("1_httey")
+Background = 1
+Speaker = ExtResource("2_73vvt")
+Characters = Array[Resource]([ExtResource("2_ivndb")])
+Text = "Welcome to today's National Official News Broadcast."
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[sub_resource type="Resource" id="Resource_dwf3s"]
+script = ExtResource("1_httey")
+Background = 1
+Speaker = ExtResource("2_73vvt")
+Characters = Array[Resource]([ExtResource("2_ivndb")])
+Text = "Today, we celebrate the 105th anniversary of the Nation's victory over the factious rebels of 2026."
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[sub_resource type="Resource" id="Resource_ivndb"]
+script = ExtResource("5_q1ebx")
+Character = ExtResource("4_ivndb")
+Pose = 0
+Head = 0
+metadata/_custom_type_script = "uid://bdaq6jgafmh5k"
+
+[sub_resource type="Resource" id="Resource_nl1uj"]
+script = ExtResource("1_httey")
+Speaker = ExtResource("4_ivndb")
+Characters = Array[Object]([SubResource("Resource_ivndb")])
+Text = "I wonder what the country would look like of those horrible rebels had their way..."
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[resource]
+script = ExtResource("3_ivndb")
+_lines = Array[ExtResource("1_httey")]([SubResource("Resource_q1ebx"), SubResource("Resource_dbh0h"), SubResource("Resource_dwf3s"), SubResource("Resource_nl1uj")])
+metadata/_custom_type_script = "uid://bl7dyjsf4wmi4"

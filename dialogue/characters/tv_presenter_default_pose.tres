@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterPose" format=3 uid="uid://buvxp8fy0bvry"]
+
+[ext_resource type="Script" uid="uid://bdaq6jgafmh5k" path="res://scripts/dialogue/CharacterPose.cs" id="1_1x1wv"]
+[ext_resource type="Resource" uid="uid://dqv4bmm7ujdr4" path="res://dialogue/characters/tv_presenter.tres" id="1_214tf"]
+
+[resource]
+script = ExtResource("1_1x1wv")
+Character = ExtResource("1_214tf")
+Scale = 0.75
+metadata/_custom_type_script = "uid://bdaq6jgafmh5k"

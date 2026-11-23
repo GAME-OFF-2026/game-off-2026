@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://criborrbk7l0d"
-path="res://.godot/imported/mob_skin.png-3c95d87cd5b736ab08a5fc600f636a44.ctex"
+uid="uid://clogdoscvhrb3"
+path="res://.godot/imported/fachoJTpresentateur.png-277e2f5c819636f45d2e69fadb3449fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mob_skin.png"
-dest_files=["res://.godot/imported/mob_skin.png-3c95d87cd5b736ab08a5fc600f636a44.ctex"]
+source_file="res://sprites/fachoJTpresentateur.png"
+dest_files=["res://.godot/imported/fachoJTpresentateur.png-277e2f5c819636f45d2e69fadb3449fc.ctex"]
 
 [params]
 

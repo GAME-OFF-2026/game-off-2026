@@ -1,22 +1,73 @@
 [gd_scene format=3 uid="uid://c548ranj115ld"]
 
+[ext_resource type="Script" uid="uid://bc2pr26xq2ptb" path="res://scripts/dialogue/TimelineVariant.cs" id="2_vogiq"]
 [ext_resource type="Script" uid="uid://j1g4ina456q6" path="res://scripts/dialogue/DialogueManager.cs" id="3_fyky8"]
-[ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/dialogue1.tres" id="4_fyky8"]
 [ext_resource type="Texture2D" uid="uid://bscfplcf608u8" path="res://sprites/FachoBar.png" id="5_03vpb"]
-[ext_resource type="Resource" uid="uid://c2ee2ongfrqkr" path="res://dialogue/dialogue2.tres" id="5_led2e"]
-[ext_resource type="PackedScene" uid="uid://m6vvt00mrk2" path="res://dialogue/bar/Bar.tscn" id="5_vogiq"]
 [ext_resource type="Texture2D" uid="uid://dw28oulh0e0go" path="res://sprites/BarTradi.png" id="6_ccu7b"]
-[ext_resource type="PackedScene" uid="uid://b404rvh8t0gt7" path="res://dialogue/characters/Waitress.tscn" id="6_vogiq"]
 [ext_resource type="Texture2D" uid="uid://ho016l4qeeoi" path="res://sprites/BarGreen.png" id="7_6xhvj"]
+[ext_resource type="Texture2D" uid="uid://dqvtglchua4gk" path="res://sprites/TradiJTBackground.png" id="7_ocawk"]
+[ext_resource type="Texture2D" uid="uid://ceu800j714fc2" path="res://sprites/FachoJTfond.png" id="8_5ih08"]
 [ext_resource type="Texture2D" uid="uid://cmjxgsf2sll46" path="res://sprites/WokeBar.png" id="8_sv5jy"]
+[ext_resource type="Texture2D" uid="uid://bhrc52qcuterv" path="res://sprites/WokeJTbackground.png" id="9_noxhw"]
+[ext_resource type="Texture2D" uid="uid://dq4gnfetyl8w1" path="res://sprites/GREENWASHINGbackground.png" id="10_d2kxg"]
+[ext_resource type="Script" uid="uid://cb3v2akfcktc1" path="res://scripts/dialogue/DialogueDay.cs" id="11_sv5jy"]
+[ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/intro_dialogue.tres" id="12_ocawk"]
+[ext_resource type="Resource" uid="uid://ml73s74cq76x" path="res://dialogue/day1_capitalist.tres" id="13_5ih08"]
+[ext_resource type="Resource" uid="uid://q54dcckr5c78" path="res://dialogue/day1_fascist.tres" id="14_noxhw"]
+
+[sub_resource type="Resource" id="Resource_led2e"]
+script = ExtResource("2_vogiq")
+_fascistVariant = ExtResource("5_03vpb")
+_capitalistVariant = ExtResource("6_ccu7b")
+_liberalVariant = ExtResource("7_6xhvj")
+_leftistVariant = ExtResource("8_sv5jy")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_vogiq"]
+script = ExtResource("2_vogiq")
+_fascistVariant = ExtResource("8_5ih08")
+_capitalistVariant = ExtResource("7_ocawk")
+_liberalVariant = ExtResource("10_d2kxg")
+_leftistVariant = ExtResource("9_noxhw")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_yvrk0"]
+script = ExtResource("11_sv5jy")
+_fascistVariant = ExtResource("12_ocawk")
+metadata/_custom_type_script = "uid://cb3v2akfcktc1"
+
+[sub_resource type="Resource" id="Resource_d2kxg"]
+script = ExtResource("11_sv5jy")
+_fascistVariant = ExtResource("14_noxhw")
+_capitalistVariant = ExtResource("13_5ih08")
+metadata/_custom_type_script = "uid://cb3v2akfcktc1"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f17"]
 
 [node name="Node" type="Node" unique_id=595695824]
 
-[node name="Dialogue" type="CanvasLayer" parent="." unique_id=1249066010]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1249066010]
+unique_name_in_owner = true
 
-[node name="PanelContainer" type="Panel" parent="Dialogue" unique_id=1973244357]
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=964181585]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_5ih08")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="DialogueManager" type="Node" parent="CanvasLayer" unique_id=618252887]
+script = ExtResource("3_fyky8")
+_barBackground = SubResource("Resource_led2e")
+_tvBackground = SubResource("Resource_vogiq")
+_dialoguePerDay = Array[ExtResource("11_sv5jy")]([SubResource("Resource_yvrk0"), SubResource("Resource_d2kxg")])
+metadata/_custom_type_script = "uid://j1g4ina456q6"
+
+[node name="PanelContainer" type="Panel" parent="CanvasLayer" unique_id=1973244357]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -27,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 
-[node name="NamePanel" type="Panel" parent="Dialogue/PanelContainer" unique_id=54069600]
+[node name="NamePanel" type="Panel" parent="CanvasLayer/PanelContainer" unique_id=54069600]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 41.0
@@ -37,7 +88,7 @@ offset_bottom = 24.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_d6f17")
 
-[node name="SpeakerName" type="RichTextLabel" parent="Dialogue/PanelContainer/NamePanel" unique_id=1471008008]
+[node name="SpeakerName" type="RichTextLabel" parent="CanvasLayer/PanelContainer/NamePanel" unique_id=1471008008]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -46,13 +97,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[font_size=24]La serveuse aux tomates"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DialogueText" type="RichTextLabel" parent="Dialogue/PanelContainer" unique_id=2108124390]
+[node name="DialogueText" type="RichTextLabel" parent="CanvasLayer/PanelContainer" unique_id=2108124390]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -69,15 +121,3 @@ theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[font_size=24]Salut c'est moi la serveuse aux tomates !! Je vis dans une société trop nulle où les milliardaires fascistes ont établi leur domination par la force et du coup on est super pauvres et les minorités ont plus aucun droits #nul"
 scroll_active = false
-
-[node name="DialogueManager" type="Node" parent="." unique_id=618252887]
-script = ExtResource("3_fyky8")
-DialoguePerDay = Array[Object]([ExtResource("4_fyky8"), ExtResource("5_led2e")])
-metadata/_custom_type_script = "uid://j1g4ina456q6"
-
-[node name="Bar" parent="." unique_id=1113718536 instance=ExtResource("5_vogiq")]
-unique_name_in_owner = true
-BarTextures = [ExtResource("5_03vpb"), ExtResource("6_ccu7b"), ExtResource("7_6xhvj"), ExtResource("8_sv5jy")]
-
-[node name="Waitress" parent="." unique_id=209684534 instance=ExtResource("6_vogiq")]
-unique_name_in_owner = true

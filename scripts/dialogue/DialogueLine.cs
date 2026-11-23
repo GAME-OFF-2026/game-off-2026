@@ -1,11 +1,17 @@
 using Godot;
+using Godot.Collections;
+
+public enum BackgroundType
+{
+    Bar,
+    Tv
+}
 
 [GlobalClass]
 public partial class DialogueLine : Resource
 {
-    [Export] public DialogueCharacter Character { get; private set; }
-    [Export] public int Pose { get; private set; } = -1;
-    [Export] public int PositionX { get; private set; }
-    [Export] public int PositionY { get; private set; }
+    [Export] public BackgroundType Background { get; private set; }
+    [Export] public DialogueCharacter Speaker { get; private set; }
+    [Export] public Array<CharacterPose> Characters { get; private set; }
     [Export(PropertyHint.MultilineText)] public string Text { get; private set; }
 }

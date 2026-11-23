@@ -7,7 +7,7 @@ public enum FutureTimeline
     Fascist = 0,
     Capitalist = 1,
     Liberal = 2,
-    Progressive = 3
+    Leftist = 3
 }
 
 public partial class GlobalState : Node
@@ -41,6 +41,14 @@ public partial class GlobalState : Node
         _scores.Clear();
 
         GetTree().ChangeSceneToFile("res://scenes/dialogue.tscn");
+    }
+
+    public void QuitToMenu()
+    {
+        GetTree().SetPause(false);
+        _scores.Clear();
+
+        GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
     }
 
     public void SwitchToDialoguePhase(int finalScore)

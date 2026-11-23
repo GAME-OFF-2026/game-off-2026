@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cucfc0qkqq8oy"]
+
+[ext_resource type="Texture2D" uid="uid://beixhnfkebwrc" path="res://sprites/WokeCorps1.png" id="1_48ehh"]
+[ext_resource type="Texture2D" uid="uid://bwdx2hwr7amv5" path="res://sprites/WokeTete1.png" id="2_48ehh"]
+
+[node name="Body" type="TextureRect" unique_id=616126648]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(576, 648)
+texture = ExtResource("1_48ehh")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Head" type="TextureRect" parent="." unique_id=1618502496]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_48ehh")
+expand_mode = 1
+stretch_mode = 6

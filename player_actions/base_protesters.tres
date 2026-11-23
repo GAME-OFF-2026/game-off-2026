@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://e8udkhl8kv1u" path="res://scripts/PlayerActionData.cs" id="1_holox"]
 [ext_resource type="PackedScene" uid="uid://7rdql7pgcxrw" path="res://player_actions/base_protesters.tscn" id="1_oq0et"]
-[ext_resource type="Texture2D" uid="uid://ca8s2xrrqs6xl" path="res://sprites/mob_outline.png" id="2_wyiby"]
+[ext_resource type="Texture2D" uid="uid://c6gj3h1uag8ar" path="res://sprites/bonhomme2gros.png" id="2_oq0et"]
 
 [resource]
 script = ExtResource("1_holox")
 Uses = 3
 Name = "Protesters"
-Sprite = ExtResource("2_wyiby")
+Sprite = ExtResource("2_oq0et")
 Item = ExtResource("1_oq0et")
 metadata/_custom_type_script = "uid://e8udkhl8kv1u"

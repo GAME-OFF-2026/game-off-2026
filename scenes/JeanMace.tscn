@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://dktc3wslmkh5i" path="res://player_actions/blackblock.tres" id="12_sy7e0"]
 [ext_resource type="Script" uid="uid://8b6c62wxhtfc" path="res://scenes/MusicVolManager.cs" id="13_emgr0"]
 [ext_resource type="Texture2D" uid="uid://uicw6k3ykla1" path="res://sprites/icone_son.png" id="14_uqk7w"]
+[ext_resource type="Script" uid="uid://cvx8jtaobbx1f" path="res://scripts/PauseMenu.cs" id="15_0tae7"]
 [ext_resource type="AudioStream" uid="uid://d055mo3i3vf2x" path="res://audio/zikmu/p1.ogg" id="17_sy7e0"]
 [ext_resource type="Script" uid="uid://dvyaqnx2bemt4" path="res://scripts/TearGasManager.cs" id="18_emgr0"]
 
@@ -62,6 +63,7 @@ navigation_layers = 2
 
 [node name="MobManager" type="Node2D" parent="." unique_id=1660597583]
 unique_name_in_owner = true
+y_sort_enabled = true
 script = ExtResource("2_y13xm")
 _protester = ExtResource("3_xi27f")
 _neutralCount = 75
@@ -135,12 +137,14 @@ anchor_right = 1.0
 offset_left = -175.0
 offset_bottom = 47.0
 grow_horizontal = 0
+mouse_filter = 2
 text = "Score : 000"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerActionsManager" type="Control" parent="CanvasLayer" unique_id=126962441]
 unique_name_in_owner = true
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,6 +233,39 @@ texture = ExtResource("14_uqk7w")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="PauseScreen" type="Panel" parent="CanvasLayer" unique_id=1176755117]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_0tae7")
+metadata/_custom_type_script = "uid://cvx8jtaobbx1f"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseScreen" unique_id=407230200]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/PauseScreen/VBoxContainer" unique_id=813029167]
+layout_mode = 2
+text = "Paused"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/PauseScreen/VBoxContainer" unique_id=1427774621]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
 [node name="PhaseClock" type="Control" parent="." unique_id=532634101]
 layout_mode = 3
 anchors_preset = 0
@@ -236,6 +273,7 @@ offset_left = 686.0
 offset_top = -606.0
 offset_right = 726.0
 offset_bottom = -566.0
+mouse_filter = 2
 script = ExtResource("11_8131g")
 metadata/_custom_type_script = "uid://n3qju8tsl66h"
 metadata/_edit_use_anchors_ = true

@@ -1,8 +1,71 @@
 [gd_resource type="Resource" script_class="DialogueCharacter" format=3 uid="uid://ddeqbkljtf84d"]
 
+[ext_resource type="Texture2D" uid="uid://cx4va6wx6565k" path="res://sprites/TradiCorps1.png" id="1_a8v57"]
 [ext_resource type="Script" uid="uid://upibexg0sgdy" path="res://scripts/dialogue/DialogueCharacter.cs" id="1_s7i1x"]
+[ext_resource type="Texture2D" uid="uid://dxcb38dw8luhs" path="res://sprites/FachoCorps1.png" id="2_l0f8f"]
+[ext_resource type="Texture2D" uid="uid://beixhnfkebwrc" path="res://sprites/WokeCorps1.png" id="3_jhkxc"]
+[ext_resource type="Texture2D" uid="uid://bggu0ra8e4p5m" path="res://sprites/GreenCorps1.png" id="4_plb7x"]
+[ext_resource type="Script" uid="uid://bc2pr26xq2ptb" path="res://scripts/dialogue/TimelineVariant.cs" id="5_rskos"]
+[ext_resource type="Texture2D" uid="uid://dl7ugyenqr8gj" path="res://sprites/TradiTete1.png" id="6_7l2cj"]
+[ext_resource type="Texture2D" uid="uid://d4fp34u7ksjxp" path="res://sprites/TradiTete2.png" id="6_47bfn"]
+[ext_resource type="Texture2D" uid="uid://m6rx6cce4uk4" path="res://sprites/TradiCorps2.png" id="6_a8v57"]
+[ext_resource type="Texture2D" uid="uid://ccxdbv88f3g0x" path="res://sprites/FachoTete1.png" id="7_d6iqp"]
+[ext_resource type="Texture2D" uid="uid://bse4va143meh8" path="res://sprites/TradiCorps3.png" id="7_l0f8f"]
+[ext_resource type="Texture2D" uid="uid://dmb75ng1pjmio" path="res://sprites/TradiTete3.png" id="7_mn2ew"]
+[ext_resource type="Texture2D" uid="uid://bwdx2hwr7amv5" path="res://sprites/WokeTete1.png" id="8_hfyxr"]
+[ext_resource type="Texture2D" uid="uid://drej8fbocyu4b" path="res://sprites/GreenTete1.png" id="9_h15l8"]
+
+[sub_resource type="Resource" id="Resource_rskos"]
+script = ExtResource("5_rskos")
+_fascistVariant = ExtResource("2_l0f8f")
+_capitalistVariant = ExtResource("1_a8v57")
+_liberalVariant = ExtResource("4_plb7x")
+_leftistVariant = ExtResource("3_jhkxc")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_7l2cj"]
+script = ExtResource("5_rskos")
+_fascistVariant = ExtResource("2_l0f8f")
+_capitalistVariant = ExtResource("6_a8v57")
+_liberalVariant = ExtResource("4_plb7x")
+_leftistVariant = ExtResource("3_jhkxc")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_d6iqp"]
+script = ExtResource("5_rskos")
+_fascistVariant = ExtResource("2_l0f8f")
+_capitalistVariant = ExtResource("7_l0f8f")
+_liberalVariant = ExtResource("4_plb7x")
+_leftistVariant = ExtResource("3_jhkxc")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_hfyxr"]
+script = ExtResource("5_rskos")
+_fascistVariant = ExtResource("7_d6iqp")
+_capitalistVariant = ExtResource("6_7l2cj")
+_liberalVariant = ExtResource("9_h15l8")
+_leftistVariant = ExtResource("8_hfyxr")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_h15l8"]
+script = ExtResource("5_rskos")
+_fascistVariant = ExtResource("7_d6iqp")
+_capitalistVariant = ExtResource("6_47bfn")
+_liberalVariant = ExtResource("9_h15l8")
+_leftistVariant = ExtResource("8_hfyxr")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[sub_resource type="Resource" id="Resource_dv54l"]
+script = ExtResource("5_rskos")
+_fascistVariant = ExtResource("7_d6iqp")
+_capitalistVariant = ExtResource("7_mn2ew")
+_liberalVariant = ExtResource("9_h15l8")
+_leftistVariant = ExtResource("8_hfyxr")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
 
 [resource]
 script = ExtResource("1_s7i1x")
-Name = "The Waitress"
+Name = "Marie-Alice"
+Body = Array[Object]([SubResource("Resource_rskos"), SubResource("Resource_7l2cj"), SubResource("Resource_d6iqp")])
+Head = Array[Object]([SubResource("Resource_hfyxr"), SubResource("Resource_h15l8"), SubResource("Resource_dv54l")])
 metadata/_custom_type_script = "uid://upibexg0sgdy"

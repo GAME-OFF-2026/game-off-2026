@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca8s2xrrqs6xl"
-path="res://.godot/imported/mob_outline.png-35395c4b33e4aedb5893f2594f67b19e.ctex"
+uid="uid://dq4gnfetyl8w1"
+path="res://.godot/imported/GREENWASHINGbackground.png-90e658ec42f031e64715ceaad4f6ac8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mob_outline.png"
-dest_files=["res://.godot/imported/mob_outline.png-35395c4b33e4aedb5893f2594f67b19e.ctex"]
+source_file="res://sprites/GREENWASHINGbackground.png"
+dest_files=["res://.godot/imported/GREENWASHINGbackground.png-90e658ec42f031e64715ceaad4f6ac8f.ctex"]
 
 [params]
 

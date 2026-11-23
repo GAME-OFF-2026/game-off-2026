@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="DialogueCharacter" format=3 uid="uid://dqv4bmm7ujdr4"]
+
+[ext_resource type="Script" uid="uid://upibexg0sgdy" path="res://scripts/dialogue/DialogueCharacter.cs" id="1_5ofi7"]
+[ext_resource type="Texture2D" uid="uid://ddt40cs0l4xai" path="res://sprites/TradiJTpresentateur.png" id="1_nx0pu"]
+[ext_resource type="Texture2D" uid="uid://clogdoscvhrb3" path="res://sprites/fachoJTpresentateur.png" id="2_iowl3"]
+[ext_resource type="Texture2D" uid="uid://buc64m4vgxrhq" path="res://sprites/wokeJTpresentateur.png" id="3_3g243"]
+[ext_resource type="Texture2D" uid="uid://25dy6ma1ke22" path="res://sprites/GREENwashingJTpresentateur.png" id="4_iys2u"]
+[ext_resource type="Script" uid="uid://bc2pr26xq2ptb" path="res://scripts/dialogue/TimelineVariant.cs" id="5_utgna"]
+
+[sub_resource type="Resource" id="Resource_bphjv"]
+script = ExtResource("5_utgna")
+_fascistVariant = ExtResource("2_iowl3")
+_capitalistVariant = ExtResource("1_nx0pu")
+_liberalVariant = ExtResource("4_iys2u")
+_leftistVariant = ExtResource("3_3g243")
+metadata/_custom_type_script = "uid://bc2pr26xq2ptb"
+
+[resource]
+script = ExtResource("1_5ofi7")
+Name = "TV Presenter"
+Body = Array[Object]([SubResource("Resource_bphjv")])
+Head = null
+metadata/_custom_type_script = "uid://upibexg0sgdy"

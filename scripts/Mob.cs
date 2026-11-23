@@ -71,6 +71,7 @@ public partial class Mob : RigidBody2D
             newSprite.Texture = layer.SpriteVariants[Utils.Rng.RandiRange(0, layer.SpriteVariants.Length - 1)];
             newSprite.Scale = new Vector2(layer.Scale, layer.Scale);
             newSprite.Position = layer.Offset;
+            newSprite.YSortEnabled = true;
             (layer.ModulateColor ? _modulatedSprites : _sprites).Add(newSprite);
             _spriteRoot.AddChild(newSprite);
         }
