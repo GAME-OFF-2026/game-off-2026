@@ -15,9 +15,14 @@ run/main_scene="uid://b5gnslnq2iu8l"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://syfrvqmi8vc"
+
 [autoload]
 
 GlobalState="*uid://boywldqvic5o6"
+AudioScene="*uid://dw24lvqfntxmh"
 
 [display]
 
@@ -28,6 +33,12 @@ window/stretch/aspect="expand"
 [dotnet]
 
 project/assembly_name="Game Off 2026"
+
+[file_customization]
+
+folder_colors={
+"res://Audio/": "green"
+}
 
 [global_group]
 

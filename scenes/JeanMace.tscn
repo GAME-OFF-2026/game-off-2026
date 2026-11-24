@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://8b6c62wxhtfc" path="res://scenes/MusicVolManager.cs" id="13_emgr0"]
 [ext_resource type="Texture2D" uid="uid://uicw6k3ykla1" path="res://sprites/icone_son.png" id="14_uqk7w"]
 [ext_resource type="Script" uid="uid://cvx8jtaobbx1f" path="res://scripts/PauseMenu.cs" id="15_0tae7"]
-[ext_resource type="AudioStream" uid="uid://d055mo3i3vf2x" path="res://audio/zikmu/p1.ogg" id="17_sy7e0"]
 [ext_resource type="Script" uid="uid://dvyaqnx2bemt4" path="res://scripts/TearGasManager.cs" id="18_emgr0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
@@ -605,10 +604,6 @@ uv = PackedVector2Array(-202.41235, -110.34234, -196.21188, -13.792221, -33.2282
 script = ExtResource("3_y13xm")
 metadata/_custom_type_script = "uid://coi0q1a5y75hf"
 
-[node name="Musique" type="AudioStreamPlayer" parent="." unique_id=1319060700]
-stream = ExtResource("17_sy7e0")
-autoplay = true
-
 [node name="MouseLabel" type="Label" parent="." unique_id=1240830314]
 unique_name_in_owner = true
 anchors_preset = 8
@@ -623,6 +618,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Left click: Confirm
 Right click: Cancel"
+
 [node name="StreetsBoundaryPolygon" type="Polygon2D" parent="." unique_id=1352798334]
 visible = false
 color = Color(1, 1, 1, 0)
