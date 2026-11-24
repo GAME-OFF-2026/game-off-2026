@@ -11,7 +11,6 @@ public partial class PhaseClock : Control
     private int PhaseNumber = 3;
     private int PhaseDuration = 1;
     private Color[] PhaseActiveColors = { Colors.Orange, Colors.Cyan, Colors.Blue };
-    private Color[] PhaseInactiveColors = { Colors.DarkOrange, Colors.DarkCyan, Colors.DarkBlue };
     private float Elapsed;
     private int CurrentPhase;
 
@@ -38,7 +37,7 @@ public partial class PhaseClock : Control
             Elapsed = 2 + (float)_gameManager.EveningPhaseCompletion();
         }
 
-        QueueRedraw();
+        // QueueRedraw();
     }
 
     private int PhaseAt(float time)
@@ -65,7 +64,7 @@ public partial class PhaseClock : Control
         for (var i = 0; i < PhaseNumber; i++)
         {
             var end = start + Mathf.Tau * PhaseDuration / total;
-            var col = i != CurrentPhase ? PhaseInactiveColors[i] : PhaseActiveColors[i];
+            var col = PhaseActiveColors[i].Lerp(new Color(0, 0, 0, 0), i == CurrentPhase ? 0 : 0.5f);
             DrawArc(center, radius, start, end, 64, col, thickness, true);
             start = end;
         }

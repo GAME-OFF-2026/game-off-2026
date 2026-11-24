@@ -18,6 +18,8 @@
 [ext_resource type="Script" uid="uid://8b6c62wxhtfc" path="res://scenes/MusicVolManager.cs" id="13_emgr0"]
 [ext_resource type="Texture2D" uid="uid://uicw6k3ykla1" path="res://sprites/icone_son.png" id="14_uqk7w"]
 [ext_resource type="Script" uid="uid://cvx8jtaobbx1f" path="res://scripts/PauseMenu.cs" id="15_0tae7"]
+[ext_resource type="Script" uid="uid://bh6pa5rinfnwk" path="res://scripts/Tutorial.cs" id="15_ioek0"]
+[ext_resource type="Script" uid="uid://c4eradkbh1bio" path="res://scripts/TutorialStep.cs" id="17_ioek0"]
 [ext_resource type="Script" uid="uid://dvyaqnx2bemt4" path="res://scripts/TearGasManager.cs" id="18_emgr0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
@@ -54,10 +56,12 @@ texture = ExtResource("1_8131g")
 
 [node name="ProtesterNavmesh" type="NavigationRegion2D" parent="." unique_id=254759925]
 unique_name_in_owner = true
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_5i8a5")
 
 [node name="NonProtesterNavmesh" type="NavigationRegion2D" parent="." unique_id=1733157789]
 unique_name_in_owner = true
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_d6f17")
 navigation_layers = 2
 
@@ -131,16 +135,21 @@ process_mode = 3
 
 [node name="ScoreText" type="RichTextLabel" parent="CanvasLayer" unique_id=1984197125]
 unique_name_in_owner = true
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -175.0
-offset_bottom = 47.0
+anchor_bottom = 1.0
+offset_left = -182.0
+offset_top = -49.0
+offset_right = -7.0
+offset_bottom = -2.0
 grow_horizontal = 0
+grow_vertical = 0
 mouse_filter = 2
 text = "Score : 000"
 horizontal_alignment = 2
-metadata/_edit_use_anchors_ = true
+vertical_alignment = 2
 
 [node name="PlayerActionsManager" type="Control" parent="CanvasLayer" unique_id=126962441]
 unique_name_in_owner = true
@@ -233,6 +242,83 @@ texture = ExtResource("14_uqk7w")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="PhaseClock" type="Control" parent="CanvasLayer" unique_id=532634101]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = 36.0
+offset_right = -26.0
+offset_bottom = 76.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("11_8131g")
+metadata/_custom_type_script = "uid://n3qju8tsl66h"
+
+[node name="Tutorial" type="Panel" parent="CanvasLayer" unique_id=1103428500]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_ioek0")
+metadata/_custom_type_script = "uid://bh6pa5rinfnwk"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=184009381 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 425.5
+offset_top = 254.5
+offset_right = 725.5
+offset_bottom = 392.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Welcome to 2026 !
+
+What could happen if a popular protest gets some traction ?
+
+Let's find out !"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = []
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=134322892 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 869.0
+offset_top = 17.0
+offset_right = 1064.835
+offset_bottom = 155.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Protest days are divided into three phases, visible on the clock."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PhaseClock")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1220251705 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 485.0
+offset_right = 333.825
+offset_bottom = 623.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Phase 1 is about setting up your first protesters and barricades."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
 [node name="PauseScreen" type="Panel" parent="CanvasLayer" unique_id=1176755117]
 process_mode = 3
 visible = false
@@ -265,18 +351,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit"
-
-[node name="PhaseClock" type="Control" parent="." unique_id=532634101]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 686.0
-offset_top = -606.0
-offset_right = 726.0
-offset_bottom = -566.0
-mouse_filter = 2
-script = ExtResource("11_8131g")
-metadata/_custom_type_script = "uid://n3qju8tsl66h"
-metadata/_edit_use_anchors_ = true
 
 [node name="GameManager" type="Node" parent="." unique_id=787705394]
 unique_name_in_owner = true

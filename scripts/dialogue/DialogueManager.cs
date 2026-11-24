@@ -12,12 +12,15 @@ public partial class DialogueManager : Node
 
     [Export] private Array<DialogueDay> _dialoguePerDay = [new(), new(), new(), new()];
 
+    [Export] private double _charactersPerSecond = 50;
+
     private Control _namePanel;
     private RichTextLabel _speakerNameLabel;
     private RichTextLabel _dialogueTextLabel;
     private TextureRect _background;
 
     private int _dialogueLineIndex;
+    private double _timeSinceDialogueDisplayed;
 
     private DialogueData CurrentDialogue =>
         _dialoguePerDay[Mathf.Clamp(GlobalState.Instance.Day, 0, _dialoguePerDay.Count - 1)].GetVariant(GlobalState.Instance.Timeline);
@@ -32,10 +35,26 @@ public partial class DialogueManager : Node
         DisplayDialogue();
     }
 
+    public override void _Process(double delta)
+
+    {
+        if (_dialogueTextLabel.VisibleRatio < 1)
+        {
+            _timeSinceDialogueDisplayed += delta;
+            _dialogueTextLabel.VisibleCharacters = (int)(_charactersPerSecond * _timeSinceDialogueDisplayed);
+        }
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed("Click"))
         {
+            if (_dialogueTextLabel.VisibleRatio < 1)
+            {
+                _dialogueTextLabel.VisibleRatio = 1;
+                return;
+            }
+
             _dialogueLineIndex++;
 
             if (_dialogueLineIndex >= CurrentDialogue.Lines.Count)
@@ -52,6 +71,9 @@ public partial class DialogueManager : Node
     {
         if (_dialogueLineIndex >= CurrentDialogue.Lines.Count)
             return;
+
+        _timeSinceDialogueDisplayed = 0;
+        _dialogueTextLabel.VisibleRatio = 0;
 
         var line = CurrentDialogue.Lines[_dialogueLineIndex];
         _background.Texture = GetBackground(line.Background, GlobalState.Instance.Timeline);

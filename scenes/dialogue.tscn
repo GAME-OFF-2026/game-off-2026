@@ -143,3 +143,4 @@ theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[font_size=24]Salut c'est moi la serveuse aux tomates !! Je vis dans une société trop nulle où les milliardaires fascistes ont établi leur domination par la force et du coup on est super pauvres et les minorités ont plus aucun droits #nul"
 scroll_active = false
+visible_characters_behavior = 1
