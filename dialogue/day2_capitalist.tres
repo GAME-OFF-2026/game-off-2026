@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DialogueData" format=3 uid="uid://cb2ipc3gc7mjc"]
+
+[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_fcp26"]
+[ext_resource type="Resource" uid="uid://det4rfn0vhom4" path="res://dialogue/characters/waitress_default_pose.tres" id="2_06lq6"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="3_bl45m"]
+[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="4_81w1b"]
+
+[sub_resource type="Resource" id="Resource_gw3pe"]
+script = ExtResource("1_fcp26")
+Speaker = ExtResource("3_bl45m")
+Characters = Array[Object]([ExtResource("2_06lq6")])
+Text = "youhou j'adore le capitalisme"
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[resource]
+script = ExtResource("4_81w1b")
+_lines = Array[ExtResource("1_fcp26")]([SubResource("Resource_gw3pe")])
+metadata/_custom_type_script = "uid://bl7dyjsf4wmi4"

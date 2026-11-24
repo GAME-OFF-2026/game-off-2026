@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DialogueData" format=3 uid="uid://hcgs0vd7sbye"]
+
+[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_8jac8"]
+[ext_resource type="Resource" uid="uid://det4rfn0vhom4" path="res://dialogue/characters/waitress_default_pose.tres" id="2_htnls"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="3_cgxyi"]
+[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="4_h56cb"]
+
+[sub_resource type="Resource" id="Resource_qr0vh"]
+script = ExtResource("1_8jac8")
+Speaker = ExtResource("3_cgxyi")
+Characters = Array[Object]([ExtResource("2_htnls")])
+Text = "nul le fascisme"
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[resource]
+script = ExtResource("4_h56cb")
+_lines = Array[ExtResource("1_8jac8")]([SubResource("Resource_qr0vh")])
+metadata/_custom_type_script = "uid://bl7dyjsf4wmi4"

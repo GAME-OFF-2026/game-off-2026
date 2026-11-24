@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterPose" format=3 uid="uid://det4rfn0vhom4"]
+
+[ext_resource type="Script" uid="uid://bdaq6jgafmh5k" path="res://scripts/dialogue/CharacterPose.cs" id="1_riclf"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="1_vn5eb"]
+
+[resource]
+script = ExtResource("1_riclf")
+Character = ExtResource("1_vn5eb")
+Pose = 0
+Head = 0
+metadata/_custom_type_script = "uid://bdaq6jgafmh5k"

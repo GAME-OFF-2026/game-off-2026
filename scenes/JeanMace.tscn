@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bcyd4exsgq7t6"]
 
-[ext_resource type="Texture2D" uid="uid://i168qxdbxpnv" path="res://sprites/grass.png" id="1_1am6x"]
 [ext_resource type="Texture2D" uid="uid://cgxjf7r6pi1k0" path="res://sprites/map.png" id="1_8131g"]
 [ext_resource type="Script" uid="uid://dgt22l142c6gv" path="res://scripts/MobManager.cs" id="2_y13xm"]
 [ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/base_protester.tres" id="3_xi27f"]
@@ -32,24 +31,26 @@ source_geometry_mode = 1
 agent_radius = 32.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d6f17"]
-vertices = PackedVector2Array(-1165.0469, 705.90625, -1168.5703, 705.9219, -1168.7578, 695.8828, -1165.0469, 695.8828, 1134, 615, -1120, 615, -1120, -610, 1134, -610, -1169.0469, -717.14844, -1169.0469, -706.65625, -1194.2109, -706.65625, -1194.3984, -717.52344)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11)])
+vertices = PackedVector2Array(1134, 615, -1120, 615, -1120, -610, 1134, -610, -1178.5078, -717.28906, -1178.5078, -709.27344, -1194.2578, -709.27344, -1194.4063, -717.52344)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1227, -750, -1200, 738, 1215, 732, 1204, -715)])
 parsed_geometry_type = 1
 source_geometry_mode = 1
 agent_radius = 32.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioek0"]
+size = Vector2(2304, 100)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d6f17"]
-size = Vector2(63.535225, 63.782448)
+size = Vector2(100, 1296)
 
 [node name="Main" type="Node2D" unique_id=1373700630]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1356506538]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=800525640]
-position = Vector2(2.666626, 1.5000153)
-scale = Vector2(0.6023148, 0.60231483)
+[node name="Map" type="Sprite2D" parent="." unique_id=800525640]
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_8131g")
 
 [node name="ProtesterNavmesh" type="NavigationRegion2D" parent="." unique_id=254759925]
@@ -289,76 +290,23 @@ metadata/_custom_type_script = "uid://dvyaqnx2bemt4"
 
 [node name="Terrain" type="Node2D" parent="." unique_id=2081596069 groups=["navigation_polygon_source_geometry_group"]]
 
-[node name="StaticBody2D6" type="StaticBody2D" parent="Terrain" unique_id=555145001]
-position = Vector2(4.999939, -771)
-scale = Vector2(36.090473, 4.044999)
+[node name="Borders" type="StaticBody2D" parent="Terrain" unique_id=555145001]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StaticBody2D6" unique_id=275472065]
-position = Vector2(0.12361145, 0)
-scale = Vector2(0.9999998, 0.9999998)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/Borders" unique_id=275472065]
+position = Vector2(0, -698)
+shape = SubResource("RectangleShape2D_ioek0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Terrain/Borders" unique_id=807955260]
+position = Vector2(0, 698)
+shape = SubResource("RectangleShape2D_ioek0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Terrain/Borders" unique_id=158209789]
+position = Vector2(-1202, 0)
 shape = SubResource("RectangleShape2D_d6f17")
 
-[node name="Sprite2D" type="Sprite2D" parent="Terrain/StaticBody2D6" unique_id=1412158172]
-position = Vector2(0.055418015, -0.4944377)
-texture = ExtResource("1_1am6x")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Terrain/StaticBody2D6" unique_id=230921406]
-vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-
-[node name="StaticBody2D7" type="StaticBody2D" parent="Terrain" unique_id=1636590943]
-position = Vector2(9, 776)
-scale = Vector2(36.090473, 4.044999)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StaticBody2D7" unique_id=807955260]
-position = Vector2(0.12361145, 0)
-scale = Vector2(0.9999998, 0.9999998)
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Terrain/Borders" unique_id=355257955]
+position = Vector2(1202, 0)
 shape = SubResource("RectangleShape2D_d6f17")
-
-[node name="Sprite2D" type="Sprite2D" parent="Terrain/StaticBody2D7" unique_id=2143164108]
-texture = ExtResource("1_1am6x")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Terrain/StaticBody2D7" unique_id=215354653]
-vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="Terrain" unique_id=1924709654]
-position = Vector2(-1281.0001, -8)
-rotation = 1.5707964
-scale = Vector2(21.067614, 4.044999)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StaticBody2D8" unique_id=158209789]
-position = Vector2(0.12361145, 0)
-scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("RectangleShape2D_d6f17")
-
-[node name="Sprite2D" type="Sprite2D" parent="Terrain/StaticBody2D8" unique_id=267705232]
-texture = ExtResource("1_1am6x")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Terrain/StaticBody2D8" unique_id=836300466]
-vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
-
-[node name="StaticBody2D9" type="StaticBody2D" parent="Terrain" unique_id=1041176242]
-position = Vector2(1294.9999, 12)
-rotation = 1.5707964
-scale = Vector2(21.067614, 4.044999)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Terrain/StaticBody2D9" unique_id=355257955]
-position = Vector2(0.12361145, 0)
-scale = Vector2(0.9999998, 0.9999998)
-shape = SubResource("RectangleShape2D_d6f17")
-
-[node name="Sprite2D" type="Sprite2D" parent="Terrain/StaticBody2D9" unique_id=1265003118]
-texture = ExtResource("1_1am6x")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Terrain/StaticBody2D9" unique_id=978506664]
-vertices = PackedVector2Array(-32, -32, -32, 32, 32, 32, 32, -32)
-affect_navigation_mesh = true
-carve_navigation_mesh = true
 
 [node name="Polygon2D6" type="Polygon2D" parent="Terrain" unique_id=467079560]
 position = Vector2(454.10248, 97.60809)
@@ -675,3 +623,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Left click: Confirm
 Right click: Cancel"
+[node name="StreetsBoundaryPolygon" type="Polygon2D" parent="." unique_id=1352798334]
+visible = false
+color = Color(1, 1, 1, 0)
+polygon = PackedVector2Array(-1036, -603, -1030, -278, -1076, 152, -1141, 515, -1144, 615, 1061, 597, 1109, 246, 1153, 12, 1153, -363, 924, -468, 896, -558, 776, -511)

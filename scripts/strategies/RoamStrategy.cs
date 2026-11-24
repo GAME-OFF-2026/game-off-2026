@@ -9,9 +9,17 @@ public partial class RoamStrategy : NeighbourBasedStrategy
     [Export] public float ConversionFactor = 1;
     [Export] public double PatienceSeconds = 1;
 
+    private Polygon2D _boundaryPolygon;
+
     private Vector2? _goal;
     private Vector2 _currentDirection;
     private double _immobileSeconds;
+
+    public override void Init()
+    {
+        base.Init();
+        _boundaryPolygon = Mob.GetNode<Polygon2D>("/root/Main/StreetsBoundaryPolygon");
+    }
 
     protected override bool PreTick(double delta)
     {
@@ -67,6 +75,12 @@ public partial class RoamStrategy : NeighbourBasedStrategy
         // Add neighbour's direction to self
         if (Mob.IsProtesting)
         {
+            if (!Geometry2D.IsPointInPolygon(Mob.GlobalPosition, _boundaryPolygon.Polygon))
+            {
+                _currentDirection = -Mob.GlobalPosition.Normalized();
+                return;
+            }
+
             if (Mob.Data.ProtesterType == ProtesterType.BlackBlock && protesters.Count > 3 && fascists.Count > 0)
             {
                 var averageFriendPosition = protesters.Aggregate(new Vector2(), (sum, mob) => sum + mob.GlobalPosition / protesters.Count);
@@ -127,7 +141,7 @@ public partial class RoamStrategy : NeighbourBasedStrategy
 
         Mob.Motivation -= Mob.MotivationLossRate * (Mob.IsProtesting ? 0.005 : 0.01);
 
-        if (Mob.Data.ProtesterType != ProtesterType.BlackBlock)
+        if (Mob.IsProtesting && Mob.Data.ProtesterType != ProtesterType.BlackBlock)
             foreach (var fascist in fascists)
                 Mob.Motivation -= Mob.MotivationLossRate *
                                   0.03 *

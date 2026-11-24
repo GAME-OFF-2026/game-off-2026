@@ -14,6 +14,13 @@
 [ext_resource type="Resource" uid="uid://dww7bij4edlpa" path="res://dialogue/intro_dialogue.tres" id="12_ocawk"]
 [ext_resource type="Resource" uid="uid://ml73s74cq76x" path="res://dialogue/day1_capitalist.tres" id="13_5ih08"]
 [ext_resource type="Resource" uid="uid://q54dcckr5c78" path="res://dialogue/day1_fascist.tres" id="14_noxhw"]
+[ext_resource type="Resource" uid="uid://cb2ipc3gc7mjc" path="res://dialogue/day2_capitalist.tres" id="15_1g5py"]
+[ext_resource type="Resource" uid="uid://703g3t6whu0u" path="res://dialogue/day2_fascist.tres" id="16_sqv3f"]
+[ext_resource type="Resource" uid="uid://sbd0g1oxuhta" path="res://dialogue/day2_liberal.tres" id="17_ch7if"]
+[ext_resource type="Resource" uid="uid://qndbf50gy238" path="res://dialogue/day3_capitalist.tres" id="18_8xfpl"]
+[ext_resource type="Resource" uid="uid://hcgs0vd7sbye" path="res://dialogue/day3_fascist.tres" id="19_l1nsy"]
+[ext_resource type="Resource" uid="uid://cvx0sf815rkvj" path="res://dialogue/day3_leftist.tres" id="20_o2ask"]
+[ext_resource type="Resource" uid="uid://b7hffj86xy5xm" path="res://dialogue/day3_liberal.tres" id="21_yrhe6"]
 
 [sub_resource type="Resource" id="Resource_led2e"]
 script = ExtResource("2_vogiq")
@@ -42,6 +49,21 @@ _fascistVariant = ExtResource("14_noxhw")
 _capitalistVariant = ExtResource("13_5ih08")
 metadata/_custom_type_script = "uid://cb3v2akfcktc1"
 
+[sub_resource type="Resource" id="Resource_ydll2"]
+script = ExtResource("11_sv5jy")
+_fascistVariant = ExtResource("16_sqv3f")
+_capitalistVariant = ExtResource("15_1g5py")
+_liberalVariant = ExtResource("17_ch7if")
+metadata/_custom_type_script = "uid://cb3v2akfcktc1"
+
+[sub_resource type="Resource" id="Resource_16587"]
+script = ExtResource("11_sv5jy")
+_fascistVariant = ExtResource("19_l1nsy")
+_capitalistVariant = ExtResource("18_8xfpl")
+_liberalVariant = ExtResource("21_yrhe6")
+_leftistVariant = ExtResource("20_o2ask")
+metadata/_custom_type_script = "uid://cb3v2akfcktc1"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f17"]
 
 [node name="Node" type="Node" unique_id=595695824]
@@ -64,7 +86,7 @@ stretch_mode = 6
 script = ExtResource("3_fyky8")
 _barBackground = SubResource("Resource_led2e")
 _tvBackground = SubResource("Resource_vogiq")
-_dialoguePerDay = Array[ExtResource("11_sv5jy")]([SubResource("Resource_yvrk0"), SubResource("Resource_d2kxg")])
+_dialoguePerDay = Array[ExtResource("11_sv5jy")]([SubResource("Resource_yvrk0"), SubResource("Resource_d2kxg"), SubResource("Resource_ydll2"), SubResource("Resource_16587")])
 metadata/_custom_type_script = "uid://j1g4ina456q6"
 
 [node name="PanelContainer" type="Panel" parent="CanvasLayer" unique_id=1973244357]

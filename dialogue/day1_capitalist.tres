@@ -1,8 +1,18 @@
 [gd_resource type="Resource" script_class="DialogueData" format=3 uid="uid://ml73s74cq76x"]
 
-[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_lup0w"]
-[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="2_fimvn"]
+[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_6p3ld"]
+[ext_resource type="Resource" uid="uid://det4rfn0vhom4" path="res://dialogue/characters/waitress_default_pose.tres" id="2_7myel"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="3_mnvf0"]
+[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="4_20oss"]
+
+[sub_resource type="Resource" id="Resource_gw3pe"]
+script = ExtResource("1_6p3ld")
+Speaker = ExtResource("3_mnvf0")
+Characters = Array[Object]([ExtResource("2_7myel")])
+Text = "youhou j'adore le capitalisme"
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
 
 [resource]
-script = ExtResource("2_fimvn")
+script = ExtResource("4_20oss")
+_lines = Array[ExtResource("1_6p3ld")]([SubResource("Resource_gw3pe")])
 metadata/_custom_type_script = "uid://bl7dyjsf4wmi4"

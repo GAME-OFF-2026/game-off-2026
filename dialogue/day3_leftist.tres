@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DialogueData" format=3 uid="uid://cvx0sf815rkvj"]
+
+[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_ydll2"]
+[ext_resource type="Resource" uid="uid://det4rfn0vhom4" path="res://dialogue/characters/waitress_default_pose.tres" id="2_v74pe"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="3_4k2q5"]
+[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="4_o7ty7"]
+
+[sub_resource type="Resource" id="Resource_gw3pe"]
+script = ExtResource("1_ydll2")
+Speaker = ExtResource("3_4k2q5")
+Characters = Array[Object]([ExtResource("2_v74pe")])
+Text = "youhou la gauche a gagné je peux enfin vivre librement ma vie de fan de la star ac !!!"
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[resource]
+script = ExtResource("4_o7ty7")
+_lines = Array[ExtResource("1_ydll2")]([SubResource("Resource_gw3pe")])
+metadata/_custom_type_script = "uid://bl7dyjsf4wmi4"

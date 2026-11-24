@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DialogueData" format=3 uid="uid://b7hffj86xy5xm"]
+
+[ext_resource type="Script" uid="uid://ciwr62e57lgy7" path="res://scripts/dialogue/DialogueLine.cs" id="1_1c64d"]
+[ext_resource type="Resource" uid="uid://det4rfn0vhom4" path="res://dialogue/characters/waitress_default_pose.tres" id="2_yhh0c"]
+[ext_resource type="Resource" uid="uid://ddeqbkljtf84d" path="res://dialogue/characters/waitress.tres" id="3_702na"]
+[ext_resource type="Script" uid="uid://bl7dyjsf4wmi4" path="res://scripts/dialogue/DialogueData.cs" id="4_17toi"]
+
+[sub_resource type="Resource" id="Resource_gw3pe"]
+script = ExtResource("1_1c64d")
+Speaker = ExtResource("3_702na")
+Characters = Array[Object]([ExtResource("2_yhh0c")])
+Text = "ouais on a grave sauvé la planète j'adore le macha à 50€"
+metadata/_custom_type_script = "uid://ciwr62e57lgy7"
+
+[resource]
+script = ExtResource("4_17toi")
+_lines = Array[ExtResource("1_1c64d")]([SubResource("Resource_gw3pe")])
+metadata/_custom_type_script = "uid://bl7dyjsf4wmi4"
