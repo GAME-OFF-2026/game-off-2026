@@ -25,6 +25,7 @@ public partial class MobManager : Node2D
     private double _fascistSpawnTimer;
 
     private Node2D[] _spawnPoints;
+    private Polygon2D[] _obstacles;
     public readonly Array<PlayerActionItem> PlacedItems = [];
 
     private Array<Mob> _currentMobs = [];
@@ -40,8 +41,10 @@ public partial class MobManager : Node2D
 
     public override void _Ready()
     {
-        _spawnPoints = [.. GetNode("SpawnPoints").GetChildren().Cast<Node2D>()];
+        _spawnPoints = [.. GetNode("SpawnPoints").GetChildren().OfType<Node2D>()];
         _gameManager = GetNode<GameManager>("%GameManager");
+        _obstacles = [.. GetNode("%Terrain").GetChildren().OfType<PolygonCollider>()];
+        GD.Print(_obstacles.Length);
         SpawnNeutralMobs();
     }
 
@@ -130,10 +133,7 @@ public partial class MobManager : Node2D
         for (var i = 0; i < _neutralCount; i++)
             SpawnMob(
                 _protester,
-                new Vector2(
-                    Utils.Rng.RandiRange(SpawnRect.Position.X, SpawnRect.End.X),
-                    Utils.Rng.RandiRange(SpawnRect.Position.Y, SpawnRect.End.Y)
-                )
+                GetRandomPointInSpawnRect()
             );
 
         var fascistsSpawnPoint = GetRandomSpawnPoint();
@@ -159,5 +159,20 @@ public partial class MobManager : Node2D
         if (_currentMobs.Contains(mob))
             return;
         _currentMobs.Add(mob);
+    }
+
+    private Vector2 GetRandomPointInSpawnRect()
+    {
+        var point = new Vector2(
+            Utils.Rng.RandfRange(SpawnRect.Position.X, SpawnRect.End.X),
+            Utils.Rng.RandfRange(SpawnRect.Position.Y, SpawnRect.End.Y)
+        );
+        while (_obstacles.Any(polygon => Geometry2D.IsPointInPolygon(point - polygon.GlobalPosition, polygon.Polygon)))
+        {
+            point.X = Utils.Rng.RandfRange(SpawnRect.Position.X, SpawnRect.End.X);
+            point.Y = Utils.Rng.RandfRange(SpawnRect.Position.Y, SpawnRect.End.Y);
+        }
+
+        return point;
     }
 }

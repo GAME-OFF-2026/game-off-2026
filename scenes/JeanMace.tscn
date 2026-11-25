@@ -23,8 +23,8 @@
 [ext_resource type="Script" uid="uid://dvyaqnx2bemt4" path="res://scripts/TearGasManager.cs" id="18_emgr0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
-vertices = PackedVector2Array(-1165.0469, 705.90625, -1168.5703, 705.9219, -1168.7578, 695.8828, -1165.0469, 695.8828, 1134, 615, -1120, 615, -1120, -610, 1134, -610, -1169.0469, -717.14844, -1169.0469, -706.65625, -1194.2109, -706.65625, -1194.3984, -717.52344)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11)])
+vertices = PackedVector2Array(1120, 616, -1120, 616, -1120, -616, 1120, -616, -1184, -717.4297, -1184, -680, -1193.7266, -680, -1194.4063, -717.5625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1227, -750, -1200, 738, 1215, 732, 1204, -715)])
 parsed_geometry_type = 1
 parsed_collision_mask = 4294967293
@@ -32,7 +32,7 @@ source_geometry_mode = 1
 agent_radius = 32.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d6f17"]
-vertices = PackedVector2Array(1134, 615, -1120, 615, -1120, -610, 1134, -610, -1178.5078, -717.28906, -1178.5078, -709.27344, -1194.2578, -709.27344, -1194.4063, -717.52344)
+vertices = PackedVector2Array(1120, 616, -1120, 616, -1120, -616, 1120, -616, -1184, -717.4297, -1184, -680, -1193.7266, -680, -1194.4063, -717.5625)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1227, -750, -1200, 738, 1215, 732, 1204, -715)])
 parsed_geometry_type = 1
@@ -243,6 +243,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="PhaseClock" type="Control" parent="CanvasLayer" unique_id=532634101]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -362,6 +363,7 @@ script = ExtResource("18_emgr0")
 metadata/_custom_type_script = "uid://dvyaqnx2bemt4"
 
 [node name="Terrain" type="Node2D" parent="." unique_id=2081596069 groups=["navigation_polygon_source_geometry_group"]]
+unique_name_in_owner = true
 
 [node name="Borders" type="StaticBody2D" parent="Terrain" unique_id=555145001]
 
@@ -529,7 +531,7 @@ metadata/_custom_type_script = "uid://coi0q1a5y75hf"
 position = Vector2(-937, -268.34363)
 scale = Vector2(0.5944969, 0.8777181)
 color = Color(0.41568628, 0.74509805, 0.1882353, 0)
-polygon = PackedVector2Array(317.9159, -45.181213, 30.27771, -114.679596, 20.18518, -253.67642, 304.4591, -244.56186)
+polygon = PackedVector2Array(317.9159, -45.181213, 30.27771, -114.679596, 20.18518, -253.67642, 314.55176, -247.97983)
 uv = PackedVector2Array(-202.41235, -110.34234, -196.21188, -13.792221, -33.22821, -35.050964, -85.48929, -91.74094)
 script = ExtResource("3_y13xm")
 metadata/_custom_type_script = "uid://coi0q1a5y75hf"
@@ -547,7 +549,7 @@ metadata/_custom_type_script = "uid://coi0q1a5y75hf"
 position = Vector2(-217, 327)
 scale = Vector2(0.5881725, 0.8878352)
 color = Color(0.41568628, 0.74509805, 0.1882353, 0)
-polygon = PackedVector2Array(-421.64505, -50.68509, -598.46387, 69.83276, -695.37427, 152.05524, -698.77454, 209.49835, 27.202911, 203.86664, 25.502747, 165.57129, 28.903107, -52.937775)
+polygon = PackedVector2Array(-421.64505, -50.68509, -598.46387, 69.83276, -695.37427, 152.05524, -698.77454, 209.49835, 122.413086, 209.49835, 115.612366, 185.84528, 32.303467, 166.69763, 28.903107, -52.937775)
 uv = PackedVector2Array(-202.41235, -110.34234, -196.21188, -13.792221, -33.22821, -35.050964, -85.48929, -91.74094)
 script = ExtResource("3_y13xm")
 metadata/_custom_type_script = "uid://coi0q1a5y75hf"

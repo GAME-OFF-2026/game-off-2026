@@ -37,7 +37,7 @@ public partial class PhaseClock : Control
             Elapsed = 2 + (float)_gameManager.EveningPhaseCompletion();
         }
 
-        // QueueRedraw();
+        QueueRedraw();
     }
 
     private int PhaseAt(float time)
