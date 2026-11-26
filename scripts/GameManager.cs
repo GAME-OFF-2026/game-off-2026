@@ -12,9 +12,13 @@ public partial class GameManager : Node
 
     private MobManager _mobManager;
     private RichTextLabel _scoreText;
-    private double _phaseCurrentTime;
 
     public uint SetupPhaseSpent = 0;
+
+    public bool TutorialPause;
+    public bool PlayerPause;
+    private bool _endPause;
+    public double PhaseCurrentTime { get; private set; }
 
     public GamePhase GamePhase { get; private set; }
 
@@ -27,7 +31,7 @@ public partial class GameManager : Node
 
     public void SetGamePhase(GamePhase newGamePhase)
     {
-        _phaseCurrentTime = 0;
+        PhaseCurrentTime = 0;
 
         GamePhase = newGamePhase;
         EmitSignalPhaseChanged(GamePhase);
@@ -51,7 +55,7 @@ public partial class GameManager : Node
 
             if (phase == GamePhase.End)
             {
-                GetTree().SetPause(true);
+                _endPause = true;
 
                 GetNode<RichTextLabel>("%FinalScoreLabel").Text =
                     $"Today's score: {ScoreFloored}\nTotal score: {GlobalState.Instance.TotalScore + ScoreFloored}";
@@ -64,6 +68,14 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
+        if (TutorialPause || PlayerPause || _endPause)
+        {
+            GetTree().Paused = true;
+            return;
+        }
+
+        GetTree().Paused = false;
+
         if (GamePhase == GamePhase.Setup)
         {
             if (SetupPhaseSpent >= SetupPhaseBudget)
@@ -74,10 +86,10 @@ public partial class GameManager : Node
         Score += delta * _mobManager.CurrentMobs.Sum(mob => mob.IsProtesting ? mob.Motivation : 0);
         _scoreText.Text = $"Score: {ScoreFloored}";
 
-        _phaseCurrentTime += delta;
+        PhaseCurrentTime += delta;
         if (GamePhase == GamePhase.Protest)
         {
-            if (_phaseCurrentTime > _protestPhaseDuration)
+            if (PhaseCurrentTime > _protestPhaseDuration)
                 SetGamePhase(GamePhase.Evening);
         }
         else if (GamePhase == GamePhase.Evening)
@@ -98,7 +110,7 @@ public partial class GameManager : Node
         if (_protestPhaseDuration == 0)
             return 1;
 
-        return Mathf.Clamp(_phaseCurrentTime / _protestPhaseDuration, 0, 1);
+        return Mathf.Clamp(PhaseCurrentTime / _protestPhaseDuration, 0, 1);
     }
 
     public double EveningPhaseCompletion()
@@ -109,6 +121,6 @@ public partial class GameManager : Node
         if (_eveningPhaseDuration == 0)
             return 1;
 
-        return Mathf.Clamp(_phaseCurrentTime / _eveningPhaseDuration, 0, 1);
+        return Mathf.Clamp(PhaseCurrentTime / _eveningPhaseDuration, 0, 1);
     }
 }

@@ -261,6 +261,7 @@ script = ExtResource("11_8131g")
 metadata/_custom_type_script = "uid://n3qju8tsl66h"
 
 [node name="Tutorial" type="Panel" parent="CanvasLayer" unique_id=1103428500]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -283,7 +284,7 @@ text = "Welcome to 2026 !
 
 What could happen if a popular protest gets some traction ?
 
-Let's find out !"
+Let's find out!"
 fit_content = true
 horizontal_alignment = 1
 script = ExtResource("17_ioek0")
@@ -318,6 +319,179 @@ fit_content = true
 horizontal_alignment = 1
 script = ExtResource("17_ioek0")
 _highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1583885366 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_top = 449.0
+offset_right = 144.0
+offset_bottom = 587.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Barricades block cops and non-protesters, but cops can break them."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1120194525 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 449.0
+offset_right = 200.0
+offset_bottom = 587.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Base protesters can motivate ordinary citizens; strength in numbers !"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=415253345 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 472.0
+offset_right = 283.0
+offset_bottom = 610.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Medics can heal people damaged by cops or tear gas."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=689617375 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 495.0
+offset_right = 364.0
+offset_bottom = 633.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Speakers have extra motivating power!"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1392803172 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 447.0
+offset_right = 447.0
+offset_bottom = 585.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Black blocks have extra health, and will protect protesters from cops."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1795966140 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 425.5
+offset_top = 300.5
+offset_right = 725.5
+offset_bottom = 438.5
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "You can use 8 actions before phase 2 starts!"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = []
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=466964412 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -69.0
+offset_right = 150.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "In phase 2, protesters mostly move on their own, but you get two actions to direct them:"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_trigger = 1
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel11" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=465575301 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 449.0
+offset_right = 138.0
+offset_bottom = 587.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "The \"Rally\" flag will make all protesters walk towards it."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel12" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1294654548 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 472.0
+offset_right = 223.0
+offset_bottom = 610.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "The \"Avoid area\" sign will make nearby protesters walk away from it."
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = [NodePath("../../PlayerActionsManager")]
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel13" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1801338106 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_left = 425.5
+offset_top = 300.5
+offset_right = 725.5
+offset_bottom = 438.5
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "Use them wisely, you only get a few!"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_highlightNodes = []
+metadata/_custom_type_script = "uid://c4eradkbh1bio"
+
+[node name="RichTextLabel14" type="RichTextLabel" parent="CanvasLayer/Tutorial" unique_id=1391451697 node_paths=PackedStringArray("_highlightNodes")]
+layout_mode = 0
+offset_top = 117.0
+offset_right = 300.0
+offset_bottom = 255.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+text = "In phase 2, you will periodically get a choice between two bonuses!
+Click one to add it to your action bar!"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("17_ioek0")
+_trigger = 2
+_highlightNodes = [NodePath("../../PlayerActionsManager/ChoicesContainer")]
 metadata/_custom_type_script = "uid://c4eradkbh1bio"
 
 [node name="PauseScreen" type="Panel" parent="CanvasLayer" unique_id=1176755117]
@@ -355,6 +529,7 @@ text = "Quit"
 
 [node name="GameManager" type="Node" parent="." unique_id=787705394]
 unique_name_in_owner = true
+process_mode = 3
 script = ExtResource("7_xi27f")
 metadata/_custom_type_script = "uid://4xvp5jn4urxk"
 

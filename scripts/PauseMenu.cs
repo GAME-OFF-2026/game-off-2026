@@ -3,8 +3,11 @@ using Godot;
 [GlobalClass]
 public partial class PauseMenu : Panel
 {
+    private GameManager _gameManager;
+
     public override void _Ready()
     {
+        _gameManager = GetNode<GameManager>("%GameManager");
         GetNode<Button>("%QuitButton").Pressed += () => { GlobalState.Instance.QuitToMenu(); };
     }
 
@@ -12,8 +15,8 @@ public partial class PauseMenu : Panel
     {
         if (Input.IsActionJustPressed("Pause"))
         {
-            GetTree().Paused = !GetTree().Paused;
-            Visible = GetTree().Paused;
+            Visible = !Visible;
+            _gameManager.PlayerPause = Visible;
         }
     }
 }

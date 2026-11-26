@@ -22,6 +22,7 @@ public partial class PlayerActionsManager : Control
     private double _timeSinceLastBonus;
 
     private GameManager _gameManager;
+    public double BonusPeriod => _bonusPeriod;
 
     public override void _Ready()
     {

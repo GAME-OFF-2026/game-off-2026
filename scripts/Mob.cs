@@ -94,10 +94,14 @@ public partial class Mob : RigidBody2D
         var flashIntensity = 1 - healthFraction * healthFraction;
         _healthFlashCounter += 10 * flashIntensity * delta;
 
+        var saturation = (float)(flashIntensity * (1 + Mathf.Cos(_healthFlashCounter)) / 2);
+        if (saturation != 0)
+            GD.Print(saturation);
+
         foreach (var sprite in _sprites)
             sprite.Modulate = Color.FromHsv(
                 0,
-                (float)(flashIntensity * (1 + Mathf.Cos(_healthFlashCounter)) / 2),
+                saturation,
                 1
             );
 

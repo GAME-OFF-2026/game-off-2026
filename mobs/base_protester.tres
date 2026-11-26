@@ -41,4 +41,5 @@ metadata/_custom_type_script = "uid://fjh1xjtcanop"
 script = ExtResource("1_p31w6")
 Layers = Array[Object]([SubResource("Resource_5832w"), SubResource("Resource_fsfmh"), SubResource("Resource_65hfs"), SubResource("Resource_etmed")])
 Strategy = SubResource("Resource_672bv")
+MaxSpeed = 70.0
 metadata/_custom_type_script = "uid://fv70y6lowrp0"

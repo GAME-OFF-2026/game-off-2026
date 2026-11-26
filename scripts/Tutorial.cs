@@ -4,21 +4,38 @@ using Godot;
 [GlobalClass]
 public partial class Tutorial : Panel
 {
+    private GameManager _gameManager;
     private TutorialStep[] _steps;
-
+    private bool _started;
     private int _stepIndex;
+
+    private TutorialStep CurrentStep => _stepIndex < _steps.Length ? _steps[_stepIndex] : null;
 
     public override void _Ready()
     {
+        _gameManager = GetNode<GameManager>("%GameManager");
+        if (GlobalState.Instance.Day > 0)
+        {
+            QueueFree();
+            return;
+        }
+
         _steps = [.. GetChildren().OfType<TutorialStep>()];
 
         UpdateSteps();
     }
 
+    public override void _Process(double delta)
+    {
+        Visible = CurrentStep?.IsTriggered() ?? false;
+        CurrentStep?.SetActive(Visible);
+        _gameManager.TutorialPause = Visible;
+    }
+
     private void UpdateSteps()
     {
-        for (var i = 0; i < _steps.Length; i++)
-            _steps[i].SetActive(i == _stepIndex);
+        foreach (var step in _steps)
+            step.SetActive(false);
     }
 
     public override void _GuiInput(InputEvent @event)
