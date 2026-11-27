@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bcyd4exsgq7t6"]
 
 [ext_resource type="Texture2D" uid="uid://cgxjf7r6pi1k0" path="res://sprites/map.png" id="1_8131g"]
+[ext_resource type="Script" uid="uid://g7ci48mu632w" path="res://scripts/MapSprite.cs" id="2_6f22u"]
 [ext_resource type="Script" uid="uid://dgt22l142c6gv" path="res://scripts/MobManager.cs" id="2_y13xm"]
+[ext_resource type="Texture2D" uid="uid://b412plcr1ydbc" path="res://sprites/Mapsoir.png" id="3_6srl2"]
 [ext_resource type="Resource" uid="uid://bxetxqvjvocw" path="res://mobs/base_protester.tres" id="3_xi27f"]
 [ext_resource type="Script" uid="uid://coi0q1a5y75hf" path="res://scripts/PolygonCollider.cs" id="3_y13xm"]
+[ext_resource type="Texture2D" uid="uid://bx1gbqtosy24d" path="res://sprites/mapmatin.png" id="4_6g560"]
 [ext_resource type="Resource" uid="uid://bmlh1jifotb6y" path="res://mobs/fascist.tres" id="4_hosn7"]
 [ext_resource type="Script" uid="uid://4xvp5jn4urxk" path="res://scripts/GameManager.cs" id="7_xi27f"]
 [ext_resource type="Script" uid="uid://6lm3in6llypw" path="res://scripts/PlayerActionsManager.cs" id="8_hosn7"]
@@ -50,9 +53,14 @@ size = Vector2(100, 1296)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1356506538]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Map" type="Sprite2D" parent="." unique_id=800525640]
+[node name="Map" type="Sprite2D" parent="." unique_id=868812951]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_8131g")
+script = ExtResource("2_6f22u")
+_dayMap = ExtResource("1_8131g")
+_eveningMap = ExtResource("3_6srl2")
+_morningMap = ExtResource("4_6g560")
+metadata/_custom_type_script = "uid://g7ci48mu632w"
 
 [node name="ProtesterNavmesh" type="NavigationRegion2D" parent="." unique_id=254759925]
 unique_name_in_owner = true

@@ -5,9 +5,9 @@ using Godot;
 public partial class Tutorial : Panel
 {
     private GameManager _gameManager;
-    private TutorialStep[] _steps;
     private bool _started;
     private int _stepIndex;
+    private TutorialStep[] _steps;
 
     private TutorialStep CurrentStep => _stepIndex < _steps.Length ? _steps[_stepIndex] : null;
 
@@ -16,6 +16,7 @@ public partial class Tutorial : Panel
         _gameManager = GetNode<GameManager>("%GameManager");
         if (GlobalState.Instance.Day > 0)
         {
+            _gameManager.TutorialPause = false;
             QueueFree();
             return;
         }
@@ -45,6 +46,7 @@ public partial class Tutorial : Panel
             _stepIndex++;
             if (_stepIndex >= _steps.Length)
             {
+                _gameManager.TutorialPause = false;
                 QueueFree();
                 return;
             }
