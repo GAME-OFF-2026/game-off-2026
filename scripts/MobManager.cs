@@ -44,7 +44,6 @@ public partial class MobManager : Node2D
         _spawnPoints = [.. GetNode("SpawnPoints").GetChildren().OfType<Node2D>()];
         _gameManager = GetNode<GameManager>("%GameManager");
         _obstacles = [.. GetNode("%Terrain").GetChildren().OfType<PolygonCollider>()];
-        GD.Print(_obstacles.Length);
         SpawnNeutralMobs();
     }
 

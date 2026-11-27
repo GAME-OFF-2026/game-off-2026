@@ -95,8 +95,6 @@ public partial class Mob : RigidBody2D
         _healthFlashCounter += 10 * flashIntensity * delta;
 
         var saturation = (float)(flashIntensity * (1 + Mathf.Cos(_healthFlashCounter)) / 2);
-        if (saturation != 0)
-            GD.Print(saturation);
 
         foreach (var sprite in _sprites)
             sprite.Modulate = Color.FromHsv(

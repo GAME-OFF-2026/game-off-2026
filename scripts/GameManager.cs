@@ -23,7 +23,8 @@ public partial class GameManager : Node
     public GamePhase GamePhase { get; private set; }
 
     public double Score { get; private set; }
-    private int ScoreFloored => Mathf.Max(0, Mathf.FloorToInt(Score));
+    public int ScoreFloored => Mathf.Max(0, Mathf.FloorToInt(Score));
+    public int TotalScore => GlobalState.Instance.TotalScore + ScoreFloored;
 
 
     public uint SetupPhaseBudget => 8;
@@ -58,7 +59,7 @@ public partial class GameManager : Node
                 _endPause = true;
 
                 GetNode<RichTextLabel>("%FinalScoreLabel").Text =
-                    $"Today's score: {ScoreFloored}\nTotal score: {GlobalState.Instance.TotalScore + ScoreFloored}";
+                    $"Today's score: {ScoreFloored}\nTotal score: {TotalScore}";
                 GetNode<Control>("%EndScreen").Visible = true;
             }
         };

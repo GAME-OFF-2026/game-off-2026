@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dt3xkiarl74e8"]
+
+[ext_resource type="Script" uid="uid://dnuxqqiucu6qd" path="res://scripts/ScoreBar.cs" id="1_yi7gx"]
+
+[node name="ScoreBar" type="Control" unique_id=1326261349]
+custom_minimum_size = Vector2(15, 300)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_yi7gx")
+metadata/_custom_type_script = "uid://dnuxqqiucu6qd"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1447844802]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=778838286]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=1248177474]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer" unique_id=83901254]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Mark" type="ColorRect" parent="VBoxContainer" unique_id=2092221504]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Marker" type="ColorRect" parent="." unique_id=134210773]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 5.000004
+pivot_offset_ratio = Vector2(0.5, 0.5)
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true

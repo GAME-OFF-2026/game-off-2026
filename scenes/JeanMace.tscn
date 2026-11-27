@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://bh6pa5rinfnwk" path="res://scripts/Tutorial.cs" id="15_ioek0"]
 [ext_resource type="Script" uid="uid://c4eradkbh1bio" path="res://scripts/TutorialStep.cs" id="17_ioek0"]
 [ext_resource type="Script" uid="uid://dvyaqnx2bemt4" path="res://scripts/TearGasManager.cs" id="18_emgr0"]
+[ext_resource type="PackedScene" uid="uid://dt3xkiarl74e8" path="res://ui/score_bar.tscn" id="19_6srl2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_5i8a5"]
 vertices = PackedVector2Array(1120, 616, -1120, 616, -1120, -616, 1120, -616, -1184, -717.4297, -1184, -680, -1193.7266, -680, -1194.4063, -717.5625)
@@ -267,6 +268,19 @@ size_flags_vertical = 0
 mouse_filter = 2
 script = ExtResource("11_8131g")
 metadata/_custom_type_script = "uid://n3qju8tsl66h"
+
+[node name="ScoreBar" parent="CanvasLayer" unique_id=1326261349 instance=ExtResource("19_6srl2")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -150.0
+offset_right = -9.0
+offset_bottom = 150.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="Tutorial" type="Panel" parent="CanvasLayer" unique_id=1103428500]
 process_mode = 3

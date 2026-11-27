@@ -19,14 +19,35 @@ public partial class GlobalState : Node
 
     public FutureTimeline Timeline => GetTimeline(_scoreThresholds, Day, TotalScore);
 
+    public Array<int> CurrentScoreThresholds => Day >= 0 && Day < _scoreThresholds.Count ? _scoreThresholds[Day] : null;
+
     public int Day => _scores.Count;
 
-    private int LatestScore =>
-        _scores.Count > 0
-            ? _scores[^1]
-            : 0;
-
     public int TotalScore => _scores.Sum();
+
+    public double GetDayProgress(int score)
+    {
+        if (Day < 0 || Day >= _scoreThresholds.Count)
+            return 0;
+
+        var thresholds = _scoreThresholds[Day];
+
+        score += TotalScore;
+
+        for (var i = 0; i <= thresholds.Count; i++)
+            if (i == thresholds.Count || score < thresholds[i])
+            {
+                var prevPoint = i > 0 ? thresholds[i - 1] : 0;
+                var nextPoint = i < thresholds.Count
+                    ? thresholds[i]
+                    : 2 * thresholds[i - 1];
+                var progressToNext = Mathf.InverseLerp(prevPoint, nextPoint, score);
+                var totalProgress = (i + progressToNext) / (thresholds.Count + 1);
+                return totalProgress;
+            }
+
+        return 1;
+    }
 
     public override void _Ready()
     {
